@@ -14,6 +14,7 @@
 		6F54E94327B1E8CB009DF2F6 /* Front_DAM_Project_2022Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E94227B1E8CB009DF2F6 /* Front_DAM_Project_2022Tests.swift */; };
 		6F54E94D27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E94C27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITests.swift */; };
 		6F54E94F27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E94E27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITestsLaunchTests.swift */; };
+		6F54E96527B1EDEC009DF2F6 /* MercurialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E96427B1EDEC009DF2F6 /* MercurialView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		6F54E94827B1E8CB009DF2F6 /* Front DAM Project 2022UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Front DAM Project 2022UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F54E94C27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Front_DAM_Project_2022UITests.swift; sourceTree = "<group>"; };
 		6F54E94E27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Front_DAM_Project_2022UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		6F54E96427B1EDEC009DF2F6 /* MercurialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercurialView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,10 @@
 		6F54E93027B1E8CA009DF2F6 /* Front DAM Project 2022 */ = {
 			isa = PBXGroup;
 			children = (
+				6F54E95E27B1EA0B009DF2F6 /* View */,
+				6F54E95D27B1E9C9009DF2F6 /* Intent */,
+				6F54E95C27B1E9BE009DF2F6 /* ViewModel */,
+				6F54E95B27B1E9B3009DF2F6 /* Model */,
 				6F54E93127B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift */,
 				6F54E93327B1E8CA009DF2F6 /* ContentView.swift */,
 				6F54E93527B1E8CB009DF2F6 /* Assets.xcassets */,
@@ -125,6 +131,59 @@
 				6F54E94E27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITestsLaunchTests.swift */,
 			);
 			path = "Front DAM Project 2022UITests";
+			sourceTree = "<group>";
+		};
+		6F54E95B27B1E9B3009DF2F6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6F54E95C27B1E9BE009DF2F6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6F54E95D27B1E9C9009DF2F6 /* Intent */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Intent;
+			sourceTree = "<group>";
+		};
+		6F54E95E27B1EA0B009DF2F6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6F54E96127B1EA38009DF2F6 /* Stocks */,
+				6F54E96027B1EA29009DF2F6 /* FichesTechniques */,
+				6F54E95F27B1EA15009DF2F6 /* Mercurial */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6F54E95F27B1EA15009DF2F6 /* Mercurial */ = {
+			isa = PBXGroup;
+			children = (
+				6F54E96427B1EDEC009DF2F6 /* MercurialView.swift */,
+			);
+			path = Mercurial;
+			sourceTree = "<group>";
+		};
+		6F54E96027B1EA29009DF2F6 /* FichesTechniques */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = FichesTechniques;
+			sourceTree = "<group>";
+		};
+		6F54E96127B1EA38009DF2F6 /* Stocks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Stocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F54E96527B1EDEC009DF2F6 /* MercurialView.swift in Sources */,
 				6F54E93427B1E8CA009DF2F6 /* ContentView.swift in Sources */,
 				6F54E93227B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift in Sources */,
 			);
