@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F2FF76827B54E4300ED2EE0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FF76727B54E4300ED2EE0 /* HomeView.swift */; };
 		6F54E93227B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E93127B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift */; };
 		6F54E93427B1E8CA009DF2F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E93327B1E8CA009DF2F6 /* ContentView.swift */; };
 		6F54E93627B1E8CB009DF2F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F54E93527B1E8CB009DF2F6 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F2FF76727B54E4300ED2EE0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		6F54E92E27B1E8CA009DF2F6 /* Front DAM Project 2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Front DAM Project 2022.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F54E93127B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Front_DAM_Project_2022App.swift; sourceTree = "<group>"; };
 		6F54E93327B1E8CA009DF2F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 		6F54E95E27B1EA0B009DF2F6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6F2FF76727B54E4300ED2EE0 /* HomeView.swift */,
 				6F54E96127B1EA38009DF2F6 /* Stocks */,
 				6F54E96027B1EA29009DF2F6 /* FichesTechniques */,
 				6F54E95F27B1EA15009DF2F6 /* Mercurial */,
@@ -317,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F54E96527B1EDEC009DF2F6 /* MercurialView.swift in Sources */,
+				6F2FF76827B54E4300ED2EE0 /* HomeView.swift in Sources */,
 				6F54E93427B1E8CA009DF2F6 /* ContentView.swift in Sources */,
 				6F54E93227B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift in Sources */,
 			);
