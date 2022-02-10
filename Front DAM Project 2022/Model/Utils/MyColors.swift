@@ -10,4 +10,9 @@ import SwiftUI
 
 extension Color {
     static let salmon = Color(red: 255/255.0, green: 153/255.0, blue: 153/255.0)
+    static let modifyButton = Color(red: 110/255, green: 85/255, blue: 85/255)
+    static let myGray = Color(red: 153/255, green: 153/255, blue: 153/255)
+    
+    
+    
 }

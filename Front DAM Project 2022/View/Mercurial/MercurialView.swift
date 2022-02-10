@@ -8,30 +8,33 @@
 import SwiftUI
 
 struct MercurialView: View {
-    var cols = [GridItem(.flexible()), GridItem(.fixed(150))]
+    @State var texte: String = ""
+    var ingredients: [String] = ["Chips","Frites","Coca","Pain"]
     var body: some View {
         VStack {
+            HStack {
+                Text("Mercurial")
+                    .font(.title)
+                    .bold()
+                    .padding(10)
+                Spacer(minLength: 0)
+            }
             VStack {
-                
+                SearchBarView(text: $texte)
             }
-            LazyVGrid(columns: cols, alignment: .leading){
-                Text("Title 1")
-                    HStack {
-                    Button("Modifier", action: {})
-                    Button("delete", action: {})
+            Text("Il y a \(ingredients.count) ingrédients correspondant à votre recherche")
+                .font(.system(size: 11))
+                .foregroundColor(Color(red: 153/255, green: 153/255, blue: 153/255))
+            List {
+                ForEach(ingredients, id: \.self) { ingredient in
+                    NavigationLink(destination: IngredientDetailView()) {
+                        Text(ingredient)
+                    }
                 }
-                Text("Title 1")
-                HStack {
-                    Button("Modifier", action: {})
-                    Button("delete", action: {})
-                }
-                Text("Title 1")
-                    HStack {
-                    Button("Modifier", action: {})
-                    Button("delete", action: {})
-                }
-
             }
+            .padding(15)
+            Spacer(minLength: 0)
+                .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
