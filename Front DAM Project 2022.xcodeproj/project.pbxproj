@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		6F2FF76827B54E4300ED2EE0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FF76727B54E4300ED2EE0 /* HomeView.swift */; };
+		6F2FF76D27B564C600ED2EE0 /* MyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FF76C27B564C600ED2EE0 /* MyColors.swift */; };
+		6F2FF77227B57A3000ED2EE0 /* MercurialMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FF77127B57A3000ED2EE0 /* MercurialMenuView.swift */; };
+		6F2FF77427B57AB600ED2EE0 /* FTMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FF77327B57AB600ED2EE0 /* FTMenuView.swift */; };
+		6F2FF77627B5812200ED2EE0 /* StocksMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FF77527B5812200ED2EE0 /* StocksMenuView.swift */; };
 		6F54E93227B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E93127B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift */; };
 		6F54E93427B1E8CA009DF2F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E93327B1E8CA009DF2F6 /* ContentView.swift */; };
 		6F54E93627B1E8CB009DF2F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F54E93527B1E8CB009DF2F6 /* Assets.xcassets */; };
@@ -37,6 +41,10 @@
 
 /* Begin PBXFileReference section */
 		6F2FF76727B54E4300ED2EE0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		6F2FF76C27B564C600ED2EE0 /* MyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColors.swift; sourceTree = "<group>"; };
+		6F2FF77127B57A3000ED2EE0 /* MercurialMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercurialMenuView.swift; sourceTree = "<group>"; };
+		6F2FF77327B57AB600ED2EE0 /* FTMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTMenuView.swift; sourceTree = "<group>"; };
+		6F2FF77527B5812200ED2EE0 /* StocksMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksMenuView.swift; sourceTree = "<group>"; };
 		6F54E92E27B1E8CA009DF2F6 /* Front DAM Project 2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Front DAM Project 2022.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F54E93127B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Front_DAM_Project_2022App.swift; sourceTree = "<group>"; };
 		6F54E93327B1E8CA009DF2F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +83,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F2FF76B27B564A500ED2EE0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6F2FF76C27B564C600ED2EE0 /* MyColors.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		6F2FF76E27B578AE00ED2EE0 /* Menus */ = {
+			isa = PBXGroup;
+			children = (
+				6F2FF77127B57A3000ED2EE0 /* MercurialMenuView.swift */,
+				6F2FF77327B57AB600ED2EE0 /* FTMenuView.swift */,
+				6F2FF77527B5812200ED2EE0 /* StocksMenuView.swift */,
+			);
+			path = Menus;
+			sourceTree = "<group>";
+		};
 		6F54E92527B1E8CA009DF2F6 = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +164,7 @@
 		6F54E95B27B1E9B3009DF2F6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6F2FF76B27B564A500ED2EE0 /* Utils */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -159,6 +186,7 @@
 		6F54E95E27B1EA0B009DF2F6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6F2FF76E27B578AE00ED2EE0 /* Menus */,
 				6F2FF76727B54E4300ED2EE0 /* HomeView.swift */,
 				6F54E96127B1EA38009DF2F6 /* Stocks */,
 				6F54E96027B1EA29009DF2F6 /* FichesTechniques */,
@@ -319,9 +347,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F2FF77427B57AB600ED2EE0 /* FTMenuView.swift in Sources */,
+				6F2FF76D27B564C600ED2EE0 /* MyColors.swift in Sources */,
 				6F54E96527B1EDEC009DF2F6 /* MercurialView.swift in Sources */,
 				6F2FF76827B54E4300ED2EE0 /* HomeView.swift in Sources */,
 				6F54E93427B1E8CA009DF2F6 /* ContentView.swift in Sources */,
+				6F2FF77227B57A3000ED2EE0 /* MercurialMenuView.swift in Sources */,
+				6F2FF77627B5812200ED2EE0 /* StocksMenuView.swift in Sources */,
 				6F54E93227B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
