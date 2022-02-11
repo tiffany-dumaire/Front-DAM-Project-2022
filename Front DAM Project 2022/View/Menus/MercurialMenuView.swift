@@ -10,8 +10,8 @@ import SwiftUI
 struct MercurialMenuView: View {
     var rows = [GridItem(.adaptive(minimum: 100, maximum: 100))]
     var body: some View {
-        LazyHGrid(rows: rows, alignment: .top, spacing: 30) {
-            NavigationLink(destination: MercurialView()){
+        LazyHGrid(rows: rows, alignment: .center, spacing: 30) {
+            NavigationLink(destination: IngredientAddView()){
                 ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
                     VStack(alignment: .leading, spacing: 15) {
                         Text("Ajouter un ingrédient")
@@ -35,7 +35,6 @@ struct MercurialMenuView: View {
                         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 5, y: 5)
                 }
             }
-
         }.padding(.horizontal)
         .padding(.top, 0.25)
     }

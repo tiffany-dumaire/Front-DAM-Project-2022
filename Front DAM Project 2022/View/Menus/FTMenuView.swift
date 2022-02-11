@@ -10,7 +10,7 @@ import SwiftUI
 struct FTMenuView: View {
     var rows = [GridItem(.adaptive(minimum: 100, maximum: 100))]
     var body: some View {
-        LazyHGrid(rows: rows, alignment: .top, spacing: 30) {
+        LazyHGrid(rows: rows, alignment: .center, spacing: 30) {
             ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
                 VStack(alignment: .leading, spacing: 15) {
                     Text("Créer une fiche technique")
@@ -31,7 +31,6 @@ struct FTMenuView: View {
                 .cornerRadius(20)
                 .shadow(color: Color.black.opacity(0.2), radius: 5, x: 5, y: 5)
             }
-            
         }
         .padding(.horizontal)
         .padding(.top, 0.25)
