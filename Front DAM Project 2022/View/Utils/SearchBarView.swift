@@ -27,7 +27,7 @@ struct SearchBarView: View {
                             .foregroundColor(.blue)
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                             .padding(.leading, 15)
-                        if isEditing {
+                        if isEditing && self.text != "" {
                             Button(action: {
                                 self.text = ""
                             }) {

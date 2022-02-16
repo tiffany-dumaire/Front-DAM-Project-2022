@@ -30,6 +30,4 @@ class IngredientViewModel: ObservableObject, IngredientDelegate {
         self.allergene = model.allergene
         self.model.observer = self
     }
-    
-    
 }

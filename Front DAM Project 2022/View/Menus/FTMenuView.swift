@@ -21,15 +21,18 @@ struct FTMenuView: View {
                 .cornerRadius(20)
                 .shadow(color: Color.black.opacity(0.2), radius: 5, x: 5, y: 5)
             }
-            ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
-                VStack(alignment: .leading, spacing: 15) {
-                    Text("Voir les fiches techniques")
+            NavigationLink(destination: FTView()) {
+                ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
+                    VStack(alignment: .leading, spacing: 15) {
+                        Text("Voir les fiches techniques")
+                    }
+                    .frame(width: 200, height: 40, alignment: .center)
+                    .padding()
+                    .foregroundColor(.black)
+                    .background(Color(red: 51/255, green: 153/255, blue: 1.0))
+                    .cornerRadius(20)
+                    .shadow(color: Color.black.opacity(0.2), radius: 5, x: 5, y: 5)
                 }
-                .frame(width: 200, height: 40, alignment: .center)
-                .padding()
-                .background(Color(red: 51/255, green: 153/255, blue: 1.0))
-                .cornerRadius(20)
-                .shadow(color: Color.black.opacity(0.2), radius: 5, x: 5, y: 5)
             }
         }
         .padding(.horizontal)

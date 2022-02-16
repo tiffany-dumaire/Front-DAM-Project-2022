@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IngredientDetailView: View {
+    //@Environment var list: IngredientViewModel
     @StateObject var vm = IngredientViewModel(model: IngredientModel(libelle: "Frites", unite: "kg", prix_unitaire: 2.34, stock: 5.6, allergene: true))
     var cols = [GridItem(.fixed(160)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)

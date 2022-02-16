@@ -72,6 +72,10 @@ struct HomeView: View {
                     FTMenuView().tag(1)
                     StocksMenuView().tag(2)
                 }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                HStack {
+                    Spacer()
+                    Image(systemName: "gearshape.circle.fill")
+                }
                 Spacer(minLength: 0)
             }.padding(.top)
                 .navigationTitle("")

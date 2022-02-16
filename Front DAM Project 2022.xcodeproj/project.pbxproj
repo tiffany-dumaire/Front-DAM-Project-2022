@@ -12,6 +12,9 @@
 		6F11388527B687460048F029 /* IngredientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11388427B687460048F029 /* IngredientViewModel.swift */; };
 		6F11388727B69A070048F029 /* IngredientModifyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11388627B69A070048F029 /* IngredientModifyView.swift */; };
 		6F11388927B6A5A90048F029 /* IngredientAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11388827B6A5A90048F029 /* IngredientAddView.swift */; };
+		6F1BD40C27B9AFBC001E50AA /* IngredientChoiceEntriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1BD40B27B9AFBC001E50AA /* IngredientChoiceEntriesView.swift */; };
+		6F1BD40E27B9B2AF001E50AA /* CategoryEntriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1BD40D27B9B2AF001E50AA /* CategoryEntriesView.swift */; };
+		6F1BD41027B9B2CF001E50AA /* EntriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1BD40F27B9B2CF001E50AA /* EntriesView.swift */; };
 		6F2FF76827B54E4300ED2EE0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FF76727B54E4300ED2EE0 /* HomeView.swift */; };
 		6F2FF76D27B564C600ED2EE0 /* MyColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FF76C27B564C600ED2EE0 /* MyColors.swift */; };
 		6F2FF77227B57A3000ED2EE0 /* MercurialMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2FF77127B57A3000ED2EE0 /* MercurialMenuView.swift */; };
@@ -25,6 +28,9 @@
 		6F54E94D27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E94C27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITests.swift */; };
 		6F54E94F27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E94E27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITestsLaunchTests.swift */; };
 		6F54E96527B1EDEC009DF2F6 /* MercurialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E96427B1EDEC009DF2F6 /* MercurialView.swift */; };
+		6FCAC3B827BCF77B006ADDDC /* RealizeSalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCAC3B727BCF77B006ADDDC /* RealizeSalesView.swift */; };
+		6FCAC3BA27BCFDBB006ADDDC /* FTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCAC3B927BCFDBB006ADDDC /* FTView.swift */; };
+		6FCAC3BC27BCFF0D006ADDDC /* FTDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCAC3BB27BCFF0D006ADDDC /* FTDetailView.swift */; };
 		6FED6DE427B5A2EB000649E8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FED6DE327B5A2EB000649E8 /* SearchBarView.swift */; };
 		6FED6DE627B5AF97000649E8 /* IngredientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FED6DE527B5AF97000649E8 /* IngredientDetailView.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +58,9 @@
 		6F11388427B687460048F029 /* IngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientViewModel.swift; sourceTree = "<group>"; };
 		6F11388627B69A070048F029 /* IngredientModifyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientModifyView.swift; sourceTree = "<group>"; };
 		6F11388827B6A5A90048F029 /* IngredientAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientAddView.swift; sourceTree = "<group>"; };
+		6F1BD40B27B9AFBC001E50AA /* IngredientChoiceEntriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientChoiceEntriesView.swift; sourceTree = "<group>"; };
+		6F1BD40D27B9B2AF001E50AA /* CategoryEntriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryEntriesView.swift; sourceTree = "<group>"; };
+		6F1BD40F27B9B2CF001E50AA /* EntriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesView.swift; sourceTree = "<group>"; };
 		6F2FF76727B54E4300ED2EE0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		6F2FF76C27B564C600ED2EE0 /* MyColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyColors.swift; sourceTree = "<group>"; };
 		6F2FF77127B57A3000ED2EE0 /* MercurialMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercurialMenuView.swift; sourceTree = "<group>"; };
@@ -68,6 +77,9 @@
 		6F54E94C27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Front_DAM_Project_2022UITests.swift; sourceTree = "<group>"; };
 		6F54E94E27B1E8CB009DF2F6 /* Front_DAM_Project_2022UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Front_DAM_Project_2022UITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6F54E96427B1EDEC009DF2F6 /* MercurialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MercurialView.swift; sourceTree = "<group>"; };
+		6FCAC3B727BCF77B006ADDDC /* RealizeSalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealizeSalesView.swift; sourceTree = "<group>"; };
+		6FCAC3B927BCFDBB006ADDDC /* FTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTView.swift; sourceTree = "<group>"; };
+		6FCAC3BB27BCFF0D006ADDDC /* FTDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTDetailView.swift; sourceTree = "<group>"; };
 		6FED6DE327B5A2EB000649E8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		6FED6DE527B5AF97000649E8 /* IngredientDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -243,6 +255,8 @@
 		6F54E96027B1EA29009DF2F6 /* FichesTechniques */ = {
 			isa = PBXGroup;
 			children = (
+				6FCAC3B927BCFDBB006ADDDC /* FTView.swift */,
+				6FCAC3BB27BCFF0D006ADDDC /* FTDetailView.swift */,
 			);
 			path = FichesTechniques;
 			sourceTree = "<group>";
@@ -250,8 +264,28 @@
 		6F54E96127B1EA38009DF2F6 /* Stocks */ = {
 			isa = PBXGroup;
 			children = (
+				6FCAC3B627BCF6E4006ADDDC /* Ventes */,
+				6FCAC3B527BCF6CB006ADDDC /* Choices */,
+				6F1BD40B27B9AFBC001E50AA /* IngredientChoiceEntriesView.swift */,
+				6F1BD40D27B9B2AF001E50AA /* CategoryEntriesView.swift */,
+				6F1BD40F27B9B2CF001E50AA /* EntriesView.swift */,
+				6FCAC3B727BCF77B006ADDDC /* RealizeSalesView.swift */,
 			);
 			path = Stocks;
+			sourceTree = "<group>";
+		};
+		6FCAC3B527BCF6CB006ADDDC /* Choices */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Choices;
+			sourceTree = "<group>";
+		};
+		6FCAC3B627BCF6E4006ADDDC /* Ventes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Ventes;
 			sourceTree = "<group>";
 		};
 		6FED6DE227B5A2C3000649E8 /* Utils */ = {
@@ -396,17 +430,23 @@
 				6FED6DE427B5A2EB000649E8 /* SearchBarView.swift in Sources */,
 				6F2FF76D27B564C600ED2EE0 /* MyColors.swift in Sources */,
 				6F54E96527B1EDEC009DF2F6 /* MercurialView.swift in Sources */,
+				6FCAC3B827BCF77B006ADDDC /* RealizeSalesView.swift in Sources */,
 				6F2FF76827B54E4300ED2EE0 /* HomeView.swift in Sources */,
+				6F1BD41027B9B2CF001E50AA /* EntriesView.swift in Sources */,
 				6F11388727B69A070048F029 /* IngredientModifyView.swift in Sources */,
 				6F54E93427B1E8CA009DF2F6 /* ContentView.swift in Sources */,
 				6F11388527B687460048F029 /* IngredientViewModel.swift in Sources */,
 				6F11388927B6A5A90048F029 /* IngredientAddView.swift in Sources */,
 				6F11388027B67D1E0048F029 /* IngredientModel.swift in Sources */,
 				6F11388227B67E0B0048F029 /* Unite.swift in Sources */,
+				6F1BD40E27B9B2AF001E50AA /* CategoryEntriesView.swift in Sources */,
+				6FCAC3BC27BCFF0D006ADDDC /* FTDetailView.swift in Sources */,
 				6F2FF77227B57A3000ED2EE0 /* MercurialMenuView.swift in Sources */,
 				6F2FF77627B5812200ED2EE0 /* StocksMenuView.swift in Sources */,
+				6FCAC3BA27BCFDBB006ADDDC /* FTView.swift in Sources */,
 				6FED6DE627B5AF97000649E8 /* IngredientDetailView.swift in Sources */,
 				6F54E93227B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift in Sources */,
+				6F1BD40C27B9AFBC001E50AA /* IngredientChoiceEntriesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

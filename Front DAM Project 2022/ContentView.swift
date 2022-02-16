@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    //@StateObject var list: IngredientViewModel = IngredientViewModel(model: IngredientModel(libelle: "Spaghettis", unite: "kg", prix_unitaire: 0.52, stock: 10, allergene: true))
     var body: some View {
         HomeView()
+        //HomeView().environmentObject(list)
     }
 }
 
