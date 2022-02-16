@@ -14,13 +14,18 @@ protocol IngredientDelegate {
 struct IngredientModel {
     var observer: IngredientDelegate?
     
+    var code: Int
     var libelle: String
     var unite: String
     var prix_unitaire: Double
     var stock: Double
     var allergene: Bool
+    var valeurStock: Double {
+        return self.stock * self.prix_unitaire
+    }
     
-    init(libelle: String, unite: String, prix_unitaire: Double, stock: Double, allergene: Bool) {
+    init(code: Int, libelle: String, unite: String, prix_unitaire: Double, stock: Double, allergene: Bool) {
+        self.code = code
         self.libelle = libelle
         self.unite = unite
         self.prix_unitaire = prix_unitaire

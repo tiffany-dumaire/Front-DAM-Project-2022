@@ -21,7 +21,6 @@ struct HomeView: View {
                         .foregroundColor(Color.blue)
                     Spacer()
                 }.padding(.horizontal)
-                
                 HStack(spacing: 0) {
                     Text("Mercurial")
                         .foregroundColor(self.index == 0 ? .white : Color.black.opacity(0.7))
@@ -65,8 +64,7 @@ struct HomeView: View {
                 }.background(Color.black.opacity(0.06))
                     .clipShape(Capsule())
                     .padding(.horizontal)
-                    .padding(.top, 25)
-                
+                    .padding(.top, 10)
                 TabView(selection: $index) {
                     MercurialMenuView().tag(0)
                     FTMenuView().tag(1)
@@ -74,7 +72,9 @@ struct HomeView: View {
                 }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 HStack {
                     Spacer()
-                    Image(systemName: "gearshape.circle.fill")
+                    NavigationLink(destination: ParameterView()) {
+                        Image(systemName: "gearshape.circle.fill")
+                    }.padding(15)
                 }
                 Spacer(minLength: 0)
             }.padding(.top)

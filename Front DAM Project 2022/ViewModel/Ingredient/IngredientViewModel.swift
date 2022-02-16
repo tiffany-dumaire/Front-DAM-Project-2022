@@ -15,6 +15,7 @@ class IngredientViewModel: ObservableObject, IngredientDelegate {
     
     private var model: IngredientModel
     
+    @Published var code: Int
     @Published var libelle: String
     @Published var unite: String
     @Published var prix_unitaire: Double
@@ -23,6 +24,7 @@ class IngredientViewModel: ObservableObject, IngredientDelegate {
     
     init(model: IngredientModel) {
         self.model = model
+        self.code = model.code
         self.libelle = model.libelle
         self.unite = model.unite
         self.prix_unitaire = model.prix_unitaire

@@ -15,7 +15,7 @@ func pdf() {
 struct StocksMenuView: View {
     var rows = [GridItem(.adaptive(minimum: 80, maximum: 90))]
     var body: some View {
-        LazyHGrid(rows: rows, alignment: .center, spacing: 30) {
+        LazyHGrid(rows: rows, alignment: .center, spacing: 25) {
             NavigationLink(destination: EntriesView()) {
                 ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
                     VStack(alignment: .leading, spacing: 15) {

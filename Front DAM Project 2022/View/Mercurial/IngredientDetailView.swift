@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IngredientDetailView: View {
     //@Environment var list: IngredientViewModel
-    @StateObject var vm = IngredientViewModel(model: IngredientModel(libelle: "Frites", unite: "kg", prix_unitaire: 2.34, stock: 5.6, allergene: true))
+    @StateObject var vm = IngredientViewModel(model: IngredientModel(code: 6, libelle: "Frites", unite: "kg", prix_unitaire: 2.34, stock: 5.6, allergene: false))
     var cols = [GridItem(.fixed(160)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)
     var body: some View {
@@ -50,9 +50,20 @@ struct IngredientDetailView: View {
             }
             LazyVGrid(columns: cols, alignment: .leading) {
                 Text("Allergène :").frame(height: 30)
-                Toggle("", isOn: $vm.allergene)
-                    .disabled(true)
-                    .padding(.trailing, 130)
+                HStack {
+                   /* Toggle("", isOn: $vm.allergene)
+                        .frame(width: 50)
+                        .disabled(true)
+                        .padding(.trailing, 130)*/
+                    if vm.allergene == false {
+                        Image(systemName: "checkmark.shield.fill")
+                            .foregroundColor(.green)
+                    }
+                    if vm.allergene == true {
+                        Image(systemName: "xmark.seal.fill")
+                            .foregroundColor(.red)
+                    }
+                }
                 if vm.allergene {
                     Text("Catégorie allergène :").frame(height: 30)
                     Text("Si allergène seulement").frame(maxWidth: .infinity, alignment: .leading)
