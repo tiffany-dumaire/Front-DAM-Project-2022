@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ParameterView: View {
-    @EnvironmentObject var parameters: ParametersModel
-    var cols = [GridItem(.fixed(130)),GridItem(.flexible())]
+    @EnvironmentObject var parameters: ParametersViewModel
+    var cols = [GridItem(.fixed(128)),GridItem(.flexible())]
     var body: some View {
         ScrollView {
             HStack {
@@ -18,30 +18,40 @@ struct ParameterView: View {
                     .font(.title3)
                     .bold()
                 Spacer()
-            }.padding(.horizontal)
+            }
+                .padding(.horizontal, 15)
             HStack {
                 Text("On peut distinguer deux coûts moyens horaires : le coût moyen horaire des fluides et le coût moyen horaire du personnel.").font(.system(size: 12))
-            }.padding(.horizontal)
-            LazyVGrid(columns: cols, alignment: .leading) {
+            }
+                .padding(.horizontal, 15)
+                .padding(.top, 5)
+            LazyVGrid(columns: cols, alignment: .leading, spacing: 20) {
                 Text("Personnel")
-                Stepper(String(format: "%.2f", parameters.parameters[2].value), value:  $parameters.parameters[2].value, step:0.01)
+                //Stepper(String(format: "%.2f", parameters.parameters[2].value), value:  $parameters.parameters[2].value, step:0.01)
+                CustomDoubleStepperView(value: $parameters.parameters[2].value, step: 0.01, decimal: 2)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.system(size: 16))
                     .padding(5)
                     .background(Color.myGray.opacity(0.25))
                 Text("Fluides")
-                Stepper(String(format: "%.2f", parameters.parameters[2].value2), value: $parameters.parameters[2].value2, step:0.01)
+                //Stepper(String(format: "%.2f", parameters.parameters[2].value2), value: $parameters.parameters[2].value2, step:0.01)
+                CustomDoubleStepperView(value: $parameters.parameters[2].value2, step: 0.01, decimal: 2)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.system(size: 16))
                     .padding(5)
                     .background(Color.myGray.opacity(0.25))
-            }.padding(.horizontal)
+            }
+                .padding(.horizontal, 15)
             HStack {
                 Text("Coefficient de vente")
                     .foregroundColor(.blue)
                     .font(.title3)
                     .bold()
                 Spacer()
-            }.padding(.horizontal)
-            LazyVGrid(columns: cols, alignment: .leading) {
+            }
+                .padding(.horizontal, 15)
+                .padding(.top, 20)
+            LazyVGrid(columns: cols, alignment: .leading, spacing: 20) {
                 Toggle("", isOn: $parameters.parameters[1].utile)
                     .padding(.trailing, 130)
                 Text("Charges \(parameters.parameters[1].utile ? "définies" : "non définies")").font(.system(size: 14))
@@ -50,8 +60,10 @@ struct ParameterView: View {
                         Text("Coefficient")
                         Text("(charges définies)").font(.system(size: 12))
                     }
-                    Stepper(String(format: "%.2f", parameters.parameters[1].value), value:  $parameters.parameters[1].value, step:0.01)
+                    //Stepper(String(format: "%.2f", parameters.parameters[1].value), value:  $parameters.parameters[1].value, step:0.01)
+                    CustomDoubleStepperView(value: $parameters.parameters[1].value, step: 0.01, decimal: 2)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.system(size: 16))
                     .padding(5)
                     .background(Color.myGray.opacity(0.25))
                 } else {
@@ -59,8 +71,10 @@ struct ParameterView: View {
                         Text("Coefficient")
                         Text("(charges non définies)").font(.system(size: 12))
                     }
-                    Stepper(String(format: "%.2f", parameters.parameters[1].value2), value: $parameters.parameters[1].value2, step:0.01)
+                    //Stepper(String(format: "%.2f", parameters.parameters[1].value2), value: $parameters.parameters[1].value2, step:0.01)
+                    CustomDoubleStepperView(value: $parameters.parameters[1].value2, step: 0.01, decimal: 2)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.system(size: 16))
                         .padding(5)
                         .background(Color.myGray.opacity(0.25))
                 }
@@ -71,21 +85,27 @@ struct ParameterView: View {
                     .font(.title3)
                     .bold()
                 Spacer()
-            }.padding(.horizontal)
+            }
+                .padding(.horizontal, 15)
+                .padding(.top, 20)
             LazyVGrid(columns: cols, alignment: .leading, spacing: 20) {
                 Toggle("", isOn: $parameters.parameters[0].utile)
                     .padding(.trailing, 130)
                 Text("Assaisonnement \(parameters.parameters[0].utile ? "en %" : "en €")").font(.system(size: 14))
                 if parameters.parameters[0].utile {
                     Text("% coût matières").font(.system(size: 15))
-                    Stepper(String(format: "%.2f", parameters.parameters[0].value), value:  $parameters.parameters[0].value, step:0.01)
+                    //Stepper(String(format: "%.2f", parameters.parameters[0].value), value:  $parameters.parameters[0].value, step:0.01)
+                    CustomDoubleStepperView(value: $parameters.parameters[0].value, step: 0.01, decimal: 2)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.system(size: 16))
                         .padding(5)
                         .background(Color.myGray.opacity(0.25))
                 } else {
                     Text("Montant fixe en €").font(.system(size: 15))
-                    Stepper(String(format: "%.2f", parameters.parameters[0].value2), value: $parameters.parameters[0].value2, step:0.01)
+                    //Stepper(String(format: "%.2f", parameters.parameters[0].value2), value: $parameters.parameters[0].value2, step:0.01)
+                    CustomDoubleStepperView(value: $parameters.parameters[0].value2, step: 0.01, decimal: 2)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.system(size: 16))
                         .padding(5)
                         .background(Color.myGray.opacity(0.25))
                 }

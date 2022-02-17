@@ -13,7 +13,7 @@ struct Front_DAM_Project_2022App: App {
     //@State var stocks: IngredientStocksDTO = IngredientStocksDTO(stocks: [])
     
     //il faudra charger les paramètres depuis le site à chaque lancement de l'application
-    @StateObject var parameters: ParametersModel = ParametersModel(parameters: [ParameterModel(libelle_parameters: "ASSAISONNEMENT", value: 5, value2: 3, utile: true), ParameterModel(libelle_parameters: "COEFF_VENTE", value: 6, value2: 10, utile: true), ParameterModel(libelle_parameters: "COUT_MOYEN_HORAIRE", value: 10, value2: 6, utile: true)])
+    @StateObject var parameters: ParametersViewModel = ParametersViewModel([])
     var body: some Scene {
         WindowGroup {
             //Exemple de IngredientDAO avec loadData()
@@ -34,6 +34,17 @@ struct Front_DAM_Project_2022App: App {
             }*/
             ContentView()
                 .environmentObject(parameters)
+                .onAppear(perform: {
+                    Task {
+                        let parameters: [String] = ["COUT_ASSAISONNEMENT", "COEFF_VENTE", "COUT_HORAIRE_MOYEN"]
+                        for parameter in parameters {
+                            if let p = await ParameterDAO.loadData(libelle_parameters: parameter) {
+                                self.parameters.parameters.append(p)
+                            }
+                        }
+                        
+                    }
+                })
         }
     }
 }
