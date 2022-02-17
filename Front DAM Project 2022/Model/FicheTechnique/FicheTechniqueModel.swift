@@ -7,13 +7,7 @@
 
 import Foundation
 
-protocol FicheTechniqueDelegate {
-    func change(libelle_fiche_technique: String)
-}
-
-struct FicheTechniqueModel {
-    var observer: FicheTechniqueDelegate?
-    
+struct FicheTechniqueModel {    
     var id_fiche_technique: Int
     var libelle_fiche_technique: String
     var nombre_couverts: Int

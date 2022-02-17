@@ -8,11 +8,7 @@
 import Foundation
 import SwiftUI
 
-class FicheTechniqueViewModel: ObservableObject, FicheTechniqueDelegate {
-    func change(libelle_fiche_technique: String) {
-        self.libelle_fiche_technique = libelle_fiche_technique
-    }
-    
+class FicheTechniqueViewModel: ObservableObject {
     private var model: FicheTechniqueModel
     
     @Published var id_fiche_technique: Int
@@ -24,6 +20,5 @@ class FicheTechniqueViewModel: ObservableObject, FicheTechniqueDelegate {
         self.id_fiche_technique = model.id_fiche_technique
         self.libelle_fiche_technique = model.libelle_fiche_technique
         self.nombre_couverts = model.nombre_couverts
-        self.model.observer = self
     }
 }

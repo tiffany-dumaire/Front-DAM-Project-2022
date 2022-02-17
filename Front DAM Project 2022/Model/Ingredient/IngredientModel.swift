@@ -7,13 +7,7 @@
 
 import Foundation
 
-protocol IngredientDelegate {
-    func change(libelle: String)
-}
-
-struct IngredientModel {
-    var observer: IngredientDelegate?
-    
+struct IngredientModel {    
     var code: Int
     var libelle: String
     var unite: String

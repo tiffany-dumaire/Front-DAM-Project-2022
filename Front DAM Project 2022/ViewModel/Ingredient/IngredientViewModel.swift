@@ -8,11 +8,7 @@
 import Foundation
 import SwiftUI
 
-class IngredientViewModel: ObservableObject, IngredientDelegate {
-    func change(libelle: String) {
-        self.libelle = libelle
-    }
-    
+class IngredientViewModel: ObservableObject {
     private var model: IngredientModel
     
     @Published var code: Int
@@ -30,6 +26,5 @@ class IngredientViewModel: ObservableObject, IngredientDelegate {
         self.prix_unitaire = model.prix_unitaire
         self.stock = model.stock
         self.allergene = model.allergene
-        self.model.observer = self
     }
 }
