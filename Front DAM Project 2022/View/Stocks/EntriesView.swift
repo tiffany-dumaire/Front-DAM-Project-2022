@@ -8,8 +8,27 @@
 import SwiftUI
 
 struct EntriesView: View {
+    @State var stocks: IngredientStocksDTO = IngredientStocksDTO(stocks: [])
+    var cols = [GridItem(.flexible()),GridItem(.fixed(80))]
     var body: some View {
-        Text("Réaliser les entrées de stocks")
+        ScrollView {
+            ForEach(stocks.stocks, id: \.code) { stock in
+                LazyVGrid(columns: cols, alignment: .leading, spacing: 10) {
+                    Text(stock.libelle)
+                    Text(String(format: "%.2f", stock.stock))
+                }
+            }
+            
+            .onAppear(perform: {
+                Task {
+                    self.stocks = await IngredientDAO.loadData()
+                    print(self.stocks)
+                }
+            })
+            
+            .navigationTitle("Entrée de stock complète")
+            .navigationBarTitleDisplayMode(.inline)
+        }
     }
 }
 

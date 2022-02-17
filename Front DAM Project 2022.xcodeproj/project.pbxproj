@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F0443EF27BE3CA500F565F3 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0443EE27BE3CA500F565F3 /* URLSession.swift */; };
+		6F0443F227BE3DC300F565F3 /* IngredientDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0443F127BE3DC300F565F3 /* IngredientDTO.swift */; };
+		6F0443F427BE5E9B00F565F3 /* ParameterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0443F327BE5E9B00F565F3 /* ParameterModel.swift */; };
+		6F0443F727BE7E8D00F565F3 /* IngredientDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0443F627BE7E8D00F565F3 /* IngredientDAO.swift */; };
 		6F11388027B67D1E0048F029 /* IngredientModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11387F27B67D1E0048F029 /* IngredientModel.swift */; };
 		6F11388227B67E0B0048F029 /* Unite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11388127B67E0B0048F029 /* Unite.swift */; };
 		6F11388527B687460048F029 /* IngredientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11388427B687460048F029 /* IngredientViewModel.swift */; };
@@ -61,6 +65,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F0443EE27BE3CA500F565F3 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		6F0443F127BE3DC300F565F3 /* IngredientDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientDTO.swift; sourceTree = "<group>"; };
+		6F0443F327BE5E9B00F565F3 /* ParameterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterModel.swift; sourceTree = "<group>"; };
+		6F0443F627BE7E8D00F565F3 /* IngredientDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientDAO.swift; sourceTree = "<group>"; };
 		6F11387F27B67D1E0048F029 /* IngredientModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientModel.swift; sourceTree = "<group>"; };
 		6F11388127B67E0B0048F029 /* Unite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unite.swift; sourceTree = "<group>"; };
 		6F11388427B687460048F029 /* IngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientViewModel.swift; sourceTree = "<group>"; };
@@ -125,6 +133,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F0443F027BE3D9200F565F3 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				6F0443F127BE3DC300F565F3 /* IngredientDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		6F0443F527BE7E7A00F565F3 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				6F0443F627BE7E8D00F565F3 /* IngredientDAO.swift */,
+			);
+			path = DAO;
+			sourceTree = "<group>";
+		};
 		6F11387E27B67CE20048F029 /* Ingredient */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				6F2FF76C27B564C600ED2EE0 /* MyColors.swift */,
+				6F0443F327BE5E9B00F565F3 /* ParameterModel.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -192,6 +217,8 @@
 		6F54E93027B1E8CA009DF2F6 /* Front DAM Project 2022 */ = {
 			isa = PBXGroup;
 			children = (
+				6F0443F527BE7E7A00F565F3 /* DAO */,
+				6F0443F027BE3D9200F565F3 /* DTO */,
 				6FB656FD27BD372F006F5146 /* Helper */,
 				6FB656FB27BD3666006F5146 /* ingredient.json */,
 				6F54E95E27B1EA0B009DF2F6 /* View */,
@@ -325,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				6FB656FE27BD374C006F5146 /* JSONHelper.swift */,
+				6F0443EE27BE3CA500F565F3 /* URLSession.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -485,6 +513,7 @@
 			files = (
 				6F2FF77427B57AB600ED2EE0 /* FTMenuView.swift in Sources */,
 				6FED6DE427B5A2EB000649E8 /* SearchBarView.swift in Sources */,
+				6F0443F227BE3DC300F565F3 /* IngredientDTO.swift in Sources */,
 				6F2FF76D27B564C600ED2EE0 /* MyColors.swift in Sources */,
 				6F9EA35127BDA3630024DAB1 /* ListFicheTechniqueViewModel.swift in Sources */,
 				6F54E96527B1EDEC009DF2F6 /* MercurialView.swift in Sources */,
@@ -496,6 +525,7 @@
 				6F11388527B687460048F029 /* IngredientViewModel.swift in Sources */,
 				6F9EA34927BD7D2B0024DAB1 /* ListIngredientViewModel.swift in Sources */,
 				6F11388927B6A5A90048F029 /* IngredientAddView.swift in Sources */,
+				6F0443F427BE5E9B00F565F3 /* ParameterModel.swift in Sources */,
 				6F11388027B67D1E0048F029 /* IngredientModel.swift in Sources */,
 				6F11388227B67E0B0048F029 /* Unite.swift in Sources */,
 				6F9EA34727BD770F0024DAB1 /* FTChoiceView.swift in Sources */,
@@ -503,6 +533,7 @@
 				6F9EA34B27BDA1730024DAB1 /* FicheTechniqueModel.swift in Sources */,
 				6F1BD40E27B9B2AF001E50AA /* CategoryEntriesView.swift in Sources */,
 				6F212FD727BD0DED00E32435 /* ParameterView.swift in Sources */,
+				6F0443F727BE7E8D00F565F3 /* IngredientDAO.swift in Sources */,
 				6F9EA34F27BDA29B0024DAB1 /* FicheTechniqueViewModel.swift in Sources */,
 				6FCAC3BC27BCFF0D006ADDDC /* FTDetailView.swift in Sources */,
 				6F2FF77227B57A3000ED2EE0 /* MercurialMenuView.swift in Sources */,
@@ -510,6 +541,7 @@
 				6FCAC3BA27BCFDBB006ADDDC /* FTView.swift in Sources */,
 				6FED6DE627B5AF97000649E8 /* IngredientDetailView.swift in Sources */,
 				6F54E93227B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift in Sources */,
+				6F0443EF27BE3CA500F565F3 /* URLSession.swift in Sources */,
 				6F1BD40C27B9AFBC001E50AA /* IngredientChoiceEntriesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

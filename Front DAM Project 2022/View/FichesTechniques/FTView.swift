@@ -11,6 +11,8 @@ struct FTView: View {
     @State var texte: String = ""
     //var listFT: [String] = ["Saint-Honoré","Crêpes","Poulet au curry","Pain"]
     @StateObject var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([FicheTechniqueModel(id_fiche_technique: 1, libelle_fiche_technique: "Saint-Honoré", nombre_couverts: 10),FicheTechniqueModel(id_fiche_technique: 2, libelle_fiche_technique: "Crêpes", nombre_couverts: 6), FicheTechniqueModel(id_fiche_technique: 3, libelle_fiche_technique: "Poulet cocotte", nombre_couverts: 4)])
+
+    
     var body: some View {
         VStack {
             /*HStack {
@@ -22,6 +24,12 @@ struct FTView: View {
             }*/
             VStack {
                 SearchBarView(text: $texte)
+                /*Button(action: {}){
+                    Image(systemName: "arrow.up.arrow.down.square.fill")
+                        .foregroundColor(.orange)
+                        .font(.system(size: 30))
+    
+                }*/
             }
             Text("Il y a \(fiches.fiches.count) fiches techniques correspondant à votre recherche")
                 .font(.system(size: 11))
@@ -36,9 +44,7 @@ struct FTView: View {
                             Text(ft.libelle_fiche_technique)
                                 .bold()
                             }
-                            HStack {
-                                Text("\(ft.nombre_couverts) couverts | Pâtissier")
-                            }
+                            Text("\(ft.nombre_couverts) couverts | Pâtissier").font(.system(size: 13)).padding(.horizontal,30)
                         }
                     }
                 }

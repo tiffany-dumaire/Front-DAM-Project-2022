@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MercurialView: View {
     @State var texte: String = ""
+    @State var stocks: [IngredientStockDTO] = []
     @StateObject var ingredients: ListIngredientViewModel = ListIngredientViewModel([IngredientModel(code: 1, libelle: "Frites", unite: "kg", prix_unitaire: 0.99, stock: 5, allergene: false), IngredientModel(code: 2, libelle: "Pommes", unite: "kg", prix_unitaire: 2.59, stock: 6, allergene: false),IngredientModel(code: 3, libelle: "Lait", unite: "L", prix_unitaire: 1.32, stock: 10.32, allergene: true)])
         var body: some View {
             VStack {
@@ -47,6 +48,8 @@ struct MercurialView: View {
                 Spacer(minLength: 0)
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationTitle("Mercurial")
+                
+                    //.onAppear(perform:{})
             }
         }
             
