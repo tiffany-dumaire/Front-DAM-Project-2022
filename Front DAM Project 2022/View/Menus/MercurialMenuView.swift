@@ -35,6 +35,18 @@ struct MercurialMenuView: View {
                         .shadow(color: Color.black.opacity(0.2), radius: 5, x: 5, y: 5)
                 }
             }
+            NavigationLink(destination: AllergenesView()){
+                ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
+                    VStack(alignment: .leading, spacing: 15) {
+                        Text("Voir les allergènes")
+                    }.frame(width: 200, height: 40, alignment: .center)
+                        .padding()
+                        .foregroundColor(.black)
+                        .background(Color(red: 1, green: 191/255, blue: 0))
+                        .cornerRadius(20)
+                        .shadow(color: Color.black.opacity(0.2), radius: 5, x: 5, y: 5)
+                }
+            }
         }.padding(.horizontal)
         .padding(.top, 0.25)
     }

@@ -1,13 +1,13 @@
 //
-//  MercurialView.swift
+//  AllergenesView.swift
 //  Front DAM Project 2022
 //
-//  Created by Tiffany Dumaire on 08/02/2022.
+//  Created by Tiffany Dumaire on 18/02/2022.
 //
 
 import SwiftUI
 
-struct MercurialView: View {
+struct AllergenesView: View {
     @State var texte: String = ""
     @State var stocks: [IngredientStockDTO] = []
     @State var ingredients: ListIngredientViewModel = ListIngredientViewModel([])
@@ -32,7 +32,7 @@ struct MercurialView: View {
             VStack {
                 SearchBarView(text: $texte)
             }
-            Text("Il y a \(ingredients.ingredients.count) ingrédients correspondant à votre recherche")
+            Text("Il y a \(ingredients.ingredients.count) allergènes correspondant à votre recherche")
                 .font(.system(size: 11))
                 .foregroundColor(.myGray)
             List {
@@ -57,11 +57,11 @@ struct MercurialView: View {
             .padding(15)
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)
-                .navigationTitle("Mercurial")
+                .navigationTitle("Liste des allergènes")
             
                 .onAppear(perform:{
                     Task {
-                        self.ingredients = await IngredientDAO.loadMercurialDatas()
+                        self.ingredients = await IngredientDAO.loadAllergenesDatas()
                         print(self.ingredients)
                     }
                 })
@@ -69,8 +69,8 @@ struct MercurialView: View {
     }
 }
 
-struct MercurialView_Previews: PreviewProvider {
+struct AllergenesView_Previews: PreviewProvider {
     static var previews: some View {
-        MercurialView()
+        AllergenesView()
     }
 }

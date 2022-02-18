@@ -21,7 +21,7 @@ struct EntriesView: View {
             
             .onAppear(perform: {
                 Task {
-                    self.stocks = await IngredientDAO.loadData()
+                    self.stocks = await IngredientDAO.loadStockDatas()
                     print(self.stocks)
                 }
             })

@@ -47,6 +47,9 @@
 		6FCAC3B827BCF77B006ADDDC /* RealizeSalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCAC3B727BCF77B006ADDDC /* RealizeSalesView.swift */; };
 		6FCAC3BA27BCFDBB006ADDDC /* FTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCAC3B927BCFDBB006ADDDC /* FTView.swift */; };
 		6FCAC3BC27BCFF0D006ADDDC /* FTDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCAC3BB27BCFF0D006ADDDC /* FTDetailView.swift */; };
+		6FE2A6C327BFDF7300EEF94D /* AllergenesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE2A6C227BFDF7300EEF94D /* AllergenesView.swift */; };
+		6FE2A6C527BFEF9B00EEF94D /* FicheTechniqueDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE2A6C427BFEF9B00EEF94D /* FicheTechniqueDTO.swift */; };
+		6FE2A6C727BFF5A500EEF94D /* FicheTechniqueDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE2A6C627BFF5A500EEF94D /* FicheTechniqueDAO.swift */; };
 		6FED6DE427B5A2EB000649E8 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FED6DE327B5A2EB000649E8 /* SearchBarView.swift */; };
 		6FED6DE627B5AF97000649E8 /* IngredientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FED6DE527B5AF97000649E8 /* IngredientDetailView.swift */; };
 /* End PBXBuildFile section */
@@ -112,6 +115,9 @@
 		6FCAC3B727BCF77B006ADDDC /* RealizeSalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealizeSalesView.swift; sourceTree = "<group>"; };
 		6FCAC3B927BCFDBB006ADDDC /* FTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTView.swift; sourceTree = "<group>"; };
 		6FCAC3BB27BCFF0D006ADDDC /* FTDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTDetailView.swift; sourceTree = "<group>"; };
+		6FE2A6C227BFDF7300EEF94D /* AllergenesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllergenesView.swift; sourceTree = "<group>"; };
+		6FE2A6C427BFEF9B00EEF94D /* FicheTechniqueDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FicheTechniqueDTO.swift; sourceTree = "<group>"; };
+		6FE2A6C627BFF5A500EEF94D /* FicheTechniqueDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FicheTechniqueDAO.swift; sourceTree = "<group>"; };
 		6FED6DE327B5A2EB000649E8 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		6FED6DE527B5AF97000649E8 /* IngredientDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +152,7 @@
 			children = (
 				6F0443F127BE3DC300F565F3 /* IngredientDTO.swift */,
 				6F835C1A27BED363009DCA40 /* ParameterDTO.swift */,
+				6FE2A6C427BFEF9B00EEF94D /* FicheTechniqueDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -155,6 +162,7 @@
 			children = (
 				6F0443F627BE7E8D00F565F3 /* IngredientDAO.swift */,
 				6F835C1827BED2DB009DCA40 /* ParameterDAO.swift */,
+				6FE2A6C627BFF5A500EEF94D /* FicheTechniqueDAO.swift */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -316,6 +324,7 @@
 				6FED6DE527B5AF97000649E8 /* IngredientDetailView.swift */,
 				6F11388627B69A070048F029 /* IngredientModifyView.swift */,
 				6F11388827B6A5A90048F029 /* IngredientAddView.swift */,
+				6FE2A6C227BFDF7300EEF94D /* AllergenesView.swift */,
 			);
 			path = Mercurial;
 			sourceTree = "<group>";
@@ -531,6 +540,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE2A6C527BFEF9B00EEF94D /* FicheTechniqueDTO.swift in Sources */,
 				6F2FF77427B57AB600ED2EE0 /* FTMenuView.swift in Sources */,
 				6FED6DE427B5A2EB000649E8 /* SearchBarView.swift in Sources */,
 				6F0443F227BE3DC300F565F3 /* IngredientDTO.swift in Sources */,
@@ -538,6 +548,7 @@
 				6F9EA35127BDA3630024DAB1 /* ListFicheTechniqueViewModel.swift in Sources */,
 				6F54E96527B1EDEC009DF2F6 /* MercurialView.swift in Sources */,
 				6FCAC3B827BCF77B006ADDDC /* RealizeSalesView.swift in Sources */,
+				6FE2A6C327BFDF7300EEF94D /* AllergenesView.swift in Sources */,
 				6F2FF76827B54E4300ED2EE0 /* HomeView.swift in Sources */,
 				6F1BD41027B9B2CF001E50AA /* EntriesView.swift in Sources */,
 				6F11388727B69A070048F029 /* IngredientModifyView.swift in Sources */,
@@ -563,6 +574,7 @@
 				6F2FF77227B57A3000ED2EE0 /* MercurialMenuView.swift in Sources */,
 				6F2FF77627B5812200ED2EE0 /* StocksMenuView.swift in Sources */,
 				6FCAC3BA27BCFDBB006ADDDC /* FTView.swift in Sources */,
+				6FE2A6C727BFF5A500EEF94D /* FicheTechniqueDAO.swift in Sources */,
 				6FED6DE627B5AF97000649E8 /* IngredientDetailView.swift in Sources */,
 				6F54E93227B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift in Sources */,
 				6F0443EF27BE3CA500F565F3 /* URLSession.swift in Sources */,

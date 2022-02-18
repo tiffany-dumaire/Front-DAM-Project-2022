@@ -1,13 +1,13 @@
 //
-//  FicheTechniqueModel.swift
+//  FicheTechniqueDTO.swift
 //  Front DAM Project 2022
 //
-//  Created by Tiffany Dumaire on 16/02/2022.
+//  Created by Tiffany Dumaire on 18/02/2022.
 //
 
 import Foundation
 
-struct FicheTechniqueModel {    
+struct FicheTechniqueDTO: Codable {
     var id_fiche_technique: Int
     var libelle_fiche_technique: String
     var nombre_couverts: Int

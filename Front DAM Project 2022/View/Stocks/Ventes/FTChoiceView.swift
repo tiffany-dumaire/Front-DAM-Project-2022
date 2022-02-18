@@ -49,6 +49,6 @@ struct FTChoiceView: View {
 
 struct FTChoiceView_Previews: PreviewProvider {
     static var previews: some View {
-        FTChoiceView(fiches: ListFicheTechniqueViewModel([FicheTechniqueModel(id_fiche_technique: 1, libelle_fiche_technique: "Saint-Honoré", nombre_couverts: 10),FicheTechniqueModel(id_fiche_technique: 2, libelle_fiche_technique: "Crêpes", nombre_couverts: 6), FicheTechniqueModel(id_fiche_technique: 3, libelle_fiche_technique: "Poulet cocotte", nombre_couverts: 4)]))
+        FTChoiceView(fiches: ListFicheTechniqueViewModel([]))
     }
 }

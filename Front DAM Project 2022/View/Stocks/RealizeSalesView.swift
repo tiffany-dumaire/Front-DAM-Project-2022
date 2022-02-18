@@ -18,7 +18,7 @@ struct FichesQuantites {
 }
 
 struct RealizeSalesView: View {
-    @StateObject var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([FicheTechniqueModel(id_fiche_technique: 1, libelle_fiche_technique: "Saint-Honoré", nombre_couverts: 10),FicheTechniqueModel(id_fiche_technique: 2, libelle_fiche_technique: "Crêpes", nombre_couverts: 6), FicheTechniqueModel(id_fiche_technique: 3, libelle_fiche_technique: "Poulet cocotte", nombre_couverts: 4)])
+    @State var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([])
     
     
     @State var index = 0
@@ -63,6 +63,13 @@ struct RealizeSalesView: View {
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .navigationTitle("Réaliser une vente")
                 .navigationBarTitleDisplayMode(.inline)
+            
+                .onAppear(perform:{
+                    Task {
+                        self.fiches = await FicheTechniqueDAO.loadFTsDatas()
+                        print(self.fiches)
+                    }
+                })
         }
     }
 }

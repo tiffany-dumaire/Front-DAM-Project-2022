@@ -10,8 +10,15 @@ import SwiftUI
 struct FTView: View {
     @State var texte: String = ""
     //var listFT: [String] = ["Saint-Honoré","Crêpes","Poulet au curry","Pain"]
-    @StateObject var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([FicheTechniqueModel(id_fiche_technique: 1, libelle_fiche_technique: "Saint-Honoré", nombre_couverts: 10),FicheTechniqueModel(id_fiche_technique: 2, libelle_fiche_technique: "Crêpes", nombre_couverts: 6), FicheTechniqueModel(id_fiche_technique: 3, libelle_fiche_technique: "Poulet cocotte", nombre_couverts: 4)])
+    @State var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([])
 
+    private func filterSearch(fiche: FicheTechniqueModel) -> Bool{
+        var ret = true
+        if !texte.isEmpty {
+            ret = false || fiche.libelle_fiche_technique.lowercased().contains(texte.lowercased())
+        }
+        return ret
+    }
     
     var body: some View {
         VStack {
@@ -35,7 +42,7 @@ struct FTView: View {
                 .font(.system(size: 11))
                 .foregroundColor(Color(red: 153/255, green: 153/255, blue: 153/255))
             List {
-                ForEach(fiches.fiches, id: \.id_fiche_technique) { ft in
+                ForEach(fiches.fiches.filter(filterSearch), id: \.id_fiche_technique) { ft in
                     NavigationLink(destination: IngredientDetailView()) {
                         VStack(alignment: .leading) {
                             HStack {
@@ -53,6 +60,13 @@ struct FTView: View {
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Fiches techniques")
+            
+                .onAppear(perform:{
+                    Task {
+                        self.fiches = await FicheTechniqueDAO.loadFTsDatas()
+                        print(self.fiches)
+                    }
+                })
         }
     }
 }
