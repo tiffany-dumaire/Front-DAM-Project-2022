@@ -9,34 +9,26 @@ import SwiftUI
 
 struct AllergenesView: View {
     @State var texte: String = ""
-    @State var stocks: [IngredientStockDTO] = []
-    @State var ingredients: ListIngredientViewModel = ListIngredientViewModel([])
+    @EnvironmentObject var mercurial: ListIngredientViewModel
     
-    private func filterSearch(ingredient: IngredientModel) -> Bool{
+    /*private func filterSearch(ingredient: IngredientModel) -> Bool{
         var ret = true
         if !texte.isEmpty {
-            ret = false || ingredient.libelle.lowercased().contains(texte.lowercased())
+            ret = false || (ingredient.libelle.lowercased().contains(texte.lowercased()) && ingredient.allergene)
         }
-        return ret
-    }
+        return ret && ingredient.allergene
+    }*/
 
     var body: some View {
         VStack {
-            /*HStack {
-                Text("Mercurial")
-                    .font(.title)
-                    .bold()
-                    .padding(10)
-                Spacer(minLength: 0)
-            }*/
             VStack {
                 SearchBarView(text: $texte)
             }
-            Text("Il y a \(ingredients.ingredients.count) allergènes correspondant à votre recherche")
+            /*Text("Il y a \(mercurial.ingredients.count) allergènes correspondant à votre recherche")
                 .font(.system(size: 11))
                 .foregroundColor(.myGray)
             List {
-                ForEach(ingredients.ingredients.filter(filterSearch), id: \.code) { ingredient in
+                ForEach(mercurial.ingredients.filter(filterSearch), id: \.code) { ingredient in
                     NavigationLink(destination: IngredientDetailView()) {
                         VStack(alignment: .leading) {
                             Text(ingredient.libelle)
@@ -54,17 +46,12 @@ struct AllergenesView: View {
                     }.foregroundColor(.black)
                 }
             }
-            .padding(15)
+            .listStyle(SidebarListStyle())
+            .padding(.horizontal, 15)*/
+            CustomIngredientListView(texte: texte, allergen: true)
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Liste des allergènes")
-            
-                .onAppear(perform:{
-                    Task {
-                        self.ingredients = await IngredientDAO.loadAllergenesDatas()
-                        print(self.ingredients)
-                    }
-                })
         }
     }
 }

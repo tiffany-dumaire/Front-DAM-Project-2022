@@ -9,16 +9,7 @@ import SwiftUI
 
 struct MercurialView: View {
     @State var texte: String = ""
-    @State var stocks: [IngredientStockDTO] = []
-    @State var ingredients: ListIngredientViewModel = ListIngredientViewModel([])
-    
-    private func filterSearch(ingredient: IngredientModel) -> Bool{
-        var ret = true
-        if !texte.isEmpty {
-            ret = false || ingredient.libelle.lowercased().contains(texte.lowercased())
-        }
-        return ret
-    }
+    @EnvironmentObject var mercurial: ListIngredientViewModel
 
     var body: some View {
         VStack {
@@ -32,11 +23,8 @@ struct MercurialView: View {
             VStack {
                 SearchBarView(text: $texte)
             }
-            Text("Il y a \(ingredients.ingredients.count) ingrédients correspondant à votre recherche")
-                .font(.system(size: 11))
-                .foregroundColor(.myGray)
-            List {
-                ForEach(ingredients.ingredients.filter(filterSearch), id: \.code) { ingredient in
+           /* List {
+                ForEach(mercurial.ingredients.filter(filterSearch), id: \.code) { ingredient in
                     NavigationLink(destination: IngredientDetailView()) {
                         VStack(alignment: .leading) {
                             Text(ingredient.libelle)
@@ -54,17 +42,18 @@ struct MercurialView: View {
                     }.foregroundColor(.black)
                 }
             }
-            .padding(15)
+            .padding(15)*/
+            CustomIngredientListView(texte: texte, allergen: false)
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Mercurial")
             
-                .onAppear(perform:{
+                /*.onAppear(perform:{
                     Task {
                         self.ingredients = await IngredientDAO.loadMercurialDatas()
                         print(self.ingredients)
                     }
-                })
+                })*/
         }
     }
 }

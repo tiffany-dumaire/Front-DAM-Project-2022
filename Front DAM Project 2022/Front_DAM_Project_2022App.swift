@@ -14,6 +14,8 @@ struct Front_DAM_Project_2022App: App {
     
     //il faudra charger les paramètres depuis le site à chaque lancement de l'application
     @StateObject var parameters: ParametersViewModel = ParametersViewModel([])
+    @StateObject var mercurial: ListIngredientViewModel = ListIngredientViewModel([])
+    @StateObject var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([])
     var body: some Scene {
         WindowGroup {
             //Exemple de IngredientDAO avec loadData()
@@ -34,6 +36,8 @@ struct Front_DAM_Project_2022App: App {
             }*/
             ContentView()
                 .environmentObject(parameters)
+                .environmentObject(mercurial)
+                .environmentObject(fiches)
                 .onAppear(perform: {
                     Task {
                         let parameters: [String] = ["COUT_ASSAISONNEMENT", "COEFF_VENTE", "COUT_HORAIRE_MOYEN"]
@@ -42,7 +46,8 @@ struct Front_DAM_Project_2022App: App {
                                 self.parameters.parameters.append(p)
                             }
                         }
-                        
+                        self.mercurial.ingredients = await IngredientDAO.loadMercurialDatas().ingredients
+                        self.fiches.fiches = await FicheTechniqueDAO.loadFTsDatas().fiches
                     }
                 })
         }

@@ -38,7 +38,7 @@ struct FTView: View {
     
                 }*/
             }
-            Text("Il y a \(fiches.fiches.count) fiches techniques correspondant à votre recherche")
+            /*Text("Il y a \(fiches.fiches.count) fiches techniques correspondant à votre recherche")
                 .font(.system(size: 11))
                 .foregroundColor(Color(red: 153/255, green: 153/255, blue: 153/255))
             List {
@@ -51,22 +51,23 @@ struct FTView: View {
                             Text(ft.libelle_fiche_technique)
                                 .bold()
                             }
-                            Text("\(ft.nombre_couverts) couverts | Pâtissier").font(.system(size: 13)).padding(.horizontal,30)
+                            Text("\(ft.nombre_couverts) couverts | \(ft.intitule_responsable)").font(.system(size: 13)).padding(.horizontal,30)
                         }
                     }
                 }
             }
-            .padding(15)
+            .padding(15)*/
+            CustomFTListView(texte: texte)
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Fiches techniques")
             
-                .onAppear(perform:{
+               /* .onAppear(perform:{
                     Task {
                         self.fiches = await FicheTechniqueDAO.loadFTsDatas()
                         print(self.fiches)
                     }
-                })
+                })*/
         }
     }
 }
