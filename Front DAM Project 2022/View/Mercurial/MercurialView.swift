@@ -10,19 +10,26 @@ import SwiftUI
 struct MercurialView: View {
     @State var texte: String = ""
     @EnvironmentObject var mercurial: ListIngredientViewModel
-
+    @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
+    @State var selectedCategorie: Int = 0
+    
     var body: some View {
         VStack {
-            /*HStack {
-                Text("Mercurial")
-                    .font(.title)
-                    .bold()
-                    .padding(10)
-                Spacer(minLength: 0)
-            }*/
-            VStack {
+            VStack(alignment: .leading) {
+                Text("Libellé :")
+                    .padding(.horizontal,10)
                 SearchBarView(text: $texte)
-            }
+                HStack {
+                    Text("Catégorie :")
+                    Picker("Catégorie", selection: $selectedCategorie) {
+                        Text("Aucune").tag(0)
+                        ForEach(categoriesIngredient.categories, id: \.id_categorie) { categorie in
+                            Text(categorie.categorie).tag(categorie.id_categorie)
+                        }
+                    }
+                } .padding(.horizontal, 10)
+            }.padding(10)
+                .background(Color.salmon.opacity(0.2))
            /* List {
                 ForEach(mercurial.ingredients.filter(filterSearch), id: \.code) { ingredient in
                     NavigationLink(destination: IngredientDetailView()) {
@@ -43,17 +50,10 @@ struct MercurialView: View {
                 }
             }
             .padding(15)*/
-            CustomIngredientListView(texte: texte, allergen: false)
+            CustomIngredientListView(texte: texte, allergen: false, categorie: selectedCategorie, categorieA: 0)
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Mercurial")
-            
-                /*.onAppear(perform:{
-                    Task {
-                        self.ingredients = await IngredientDAO.loadMercurialDatas()
-                        print(self.ingredients)
-                    }
-                })*/
         }
     }
 }

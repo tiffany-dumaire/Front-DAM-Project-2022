@@ -8,6 +8,9 @@
 import Foundation
 
 struct IngredientDAO {
+    
+    /**GET**/
+    
     static func loadStockDatas() async -> IngredientStocksDTO {
         if let url: URL = URL(string: "https://back-awi-projet-2021.herokuapp.com/ingredients/stocks") {
             do {
@@ -42,7 +45,7 @@ struct IngredientDAO {
                     }
                     var ingredients: [IngredientModel] = []
                     for ingredient in list {
-                        ingredients.append(IngredientModel(code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, stock: ingredient.stock, allergene: ingredient.allergene == 1 ? true : false))
+                        ingredients.append(IngredientModel(code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, stock: ingredient.stock, allergene: ingredient.allergene == 1 ? true : false, id_categorie: ingredient.id_categorie, id_categorie_allergene: ingredient.id_categorie_allergene))
                     }
                     return ListIngredientViewModel(ingredients)
                 } else {
@@ -67,7 +70,7 @@ struct IngredientDAO {
                     }
                     var ingredients: [IngredientModel] = []
                     for ingredient in list {
-                        ingredients.append(IngredientModel(code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, stock: ingredient.stock, allergene: ingredient.allergene == 1 ? true : false))
+                        ingredients.append(IngredientModel(code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, stock: ingredient.stock, allergene: ingredient.allergene == 1 ? true : false, id_categorie: ingredient.id_categorie, id_categorie_allergene: ingredient.id_categorie_allergene))
                     }
                     return ListIngredientViewModel(ingredients)
                 } else {
@@ -82,7 +85,25 @@ struct IngredientDAO {
         return ListIngredientViewModel([])
      }
     
-   /* static func postIngredient(ingredient: IngredientModel) async {
-        if let encoded = try JSONEncoder().encode(ingredient)
-    }*/
+    static func addIngredient(ingredient: IngredientModel) async {
+        if let encoded = try? JSONEncoder().encode(IngredientDTO(code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, stock: ingredient.stock, allergene: ingredient.allergene ? 1 : 0, id_categorie: ingredient.id_categorie, id_categorie_allergene: ingredient.id_categorie_allergene)){
+            if let url = URL(string: "https://awi-backend.herokuapp.com/ingredients/post"){
+                do{
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "POST"
+                    request.httpBody = encoded
+                    request.addValue("application/json", forHTTPHeaderField: "content-type")
+                    if let (_, response) = try? await URLSession.shared.upload(for: request, from:encoded){
+                        let httpresponse = response as! HTTPURLResponse
+                        if httpresponse.statusCode == 201 {
+                            print("L'ingrédient a été ajouté avec succès.")
+                        }
+                        else{
+                            print("Ajout d'un ingrédient - error \(httpresponse.statusCode): \(HTTPURLResponse.localizedString(forStatusCode: httpresponse.statusCode))")
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

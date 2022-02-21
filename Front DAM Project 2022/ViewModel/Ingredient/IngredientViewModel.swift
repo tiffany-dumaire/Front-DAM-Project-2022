@@ -17,6 +17,8 @@ class IngredientViewModel: ObservableObject {
     @Published var prix_unitaire: Double
     @Published var stock: Double
     @Published var allergene: Bool
+    @Published var id_categorie: Int
+    @Published var id_categorie_allergene: Int?
     
     init(model: IngredientModel) {
         self.model = model
@@ -26,5 +28,6 @@ class IngredientViewModel: ObservableObject {
         self.prix_unitaire = model.prix_unitaire
         self.stock = model.stock
         self.allergene = model.allergene
+        self.id_categorie = model.id_categorie
     }
 }

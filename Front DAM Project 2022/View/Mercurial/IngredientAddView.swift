@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct IngredientAddView: View {
-    @StateObject var vm: IngredientViewModel = IngredientViewModel(model: IngredientModel(code: 0, libelle: "", unite: "", prix_unitaire: 0, stock: 0, allergene: false))
+    @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
+    @StateObject var vm: IngredientViewModel = IngredientViewModel(model: IngredientModel(code: 0, libelle: "", unite: "", prix_unitaire: 0, stock: 0, allergene: false, id_categorie: 0, id_categorie_allergene: nil))
     var cols = [GridItem(.fixed(130)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)
     
@@ -16,7 +17,15 @@ struct IngredientAddView: View {
         VStack {
             Spacer().frame(height: 20)
             LazyVGrid(columns: cols, alignment: .leading) {
-                Text("Libellé :")
+                Text("Code :").frame(height: 30)
+                CustomIntStepperView(value: $vm.code, step: 1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(5)
+                    .background(Color.myGray.opacity(0.25))
+                    .cornerRadius(10)
+            }
+            LazyVGrid(columns: cols, alignment: .leading) {
+                Text("Libellé :").frame(height: 30)
                 TextField("libellé...", text: $vm.libelle)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)

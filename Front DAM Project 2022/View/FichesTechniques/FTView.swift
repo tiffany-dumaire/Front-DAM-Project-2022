@@ -10,64 +10,31 @@ import SwiftUI
 struct FTView: View {
     @State var texte: String = ""
     //var listFT: [String] = ["Saint-Honoré","Crêpes","Poulet au curry","Pain"]
-    @State var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([])
-
-    private func filterSearch(fiche: FicheTechniqueModel) -> Bool{
-        var ret = true
-        if !texte.isEmpty {
-            ret = false || fiche.libelle_fiche_technique.lowercased().contains(texte.lowercased())
-        }
-        return ret
-    }
+    //@StateObject var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([])
+    @EnvironmentObject var categoriesFT: ListCategorieFTViewModel
+    @State var selectedCategorie: Int = 0
     
     var body: some View {
         VStack {
-            /*HStack {
-                Text("Fiches Techniques")
-                    .font(.title)
-                    .bold()
-                    .padding(10)
-                Spacer(minLength: 0)
-            }*/
-            VStack {
+            VStack(alignment: .leading) {
+                Text("Intitulé de la fiche :")
+                    .padding(.horizontal,10)
                 SearchBarView(text: $texte)
-                /*Button(action: {}){
-                    Image(systemName: "arrow.up.arrow.down.square.fill")
-                        .foregroundColor(.orange)
-                        .font(.system(size: 30))
-    
-                }*/
-            }
-            /*Text("Il y a \(fiches.fiches.count) fiches techniques correspondant à votre recherche")
-                .font(.system(size: 11))
-                .foregroundColor(Color(red: 153/255, green: 153/255, blue: 153/255))
-            List {
-                ForEach(fiches.fiches.filter(filterSearch), id: \.id_fiche_technique) { ft in
-                    NavigationLink(destination: IngredientDetailView()) {
-                        VStack(alignment: .leading) {
-                            HStack {
-                                Image(systemName: "circle.hexagongrid.fill")
-                                    .symbolRenderingMode(.multicolor)
-                            Text(ft.libelle_fiche_technique)
-                                .bold()
-                            }
-                            Text("\(ft.nombre_couverts) couverts | \(ft.intitule_responsable)").font(.system(size: 13)).padding(.horizontal,30)
+                HStack {
+                    Text("Catégorie :")
+                    Picker("Catégorie", selection: $selectedCategorie) {
+                        Text("Aucune").tag(0)
+                        ForEach(categoriesFT.categories, id: \.id_categorie_fiche) { categorie in
+                            Text(categorie.categorie_fiche).tag(categorie.id_categorie_fiche)
                         }
                     }
-                }
-            }
-            .padding(15)*/
-            CustomFTListView(texte: texte)
+                } .padding(.horizontal, 10)
+            }.padding(10)
+                .background(Color.salmon.opacity(0.2))
+            CustomFTListView(texte: texte, categorie: selectedCategorie)
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Fiches techniques")
-            
-               /* .onAppear(perform:{
-                    Task {
-                        self.fiches = await FicheTechniqueDAO.loadFTsDatas()
-                        print(self.fiches)
-                    }
-                })*/
         }
     }
 }

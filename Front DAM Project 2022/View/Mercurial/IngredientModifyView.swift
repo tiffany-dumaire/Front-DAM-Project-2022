@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct IngredientModifyView: View {
+    @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
     @ObservedObject var vm: IngredientViewModel
     var cols = [GridItem(.fixed(130)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)

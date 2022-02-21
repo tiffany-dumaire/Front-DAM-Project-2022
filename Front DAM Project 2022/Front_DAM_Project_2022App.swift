@@ -16,28 +16,19 @@ struct Front_DAM_Project_2022App: App {
     @StateObject var parameters: ParametersViewModel = ParametersViewModel([])
     @StateObject var mercurial: ListIngredientViewModel = ListIngredientViewModel([])
     @StateObject var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([])
+    @StateObject var categoriesFT: ListCategorieFTViewModel = ListCategorieFTViewModel([])
+    @StateObject var categoriesIngredient: ListCategorieIngredientViewModel = ListCategorieIngredientViewModel([])
+    @StateObject var categoriesAllergenes: ListCategorieAllergeneViewModel = ListCategorieAllergeneViewModel([])
+    
     var body: some Scene {
         WindowGroup {
-            //Exemple de IngredientDAO avec loadData()
-            /*VStack {
-                List {
-                    ForEach(stocks.stocks, id: \.code) { stock in
-                        Text(stock.libelle)
-                    }
-                }
-               
-                
-                .onAppear(perform: {
-                    Task {
-                        self.stocks = await IngredientDAO.loadData()
-                        print(self.stocks)
-                    }
-                })
-            }*/
             ContentView()
                 .environmentObject(parameters)
                 .environmentObject(mercurial)
                 .environmentObject(fiches)
+                .environmentObject(categoriesFT)
+                .environmentObject(categoriesIngredient)
+                .environmentObject(categoriesAllergenes)
                 .onAppear(perform: {
                     Task {
                         let parameters: [String] = ["COUT_ASSAISONNEMENT", "COEFF_VENTE", "COUT_HORAIRE_MOYEN"]
@@ -48,6 +39,9 @@ struct Front_DAM_Project_2022App: App {
                         }
                         self.mercurial.ingredients = await IngredientDAO.loadMercurialDatas().ingredients
                         self.fiches.fiches = await FicheTechniqueDAO.loadFTsDatas().fiches
+                        self.categoriesFT.categories = await CategoriesDAO.loadCategorieFTDatas().categories
+                        self.categoriesIngredient.categories = await CategoriesDAO.loadCategorieIngredientDatas().categories
+                        self.categoriesAllergenes.categories = await CategoriesDAO.loadCategorieAllergeneDatas().categories
                     }
                 })
         }

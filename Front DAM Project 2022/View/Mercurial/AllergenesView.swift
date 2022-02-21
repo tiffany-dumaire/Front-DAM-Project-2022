@@ -10,45 +10,27 @@ import SwiftUI
 struct AllergenesView: View {
     @State var texte: String = ""
     @EnvironmentObject var mercurial: ListIngredientViewModel
+    @EnvironmentObject var categoriesAllergenes: ListCategorieAllergeneViewModel 
+    @State var selectedCategorie: Int = 0
     
-    /*private func filterSearch(ingredient: IngredientModel) -> Bool{
-        var ret = true
-        if !texte.isEmpty {
-            ret = false || (ingredient.libelle.lowercased().contains(texte.lowercased()) && ingredient.allergene)
-        }
-        return ret && ingredient.allergene
-    }*/
-
     var body: some View {
         VStack {
-            VStack {
+            VStack(alignment: .leading) {
+                Text("Libellé :")
+                    .padding(.horizontal,10)
                 SearchBarView(text: $texte)
-            }
-            /*Text("Il y a \(mercurial.ingredients.count) allergènes correspondant à votre recherche")
-                .font(.system(size: 11))
-                .foregroundColor(.myGray)
-            List {
-                ForEach(mercurial.ingredients.filter(filterSearch), id: \.code) { ingredient in
-                    NavigationLink(destination: IngredientDetailView()) {
-                        VStack(alignment: .leading) {
-                            Text(ingredient.libelle)
-                                .bold()
-                                .font(.system(size: 17))
-                            HStack {
-                                Text("Unité : \(ingredient.unite)").font(.system(size: 13))
-                                if ingredient.allergene {
-                                    Image(systemName: "allergens")
-                                        .foregroundColor(.red)
-                                }
-                            }
-                            Text("Valeur du stock : " + String(format: "%.2F",ingredient.valeurStock) + " €").font(.system(size: 13))
+                HStack {
+                    Text("Catégorie d'allergènes :")
+                    Picker("Catégorie d'allergènes", selection: $selectedCategorie) {
+                        Text("Aucune").tag(0)
+                        ForEach(categoriesAllergenes.categories, id: \.id_categorie_allergene) { categorie in
+                            Text(categorie.categorie_allergene).tag(categorie.id_categorie_allergene)
                         }
-                    }.foregroundColor(.black)
-                }
-            }
-            .listStyle(SidebarListStyle())
-            .padding(.horizontal, 15)*/
-            CustomIngredientListView(texte: texte, allergen: true)
+                    }
+                } .padding(.horizontal, 10)
+            }.padding(10)
+                .background(Color.salmon.opacity(0.2))
+            CustomIngredientListView(texte: texte, allergen: true, categorie: 0, categorieA: selectedCategorie)
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Liste des allergènes")

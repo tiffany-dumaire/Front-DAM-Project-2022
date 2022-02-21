@@ -1,16 +1,15 @@
 //
-//  CustomDoubleStepperView.swift
+//  CustomIntStepperView.swift
 //  Front DAM Project 2022
 //
-//  Created by Tiffany Dumaire on 17/02/2022.
+//  Created by Tiffany Dumaire on 21/02/2022.
 //
 
 import SwiftUI
 
-struct CustomDoubleStepperView: View {
-    @Binding var value: Double
-    var step: Double
-    var decimal: Int
+struct CustomIntStepperView: View {
+    @Binding var value: Int
+    var step: Int
     
     var body: some View {
         HStack {
@@ -25,7 +24,7 @@ struct CustomDoubleStepperView: View {
             Spacer()
             Divider()
             Spacer()
-            Text(String(format: "%.\(decimal)f", value))
+            Text("\(value)")
                 .font(.system(size: 16))
                 .foregroundColor(.stepperFontColor)
             Spacer()
@@ -43,8 +42,8 @@ struct CustomDoubleStepperView: View {
     }
 }
 
-struct CustomDoubleStepperView_Previews: PreviewProvider {
+struct CustomIntStepperView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomDoubleStepperView(value: .constant(1.0), step: 0.1, decimal: 2)
+        CustomIntStepperView(value: .constant(1), step: 1)
     }
 }

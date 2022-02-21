@@ -1,5 +1,5 @@
 //
-//  CustomListView.swift
+//  CustomIngredientListView.swift
 //  Front DAM Project 2022
 //
 //  Created by Tiffany Dumaire on 20/02/2022.
@@ -8,29 +8,55 @@
 import SwiftUI
 
 struct CustomIngredientListView: View {
-    //@State var ingredients: [IngredientModel] = [IngredientModel(code: 101, libelle: "Test 1", unite: "kg", prix_unitaire: 1.24, stock: 5.435, allergene: false), IngredientModel(code: 102, libelle: "Test2", unite: "L", prix_unitaire: 1.35, stock: 6.7, allergene: true)]
     private var texte: String
     private var allergen: Bool
+    private var categorie: Int
+    private var categorieA: Int
     @EnvironmentObject var mercurial: ListIngredientViewModel
     
     private func filterSearch(ingredient: IngredientModel) -> Bool{
-        var ret = true
-        if allergen {
-            if !texte.isEmpty {
-                ret = false || (ingredient.libelle.lowercased().contains(texte.lowercased()) && ingredient.allergene)
+        /*var ret = true
+        if categorie != 0 {
+            if allergen {
+                if !texte.isEmpty {
+                    ret = false || (ingredient.libelle.lowercased().contains(texte.lowercased()) && ingredient.allergene && (ingredient.id_categorie == categorie))
+                }
+                return ret && ingredient.allergene && (ingredient.id_categorie == categorie)
+            } else {
+                if !texte.isEmpty {
+                    ret = false || (ingredient.libelle.lowercased().contains(texte.lowercased())  && (ingredient.id_categorie == categorie))
+                }
+                return ret && (ingredient.id_categorie == categorie)
             }
-            return ret && ingredient.allergene
         } else {
-            if !texte.isEmpty {
-                ret = false || ingredient.libelle.lowercased().contains(texte.lowercased())
+            if allergen {
+                if !texte.isEmpty {
+                    ret = false || (ingredient.libelle.lowercased().contains(texte.lowercased()) && ingredient.allergene)
+                }
+                return ret && ingredient.allergene
+            } else {
+                if !texte.isEmpty {
+                    ret = false || ingredient.libelle.lowercased().contains(texte.lowercased())
+                }
             }
-            return ret
+        }*/
+        return ((!texte.isEmpty ? ingredient.libelle.lowercased().contains(texte.lowercased()) : true) && (categorie != 0 ? ingredient.id_categorie == categorie : true) && (allergen ? ingredient.allergene : true) && (categorieA != 0 ? ingredient.id_categorie_allergene == categorieA : true))
+    }
+    
+    private func stateChanged(_ state: ListIngredientIntent) {
+        switch state {
+            case .changedListIngredient:
+                mercurial.state = .ready
+            default:
+                return
         }
     }
     
-    init(texte: String, allergen: Bool) {
+    init(texte: String, allergen: Bool, categorie: Int, categorieA: Int) {
         self.texte = texte
         self.allergen = allergen
+        self.categorie = categorie
+        self.categorieA = categorieA
     }
     
     var body: some View {
@@ -72,9 +98,13 @@ struct CustomIngredientListView: View {
                         .background(Color.salmon.opacity(0.1))
                         .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.salmon, lineWidth: 2))
                 }
-                .padding(15)
+                .padding(5)
+                
             }
         }
+        .onChange(of: mercurial.state, perform: {
+            newValue in stateChanged(newValue)
+        })
     }
 }
 

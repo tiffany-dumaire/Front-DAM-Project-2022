@@ -9,18 +9,28 @@ import SwiftUI
 
 struct CustomFTListView: View {
     private var texte: String
+    private var categorie: Int
     @EnvironmentObject var fiches: ListFicheTechniqueViewModel
     
     private func filterSearch(fiche: FicheTechniqueModel) -> Bool{
         var ret = true
         if !texte.isEmpty {
-            ret = false || fiche.libelle_fiche_technique.lowercased().contains(texte.lowercased())
+            if categorie == 0 {
+                ret = false || fiche.libelle_fiche_technique.lowercased().contains(texte.lowercased())
+            } else {
+                ret = false || (fiche.libelle_fiche_technique.lowercased().contains(texte.lowercased()) && fiche.id_categorie_fiche == categorie)
+            }
+        } else {
+            if categorie != 0 {
+                ret = false || fiche.id_categorie_fiche == categorie
+            }
         }
         return ret
     }
     
-    init(texte: String) {
+    init(texte: String, categorie: Int) {
         self.texte = texte
+        self.categorie = categorie
     }
     
     var body: some View {
@@ -61,7 +71,7 @@ struct CustomFTListView: View {
                         .background(Color.salmon.opacity(0.1))
                         .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.salmon, lineWidth: 2))
                 }
-                .padding(15)
+                .padding(5)
             }
         }
     }
@@ -69,6 +79,6 @@ struct CustomFTListView: View {
 
 struct CustomFTListView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomFTListView(texte: "")
+        CustomFTListView(texte: "", categorie: 1)
     }
 }
