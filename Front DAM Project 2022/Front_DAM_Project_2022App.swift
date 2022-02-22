@@ -9,10 +9,6 @@ import SwiftUI
 
 @main
 struct Front_DAM_Project_2022App: App {
-    //Exemple de IngredientDAO avec loadData()
-    //@State var stocks: IngredientStocksDTO = IngredientStocksDTO(stocks: [])
-    
-    //il faudra charger les paramètres depuis le site à chaque lancement de l'application
     @StateObject var parameters: ParametersViewModel = ParametersViewModel([])
     @StateObject var mercurial: ListIngredientViewModel = ListIngredientViewModel([])
     @StateObject var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([])
@@ -37,7 +33,7 @@ struct Front_DAM_Project_2022App: App {
                                 self.parameters.parameters.append(p)
                             }
                         }
-                        self.mercurial.ingredients = await IngredientDAO.loadMercurialDatas().ingredients
+                        self.mercurial.ingredients = await IngredientDAO.loadMercurialDatas()
                         self.fiches.fiches = await FicheTechniqueDAO.loadFTsDatas().fiches
                         self.categoriesFT.categories = await CategoriesDAO.loadCategorieFTDatas().categories
                         self.categoriesIngredient.categories = await CategoriesDAO.loadCategorieIngredientDatas().categories

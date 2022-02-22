@@ -13,19 +13,7 @@ struct CustomFTListView: View {
     @EnvironmentObject var fiches: ListFicheTechniqueViewModel
     
     private func filterSearch(fiche: FicheTechniqueModel) -> Bool{
-        var ret = true
-        if !texte.isEmpty {
-            if categorie == 0 {
-                ret = false || fiche.libelle_fiche_technique.lowercased().contains(texte.lowercased())
-            } else {
-                ret = false || (fiche.libelle_fiche_technique.lowercased().contains(texte.lowercased()) && fiche.id_categorie_fiche == categorie)
-            }
-        } else {
-            if categorie != 0 {
-                ret = false || fiche.id_categorie_fiche == categorie
-            }
-        }
-        return ret
+        return (categorie != 0 ? fiche.id_categorie_fiche == categorie : true) && (!texte.isEmpty ? fiche.libelle_fiche_technique.lowercased().contains(texte.lowercased()) : true)
     }
     
     init(texte: String, categorie: Int) {

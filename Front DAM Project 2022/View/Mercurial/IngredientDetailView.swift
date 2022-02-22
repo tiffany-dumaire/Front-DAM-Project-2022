@@ -9,8 +9,7 @@ import SwiftUI
 
 struct IngredientDetailView: View {
     @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
-    //@Environment var list: IngredientViewModel
-    @StateObject var vm = IngredientViewModel(model: IngredientModel(code: 6, libelle: "Frites", unite: "kg", prix_unitaire: 2.34, stock: 5.6, allergene: false, id_categorie: 1, id_categorie_allergene: nil))
+    @StateObject var vm = IngredientViewModel(model: IngredientModel(code: 6, libelle: "Frites", unite: "kg", prix_unitaire: 2.34, stock: 5.6, allergene: true, id_categorie: 1, id_categorie_allergene: nil))
     var cols = [GridItem(.fixed(160)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)
     var body: some View {
@@ -52,17 +51,18 @@ struct IngredientDetailView: View {
             LazyVGrid(columns: cols, alignment: .leading) {
                 Text("Allergène :").frame(height: 30)
                 HStack {
-                   /* Toggle("", isOn: $vm.allergene)
-                        .frame(width: 50)
-                        .disabled(true)
-                        .padding(.trailing, 130)*/
                     if vm.allergene == false {
-                        Image(systemName: "checkmark.shield.fill")
-                            .foregroundColor(.green)
-                    }
-                    if vm.allergene == true {
-                        Image(systemName: "xmark.seal.fill")
-                            .foregroundColor(.red)
+                        HStack {
+                            Image(systemName: "checkmark.shield.fill")
+                                .foregroundColor(.green)
+                            Text("Non")
+                        }
+                    } else {
+                        HStack {
+                            Image(systemName: "xmark.seal.fill")
+                                .foregroundColor(.red)
+                            Text("Oui")
+                        }
                     }
                 }
                 if vm.allergene {
@@ -105,7 +105,7 @@ struct IngredientDetailView: View {
             }
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)
-        }.padding(10)
+        }.padding(.horizontal, 10)
     }
 }
 

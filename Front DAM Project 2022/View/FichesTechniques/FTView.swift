@@ -9,8 +9,6 @@ import SwiftUI
 
 struct FTView: View {
     @State var texte: String = ""
-    //var listFT: [String] = ["Saint-Honoré","Crêpes","Poulet au curry","Pain"]
-    //@StateObject var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([])
     @EnvironmentObject var categoriesFT: ListCategorieFTViewModel
     @State var selectedCategorie: Int = 0
     

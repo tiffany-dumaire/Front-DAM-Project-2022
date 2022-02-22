@@ -9,6 +9,7 @@ import SwiftUI
 
 struct IngredientModifyView: View {
     @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
+    @EnvironmentObject var categoriesAllergenes: ListCategorieAllergeneViewModel
     @ObservedObject var vm: IngredientViewModel
     var cols = [GridItem(.fixed(130)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)
@@ -28,14 +29,12 @@ struct IngredientModifyView: View {
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
                 Text("Prix unitaire :").frame(height: 30)
-                //Stepper(String(format: "%.2f", vm.prix_unitaire), value: $vm.prix_unitaire, step:0.01)
                 CustomDoubleStepperView(value: $vm.prix_unitaire, step: 0.01, decimal: 2)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
                 Text("Stock :").frame(height: 30)
-                //Stepper(String(format: "%.3f", vm.stock), value: $vm.stock, step:0.001)
                 CustomDoubleStepperView(value: $vm.stock, step: 0.001, decimal: 3)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
@@ -47,7 +46,12 @@ struct IngredientModifyView: View {
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
                 Text("Catégorie :").frame(height: 30)
-                Text("Repas").frame(maxWidth: .infinity, alignment: .leading)
+                Picker("Catégorie", selection: $vm.id_categorie) {
+                    Text("Aucune").tag(0)
+                    ForEach(categoriesIngredient.categories, id: \.id_categorie) { categorie in
+                        Text(categorie.categorie).tag(categorie.id_categorie)
+                    }
+                }.frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
@@ -63,7 +67,12 @@ struct IngredientModifyView: View {
                     .padding(.trailing, 130)
                 if vm.allergene {
                     Text("Cat.d'allergène :").frame(height: 30)
-                    Text("Si allergène seulement").frame(maxWidth: .infinity, alignment: .leading)
+                    Picker("Catégorie d'allergènes", selection: $vm.id_categorie_allergene) {
+                        Text("Aucune").tag(0)
+                        ForEach(categoriesAllergenes.categories, id: \.id_categorie_allergene) { categorie in
+                            Text(categorie.categorie_allergene).tag(categorie.id_categorie_allergene)
+                        }
+                    }.frame(maxWidth: .infinity, alignment: .leading)
                         .padding(5)
                         .background(Color.myGray.opacity(0.25))
                         .cornerRadius(10)

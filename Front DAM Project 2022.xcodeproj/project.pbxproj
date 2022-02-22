@@ -36,6 +36,7 @@
 		6F43CBAC27C3A129001A39C5 /* CategorieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F43CBAB27C3A129001A39C5 /* CategorieDTO.swift */; };
 		6F43CBAE27C4362B001A39C5 /* CustomIntStepperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F43CBAD27C4362B001A39C5 /* CustomIntStepperView.swift */; };
 		6F43CBB027C44087001A39C5 /* ListCategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F43CBAF27C44087001A39C5 /* ListCategoriesViewModel.swift */; };
+		6F43CBB227C46ABB001A39C5 /* IngredientIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F43CBB127C46ABB001A39C5 /* IngredientIntent.swift */; };
 		6F54E93227B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E93127B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift */; };
 		6F54E93427B1E8CA009DF2F6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54E93327B1E8CA009DF2F6 /* ContentView.swift */; };
 		6F54E93627B1E8CB009DF2F6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F54E93527B1E8CB009DF2F6 /* Assets.xcassets */; };
@@ -111,6 +112,7 @@
 		6F43CBAB27C3A129001A39C5 /* CategorieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorieDTO.swift; sourceTree = "<group>"; };
 		6F43CBAD27C4362B001A39C5 /* CustomIntStepperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomIntStepperView.swift; sourceTree = "<group>"; };
 		6F43CBAF27C44087001A39C5 /* ListCategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCategoriesViewModel.swift; sourceTree = "<group>"; };
+		6F43CBB127C46ABB001A39C5 /* IngredientIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientIntent.swift; sourceTree = "<group>"; };
 		6F54E92E27B1E8CA009DF2F6 /* Front DAM Project 2022.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Front DAM Project 2022.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F54E93127B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Front_DAM_Project_2022App.swift; sourceTree = "<group>"; };
 		6F54E93327B1E8CA009DF2F6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				6F43CB9F27C38EB9001A39C5 /* ListIngredientIntent.swift */,
+				6F43CBB127C46ABB001A39C5 /* IngredientIntent.swift */,
 			);
 			path = Intent;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				6FCAC3BC27BCFF0D006ADDDC /* FTDetailView.swift in Sources */,
 				6F2FF77227B57A3000ED2EE0 /* MercurialMenuView.swift in Sources */,
 				6F43CBAC27C3A129001A39C5 /* CategorieDTO.swift in Sources */,
+				6F43CBB227C46ABB001A39C5 /* IngredientIntent.swift in Sources */,
 				6F2FF77627B5812200ED2EE0 /* StocksMenuView.swift in Sources */,
 				6FCAC3BA27BCFDBB006ADDDC /* FTView.swift in Sources */,
 				6FE2A6C727BFF5A500EEF94D /* FicheTechniqueDAO.swift in Sources */,

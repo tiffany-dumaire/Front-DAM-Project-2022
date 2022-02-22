@@ -19,6 +19,19 @@ class IngredientViewModel: ObservableObject {
     @Published var allergene: Bool
     @Published var id_categorie: Int
     @Published var id_categorie_allergene: Int?
+    @Published var state: IngredientIntent = .ready{
+        didSet{
+            switch state {
+                case .ingredientAdding(let ingredient):
+                    Task {
+                        await IngredientDAO.addIngredient(ingredient: ingredient)
+                        self.state = .ingredientAdded
+                    }
+                default:
+                    return
+            }
+        }
+    }
     
     init(model: IngredientModel) {
         self.model = model

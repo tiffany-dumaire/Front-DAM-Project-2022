@@ -9,9 +9,22 @@ import SwiftUI
 
 struct IngredientAddView: View {
     @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
+    @EnvironmentObject var categoriesAllergenes: ListCategorieAllergeneViewModel
+    @EnvironmentObject var mercurial: ListIngredientViewModel
     @StateObject var vm: IngredientViewModel = IngredientViewModel(model: IngredientModel(code: 0, libelle: "", unite: "", prix_unitaire: 0, stock: 0, allergene: false, id_categorie: 0, id_categorie_allergene: nil))
     var cols = [GridItem(.fixed(130)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)
+    
+    private func stateChanged(_ newValue: IngredientIntent) {
+        switch self.vm.state {
+            case .ingredientAdded:
+                self.vm.state = .ready
+                self.mercurial.state = .changedListIngredient
+            default:
+                return
+        }
+        
+    }
     
     var body: some View {
         VStack {
@@ -32,14 +45,12 @@ struct IngredientAddView: View {
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
                 Text("Prix unitaire :").frame(height: 30)
-                //Stepper(String(format: "%.2f", vm.prix_unitaire), value: $vm.prix_unitaire, step:0.01)
                 CustomDoubleStepperView(value: $vm.prix_unitaire, step: 0.01, decimal: 2)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
                 Text("Stock :").frame(height: 30)
-                //Stepper(String(format: "%.3f", vm.stock), value: $vm.stock, step:0.001)
                 CustomDoubleStepperView(value: $vm.stock, step: 0.001, decimal: 3)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
@@ -51,7 +62,12 @@ struct IngredientAddView: View {
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
                 Text("Catégorie :").frame(height: 30)
-                Text("Repas").frame(maxWidth: .infinity, alignment: .leading)
+                Picker("Catégorie", selection: $vm.id_categorie) {
+                    Text("Aucune").tag(0)
+                    ForEach(categoriesIngredient.categories, id: \.id_categorie) { categorie in
+                        Text(categorie.categorie).tag(categorie.id_categorie)
+                    }
+                }.frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
@@ -67,7 +83,12 @@ struct IngredientAddView: View {
                     .padding(.trailing, 130)
                 if vm.allergene {
                     Text("Cat.d'allergène :").frame(height: 30)
-                    Text("Si allergène seulement").frame(maxWidth: .infinity, alignment: .leading)
+                    Picker("Catégorie d'allergènes", selection: $vm.id_categorie_allergene) {
+                        Text("Aucune").tag(0)
+                        ForEach(categoriesAllergenes.categories, id: \.id_categorie_allergene) { categorie in
+                            Text(categorie.categorie_allergene).tag(categorie.id_categorie_allergene)
+                        }
+                    }.frame(maxWidth: .infinity, alignment: .leading)
                         .padding(5)
                         .background(Color.myGray.opacity(0.25))
                         .cornerRadius(10)
@@ -78,7 +99,13 @@ struct IngredientAddView: View {
                 Divider()
                 Spacer().frame(height: 20)
                 LazyVGrid(columns: cols2, alignment: .center, spacing: 20) {
-                    Button("Ajouter", action: {})
+                    Button("Ajouter", action: {
+                        if vm.allergene && vm.id_categorie_allergene == 0 {
+                            return
+                        } else {
+                            vm.state.intentToChange(ingredientAdd: IngredientModel(code: vm.code, libelle: vm.libelle, unite: vm.unite, prix_unitaire: vm.prix_unitaire, stock: vm.stock, allergene: vm.allergene, id_categorie: vm.id_categorie, id_categorie_allergene: vm.allergene ? vm.id_categorie_allergene : nil))
+                        }
+                    })
                         .padding(10)
                         .frame(width: 138)
                         .background(Color.green.opacity(0.25))
@@ -97,6 +124,11 @@ struct IngredientAddView: View {
             Spacer(minLength: 0)
                 .navigationTitle("Ajouter un ingrédient")
                 .navigationBarTitleDisplayMode(.inline)
+            
+                .onChange(of: self.vm.state, perform: {
+                    newValue in stateChanged(newValue)
+                })
+            
         }.padding(10)
     }
 }

@@ -15,31 +15,6 @@ struct CustomIngredientListView: View {
     @EnvironmentObject var mercurial: ListIngredientViewModel
     
     private func filterSearch(ingredient: IngredientModel) -> Bool{
-        /*var ret = true
-        if categorie != 0 {
-            if allergen {
-                if !texte.isEmpty {
-                    ret = false || (ingredient.libelle.lowercased().contains(texte.lowercased()) && ingredient.allergene && (ingredient.id_categorie == categorie))
-                }
-                return ret && ingredient.allergene && (ingredient.id_categorie == categorie)
-            } else {
-                if !texte.isEmpty {
-                    ret = false || (ingredient.libelle.lowercased().contains(texte.lowercased())  && (ingredient.id_categorie == categorie))
-                }
-                return ret && (ingredient.id_categorie == categorie)
-            }
-        } else {
-            if allergen {
-                if !texte.isEmpty {
-                    ret = false || (ingredient.libelle.lowercased().contains(texte.lowercased()) && ingredient.allergene)
-                }
-                return ret && ingredient.allergene
-            } else {
-                if !texte.isEmpty {
-                    ret = false || ingredient.libelle.lowercased().contains(texte.lowercased())
-                }
-            }
-        }*/
         return ((!texte.isEmpty ? ingredient.libelle.lowercased().contains(texte.lowercased()) : true) && (categorie != 0 ? ingredient.id_categorie == categorie : true) && (allergen ? ingredient.allergene : true) && (categorieA != 0 ? ingredient.id_categorie_allergene == categorieA : true))
     }
     

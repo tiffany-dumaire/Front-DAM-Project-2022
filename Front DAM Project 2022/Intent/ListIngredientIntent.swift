@@ -7,14 +7,21 @@
 
 import Foundation
 
-enum ListIngredientIntent: Equatable {
+enum ListIngredientIntent: CustomStringConvertible, Equatable {
     case ready
     case changingListIngredient
     case changedListIngredient
     
+    var description: String{
+        switch self {
+            case .ready: return "state: .ready"
+            case .changingListIngredient: return "state: .ready to .changingListIngredient"
+            default: return ""
+        }
+    }
+    
     mutating func intentToChange() {
         self = .changingListIngredient
-        print("ListIngredientIntent: state changed --> ready to changingListIngredient")
     }
     
     
