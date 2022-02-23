@@ -15,8 +15,12 @@ class ListIngredientViewModel: ObservableObject {
         didSet {
             switch state {
                 case .changingListIngredient:
+                    Task {
+                        self.ingredients = await IngredientDAO.loadMercurialDatas()
+                    }
                     self.model.ingredients = self.ingredients
                     self.state = .changedListIngredient
+                    print("ListIngredientIntent: .changingListIngredient to .changedListIngredient")
                 default:
                     return
             }

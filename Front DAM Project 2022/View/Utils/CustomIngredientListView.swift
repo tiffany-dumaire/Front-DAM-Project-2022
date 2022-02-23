@@ -37,7 +37,7 @@ struct CustomIngredientListView: View {
     var body: some View {
         ScrollView {
             ForEach(mercurial.ingredients.filter(filterSearch), id: \.code) { ingredient in
-                NavigationLink(destination: IngredientDetailView()) {
+                NavigationLink(destination: IngredientDetailView(IngredientViewModel(model: ingredient))) {
                     HStack {
                         VStack(alignment: .leading) {
                             HStack {

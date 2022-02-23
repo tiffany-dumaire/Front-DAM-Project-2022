@@ -12,44 +12,32 @@ struct MercurialView: View {
     @EnvironmentObject var mercurial: ListIngredientViewModel
     @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
     @State var selectedCategorie: Int = 0
+    var cols = [GridItem(.fixed(85)),GridItem(.flexible())]
     
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                Text("Libellé :")
-                    .padding(.horizontal,10)
-                SearchBarView(text: $texte)
-                HStack {
+                LazyVGrid(columns: cols, alignment: .leading, spacing: 5) {
+                    Text("Libellé :")
+                        .font(.system(size: 16))
+                    SearchBarView(text: $texte, placeholder: "libellé..")
                     Text("Catégorie :")
+                        .font(.system(size: 16))
                     Picker("Catégorie", selection: $selectedCategorie) {
                         Text("Aucune").tag(0)
+                            .padding(.horizontal, 10)
                         ForEach(categoriesIngredient.categories, id: \.id_categorie) { categorie in
                             Text(categorie.categorie).tag(categorie.id_categorie)
+                                .padding(.horizontal, 10)
                         }
-                    }
-                } .padding(.horizontal, 10)
-            }.padding(10)
+                    }.frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(5)
+                        .background(Color.myGray.opacity(0.25))
+                        .cornerRadius(10)
+                        .padding(.horizontal, 10)
+                }.padding(10)
+            }.padding(.bottom, 5)
                 .background(Color.salmon.opacity(0.2))
-           /* List {
-                ForEach(mercurial.ingredients.filter(filterSearch), id: \.code) { ingredient in
-                    NavigationLink(destination: IngredientDetailView()) {
-                        VStack(alignment: .leading) {
-                            Text(ingredient.libelle)
-                                .bold()
-                                .font(.system(size: 17))
-                            HStack {
-                                Text("Unité : \(ingredient.unite)").font(.system(size: 13))
-                                if ingredient.allergene {
-                                    Image(systemName: "allergens")
-                                        .foregroundColor(.red)
-                                }
-                            }
-                            Text("Valeur du stock : " + String(format: "%.2F",ingredient.valeurStock) + " €").font(.system(size: 13))
-                        }
-                    }.foregroundColor(.black)
-                }
-            }
-            .padding(15)*/
             CustomIngredientListView(texte: texte, allergen: false, categorie: selectedCategorie, categorieA: 0)
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)

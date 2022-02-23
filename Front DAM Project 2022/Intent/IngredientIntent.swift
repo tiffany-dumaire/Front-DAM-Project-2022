@@ -32,10 +32,12 @@ enum IngredientIntent: CustomStringConvertible, Equatable {
     
     mutating func intentToChange(ingredientAdd: IngredientModel){
         self = .ingredientAdding(ingredientAdd)
+        print("IngredientIntent: .ready to .ingredientAdding")
     }
     
     mutating func intentToChange(ingredientModify: IngredientModel){
         self = .ingredientChanging(ingredientModify)
+        print("IngredientIntent: .ready to .ingredientChanging")
     }
     
 }

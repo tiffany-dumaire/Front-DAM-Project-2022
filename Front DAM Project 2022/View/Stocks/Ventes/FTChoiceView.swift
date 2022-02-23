@@ -18,7 +18,7 @@ struct FTChoiceView: View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
                 Text("Listes des fiches")
-                SearchBarView(text: .constant(""))
+                SearchBarView(text: .constant(""), placeholder: "intitulé fiche..")
                 List {
                     ForEach(fiches.fiches, id: \.id_fiche_technique) { fiche in
                         VStack(alignment: .leading) {

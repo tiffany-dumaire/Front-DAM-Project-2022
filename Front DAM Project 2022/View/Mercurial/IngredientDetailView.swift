@@ -9,9 +9,16 @@ import SwiftUI
 
 struct IngredientDetailView: View {
     @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
-    @StateObject var vm = IngredientViewModel(model: IngredientModel(code: 6, libelle: "Frites", unite: "kg", prix_unitaire: 2.34, stock: 5.6, allergene: true, id_categorie: 1, id_categorie_allergene: nil))
-    var cols = [GridItem(.fixed(160)),GridItem(.flexible())]
+    @EnvironmentObject var categoriesAllergenes: ListCategorieAllergeneViewModel
+    @ObservedObject var vm: IngredientViewModel
+    
+    var cols = [GridItem(.fixed(140)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)
+    
+    init(_ vm: IngredientViewModel) {
+        self.vm = vm
+    }
+    
     var body: some View {
         VStack {
             Text("\(vm.libelle)")
@@ -22,7 +29,7 @@ struct IngredientDetailView: View {
             Spacer().frame(height: 20)
             LazyVGrid(columns: cols, alignment: .leading) {
                 Text("Prix unitaire :").frame(height: 30)
-                Text(String(format: "%.2f", vm.prix_unitaire))
+                Text(String(format: "%.2f", vm.prix_unitaire) + " €")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
                     .background(Color.myGray.opacity(0.25))
@@ -38,7 +45,15 @@ struct IngredientDetailView: View {
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
                 Text("Catégorie :").frame(height: 30)
-                Text("Repas").frame(maxWidth: .infinity, alignment: .leading)
+                Picker("Catégorie", selection: $vm.id_categorie) {
+                    Text("Aucune").tag(0)
+                        .foregroundColor(.black)
+                    ForEach(categoriesIngredient.categories, id: \.id_categorie) { categorie in
+                        Text(categorie.categorie).tag(categorie.id_categorie)
+                            .foregroundColor(.black)
+                    }
+                }.frame(maxWidth: .infinity, alignment: .leading)
+                    .disabled(true)
                     .padding(5)
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
@@ -66,8 +81,16 @@ struct IngredientDetailView: View {
                     }
                 }
                 if vm.allergene {
-                    Text("Catégorie allergène :").frame(height: 30)
-                    Text("Si allergène seulement").frame(maxWidth: .infinity, alignment: .leading)
+                    Text("Cat. d'allergènes :").frame(height: 30)
+                    Picker("Cat. d'allergènes", selection: $vm.id_categorie_allergene) {
+                        Text("Aucune").tag(0)
+                            .foregroundColor(.black)
+                        ForEach(categoriesAllergenes.categories, id: \.id_categorie_allergene) { categorie in
+                            Text(categorie.categorie_allergene).tag(categorie.id_categorie_allergene)
+                                .foregroundColor(.black)
+                        }
+                    }.frame(maxWidth: .infinity, alignment: .leading)
+                        .disabled(true)
                         .padding(5)
                         .background(Color.myGray.opacity(0.25))
                         .cornerRadius(10)
@@ -111,6 +134,6 @@ struct IngredientDetailView: View {
 
 struct IngredientDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        IngredientDetailView()
+        IngredientDetailView(IngredientViewModel(model: IngredientModel(code: 101, libelle: "Frites", unite: "Kg", prix_unitaire: 2.32, stock: 0.32, allergene: false, id_categorie: 1, id_categorie_allergene: 0)))
     }
 }

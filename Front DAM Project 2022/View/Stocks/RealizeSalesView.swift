@@ -18,8 +18,7 @@ struct FichesQuantites {
 }
 
 struct RealizeSalesView: View {
-    @State var fiches: ListFicheTechniqueViewModel = ListFicheTechniqueViewModel([])
-    
+    @EnvironmentObject var fiches: ListFicheTechniqueViewModel
     
     @State var index = 0
     var body: some View {
@@ -63,13 +62,6 @@ struct RealizeSalesView: View {
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .navigationTitle("Réaliser une vente")
                 .navigationBarTitleDisplayMode(.inline)
-            
-                .onAppear(perform:{
-                    Task {
-                        self.fiches = await FicheTechniqueDAO.loadFTsDatas()
-                        print(self.fiches)
-                    }
-                })
         }
     }
 }

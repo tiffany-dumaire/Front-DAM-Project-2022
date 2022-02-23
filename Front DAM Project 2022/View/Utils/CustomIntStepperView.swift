@@ -24,14 +24,15 @@ struct CustomIntStepperView: View {
             Spacer()
             Divider()
             Spacer()
-            Text("\(value)")
+            TextField("\(value)", value: $value, format: .number)
                 .font(.system(size: 16))
                 .foregroundColor(.stepperFontColor)
+                .multilineTextAlignment(.center)
             Spacer()
             Divider()
             Spacer()
             Button(action: {
-                if self.value > 0 {
+                if self.value >= 0 {
                     self.value += self.step
                 }
             }, label: {

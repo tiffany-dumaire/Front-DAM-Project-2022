@@ -26,6 +26,21 @@ class IngredientViewModel: ObservableObject {
                     Task {
                         await IngredientDAO.addIngredient(ingredient: ingredient)
                         self.state = .ingredientAdded
+                        print("IngredientIntent: .ingredientAdding to .ingredientAdded")
+                    }
+                case .ingredientChanging(let ingredient):
+                    self.code = ingredient.code
+                    self.libelle = ingredient.libelle
+                    self.unite = ingredient.unite
+                    self.prix_unitaire = ingredient.prix_unitaire
+                    self.stock = ingredient.stock
+                    self.allergene = ingredient.allergene
+                    self.id_categorie = ingredient.id_categorie
+                    self.id_categorie_allergene = id_categorie_allergene
+                    Task {
+                        await IngredientDAO.modifyIngredient(ingredient: ingredient)
+                        self.state = .ingredientChanged
+                        print("IngredientIntent: .ingredientChanging to .ingredientChanged")
                     }
                 default:
                     return
@@ -34,7 +49,6 @@ class IngredientViewModel: ObservableObject {
     }
     
     init(model: IngredientModel) {
-        self.model = model
         self.code = model.code
         self.libelle = model.libelle
         self.unite = model.unite
@@ -42,5 +56,18 @@ class IngredientViewModel: ObservableObject {
         self.stock = model.stock
         self.allergene = model.allergene
         self.id_categorie = model.id_categorie
+        self.id_categorie_allergene = model.id_categorie_allergene
+        self.model = model
+    }
+    
+    func reset() {
+        self.code = self.model.code
+        self.libelle = self.model.libelle
+        self.unite = self.model.unite
+        self.prix_unitaire = self.model.prix_unitaire
+        self.stock = self.model.stock
+        self.allergene = self.model.allergene
+        self.id_categorie = self.model.id_categorie
+        self.id_categorie_allergene = self.model.id_categorie_allergene
     }
 }

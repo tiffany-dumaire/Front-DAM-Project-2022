@@ -22,7 +22,10 @@ enum ListIngredientIntent: CustomStringConvertible, Equatable {
     
     mutating func intentToChange() {
         self = .changingListIngredient
+        print("ListIngredientIntent: .ready to .changingListIngredient")
     }
     
-    
+    mutating func endOfIntent() {
+        self = .ready
+    }
 }

@@ -11,19 +11,24 @@ struct IngredientAddView: View {
     @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
     @EnvironmentObject var categoriesAllergenes: ListCategorieAllergeneViewModel
     @EnvironmentObject var mercurial: ListIngredientViewModel
-    @StateObject var vm: IngredientViewModel = IngredientViewModel(model: IngredientModel(code: 0, libelle: "", unite: "", prix_unitaire: 0, stock: 0, allergene: false, id_categorie: 0, id_categorie_allergene: nil))
-    var cols = [GridItem(.fixed(130)),GridItem(.flexible())]
+    @Environment(\.dismiss) var dismiss
+    @ObservedObject var vm: IngredientViewModel = IngredientViewModel(model: IngredientModel(code: 0, libelle: "", unite: "", prix_unitaire: 0, stock: 0, allergene: false, id_categorie: 0, id_categorie_allergene: nil))
+    @State private var showingAlert = false
+    @State var code: Int = 0
+    @State var prix_unitaire: Double = 0
+    
+    var cols = [GridItem(.fixed(140)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)
     
     private func stateChanged(_ newValue: IngredientIntent) {
         switch self.vm.state {
             case .ingredientAdded:
                 self.vm.state = .ready
-                self.mercurial.state = .changedListIngredient
+                print("IngredientIntent: .ingredientAdded to .ready")
+                self.mercurial.state = .changingListIngredient
             default:
                 return
         }
-        
     }
     
     var body: some View {
@@ -41,7 +46,8 @@ struct IngredientAddView: View {
                 Text("Libellé :").frame(height: 30)
                 TextField("libellé...", text: $vm.libelle)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(5)
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 10)
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
                 Text("Prix unitaire :").frame(height: 30)
@@ -58,7 +64,8 @@ struct IngredientAddView: View {
                     .cornerRadius(10)
                 Text("Unité :").frame(height: 30)
                 TextField("", text: $vm.unite).frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(5)
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 10)
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
                 Text("Catégorie :").frame(height: 30)
@@ -82,7 +89,7 @@ struct IngredientAddView: View {
                 Toggle("", isOn: $vm.allergene)
                     .padding(.trailing, 130)
                 if vm.allergene {
-                    Text("Cat.d'allergène :").frame(height: 30)
+                    Text("Cat.d'allergènes :").frame(height: 30)
                     Picker("Catégorie d'allergènes", selection: $vm.id_categorie_allergene) {
                         Text("Aucune").tag(0)
                         ForEach(categoriesAllergenes.categories, id: \.id_categorie_allergene) { categorie in
@@ -101,18 +108,27 @@ struct IngredientAddView: View {
                 LazyVGrid(columns: cols2, alignment: .center, spacing: 20) {
                     Button("Ajouter", action: {
                         if vm.allergene && vm.id_categorie_allergene == 0 {
-                            return
+                            vm.reset()
+                            showingAlert.toggle()
                         } else {
                             vm.state.intentToChange(ingredientAdd: IngredientModel(code: vm.code, libelle: vm.libelle, unite: vm.unite, prix_unitaire: vm.prix_unitaire, stock: vm.stock, allergene: vm.allergene, id_categorie: vm.id_categorie, id_categorie_allergene: vm.allergene ? vm.id_categorie_allergene : nil))
+                            dismiss()
                         }
-                    })
+                    }).alert("Vous ne pouvez pas créer un ingrédient sans remplir tous les champs obligatoires.", isPresented: $showingAlert) {
+                        Button("J'ai compris", role: .cancel) {
+                            return
+                        }
+                    }
                         .padding(10)
                         .frame(width: 138)
                         .background(Color.green.opacity(0.25))
                         .foregroundColor(Color.green)
                         .cornerRadius(10)
                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: 2))
-                    Button("Annuler", action: {})
+                    Button("Annuler", action: {
+                        vm.reset()
+                        dismiss()
+                    })
                         .padding(10)
                         .frame(width: 138)
                         .background(Color.red.opacity(0.25))

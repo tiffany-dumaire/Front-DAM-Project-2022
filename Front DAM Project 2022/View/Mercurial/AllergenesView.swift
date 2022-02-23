@@ -12,23 +12,31 @@ struct AllergenesView: View {
     @EnvironmentObject var mercurial: ListIngredientViewModel
     @EnvironmentObject var categoriesAllergenes: ListCategorieAllergeneViewModel 
     @State var selectedCategorie: Int = 0
+    var cols = [GridItem(.fixed(95)),GridItem(.flexible())]
     
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                Text("Libellé :")
-                    .padding(.horizontal,10)
-                SearchBarView(text: $texte)
-                HStack {
-                    Text("Catégorie d'allergènes :")
+                LazyVGrid(columns: cols, alignment: .leading, spacing: 5) {
+                    Text("Libellé :")
+                        .font(.system(size: 16))
+                    SearchBarView(text: $texte, placeholder: "libellé..")
+                    Text("Catégorie \nd'allergènes :")
+                        .font(.system(size: 15))
                     Picker("Catégorie d'allergènes", selection: $selectedCategorie) {
                         Text("Aucune").tag(0)
+                            .padding(.horizontal, 10)
                         ForEach(categoriesAllergenes.categories, id: \.id_categorie_allergene) { categorie in
                             Text(categorie.categorie_allergene).tag(categorie.id_categorie_allergene)
+                                .padding(.horizontal, 10)
                         }
-                    }
-                } .padding(.horizontal, 10)
-            }.padding(10)
+                    }.frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(5)
+                        .background(Color.myGray.opacity(0.25))
+                        .cornerRadius(10)
+                        .padding(.horizontal, 10)
+                }.padding(10)
+            }.padding(.bottom, 5)
                 .background(Color.salmon.opacity(0.2))
             CustomIngredientListView(texte: texte, allergen: true, categorie: 0, categorieA: selectedCategorie)
             Spacer(minLength: 0)

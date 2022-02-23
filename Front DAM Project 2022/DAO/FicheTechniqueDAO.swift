@@ -11,9 +11,6 @@ struct FicheTechniqueDAO {
     static func loadFTsDatas() async -> ListFicheTechniqueViewModel {
         if let url: URL = URL(string: "https://back-awi-projet-2021.herokuapp.com/fiches_techniques/all") {
             do {
-               /* var urlS = URLSession.data(from: url)
-                let s: IngredientStocksDTO = await urlS.getJSON(from: url)
-                self.stocks = s*/
                 let (data, _) = try await URLSession.shared.data(from: url)
                 if let s: [FicheTechniqueDTO] = JSONHelper.decode(data: data) {
                     let list: [FicheTechniqueDTO] = s.sorted {

@@ -13,9 +13,7 @@ struct ParameterDAO {
         if let url: URL = URL(string: "https://back-awi-projet-2021.herokuapp.com/parameters/" + libelle_parameters) {
             do {
                 let (data, _) = try await URLSession.shared.data(from: url)
-                print(data)
                 if let s: [ParameterDTO] = JSONHelper.decode(data: data) {
-                    print(s)
                     return ParameterDAO.parameterDTOtoModel(dto: s[0])
                 } else {
                     print("Récupération des stocks d'ingrédients -> nil | Aucune donnée trouvée.")
