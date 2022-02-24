@@ -66,9 +66,9 @@ struct IngredientInStepDTO: Codable {
     var unite: String
     var prix_unitaire: Double
     var allergene: Int
-    var quantite: Int
+    var quantite: Double
     
-    init(id_phase_ingredient: Int, code: Int, libelle: String, unite: String, prix_unitaire: Double, allergene: Int, quantite: Int) {
+    init(id_phase_ingredient: Int, code: Int, libelle: String, unite: String, prix_unitaire: Double, allergene: Int, quantite: Double) {
         self.id_phase_ingredient = id_phase_ingredient
         self.code = code
         self.libelle = libelle

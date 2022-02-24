@@ -55,7 +55,8 @@
 		6F9EA34B27BDA1730024DAB1 /* FicheTechniqueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9EA34A27BDA1730024DAB1 /* FicheTechniqueModel.swift */; };
 		6F9EA34F27BDA29B0024DAB1 /* FicheTechniqueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9EA34E27BDA29B0024DAB1 /* FicheTechniqueViewModel.swift */; };
 		6F9EA35127BDA3630024DAB1 /* ListFicheTechniqueViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9EA35027BDA3630024DAB1 /* ListFicheTechniqueViewModel.swift */; };
-		6FABF0F927C6D4F300EA9AAA /* StepDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FABF0F827C6D4F300EA9AAA /* StepDTO.swift */; };
+		6FABF0F927C6D4F300EA9AAA /* PhaseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FABF0F827C6D4F300EA9AAA /* PhaseDTO.swift */; };
+		6FABF0FB27C7740D00EA9AAA /* PhaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FABF0FA27C7740D00EA9AAA /* PhaseModel.swift */; };
 		6FB656FF27BD374C006F5146 /* JSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB656FE27BD374C006F5146 /* JSONHelper.swift */; };
 		6FCAC3B827BCF77B006ADDDC /* RealizeSalesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCAC3B727BCF77B006ADDDC /* RealizeSalesView.swift */; };
 		6FCAC3BA27BCFDBB006ADDDC /* FTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCAC3B927BCFDBB006ADDDC /* FTView.swift */; };
@@ -136,7 +137,8 @@
 		6F9EA34A27BDA1730024DAB1 /* FicheTechniqueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FicheTechniqueModel.swift; sourceTree = "<group>"; };
 		6F9EA34E27BDA29B0024DAB1 /* FicheTechniqueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FicheTechniqueViewModel.swift; sourceTree = "<group>"; };
 		6F9EA35027BDA3630024DAB1 /* ListFicheTechniqueViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFicheTechniqueViewModel.swift; sourceTree = "<group>"; };
-		6FABF0F827C6D4F300EA9AAA /* StepDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepDTO.swift; sourceTree = "<group>"; };
+		6FABF0F827C6D4F300EA9AAA /* PhaseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseDTO.swift; sourceTree = "<group>"; };
+		6FABF0FA27C7740D00EA9AAA /* PhaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseModel.swift; sourceTree = "<group>"; };
 		6FB656FE27BD374C006F5146 /* JSONHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONHelper.swift; sourceTree = "<group>"; };
 		6FCAC3B727BCF77B006ADDDC /* RealizeSalesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealizeSalesView.swift; sourceTree = "<group>"; };
 		6FCAC3B927BCFDBB006ADDDC /* FTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTView.swift; sourceTree = "<group>"; };
@@ -180,7 +182,7 @@
 				6F835C1A27BED363009DCA40 /* ParameterDTO.swift */,
 				6FE2A6C427BFEF9B00EEF94D /* FicheTechniqueDTO.swift */,
 				6F43CBAB27C3A129001A39C5 /* CategorieDTO.swift */,
-				6FABF0F827C6D4F300EA9AAA /* StepDTO.swift */,
+				6FABF0F827C6D4F300EA9AAA /* PhaseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -397,6 +399,7 @@
 				6F9EA34A27BDA1730024DAB1 /* FicheTechniqueModel.swift */,
 				6F43CBA327C39C1A001A39C5 /* CategoriesModel.swift */,
 				6F43CBA527C39F62001A39C5 /* ListCategoriesModel.swift */,
+				6FABF0FA27C7740D00EA9AAA /* PhaseModel.swift */,
 			);
 			path = FicheTechnique;
 			sourceTree = "<group>";
@@ -579,11 +582,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F43CBAE27C4362B001A39C5 /* CustomIntStepperView.swift in Sources */,
+				6FABF0FB27C7740D00EA9AAA /* PhaseModel.swift in Sources */,
 				6FE2A6C527BFEF9B00EEF94D /* FicheTechniqueDTO.swift in Sources */,
 				6F2FF77427B57AB600ED2EE0 /* FTMenuView.swift in Sources */,
 				6FED6DE427B5A2EB000649E8 /* SearchBarView.swift in Sources */,
 				6F0443F227BE3DC300F565F3 /* IngredientDTO.swift in Sources */,
-				6FABF0F927C6D4F300EA9AAA /* StepDTO.swift in Sources */,
+				6FABF0F927C6D4F300EA9AAA /* PhaseDTO.swift in Sources */,
 				6F43CBA627C39F62001A39C5 /* ListCategoriesModel.swift in Sources */,
 				6F2FF76D27B564C600ED2EE0 /* MyColors.swift in Sources */,
 				6F9EA35127BDA3630024DAB1 /* ListFicheTechniqueViewModel.swift in Sources */,

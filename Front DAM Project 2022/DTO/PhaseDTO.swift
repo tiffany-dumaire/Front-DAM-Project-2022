@@ -1,5 +1,5 @@
 //
-//  StepDTO.swift
+//  PhaseDTO.swift
 //  Front DAM Project 2022
 //
 //  Created by Tiffany Dumaire on 23/02/2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct StepDTO: Codable {
+struct PhaseDTO: Codable {
     var id_phase: Int
     var id_phase_ft: Int
     var libelle_phase: String

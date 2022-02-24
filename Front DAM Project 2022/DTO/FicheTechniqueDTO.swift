@@ -14,9 +14,9 @@ struct FicheTechniqueDTO: Codable {
     var id_responsable: Int
     var intitule_responsable: String
     var id_categorie_fiche: Int
-    var phases: [StepDTO]
+    var phases: [PhaseDTO]
     
-    init(id_fiche_technique: Int, libelle_fiche_technique: String, nombre_couverts: Int, id_responsable: Int, intitule_responsable: String, id_categorie_fiche: Int, phases: [StepDTO]) {
+    init(id_fiche_technique: Int, libelle_fiche_technique: String, nombre_couverts: Int, id_responsable: Int, intitule_responsable: String, id_categorie_fiche: Int, phases: [PhaseDTO]) {
         self.id_fiche_technique = id_fiche_technique
         self.libelle_fiche_technique = libelle_fiche_technique
         self.nombre_couverts = nombre_couverts

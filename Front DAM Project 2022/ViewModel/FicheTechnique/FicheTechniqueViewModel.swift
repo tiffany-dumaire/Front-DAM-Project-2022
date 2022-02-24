@@ -14,11 +14,19 @@ class FicheTechniqueViewModel: ObservableObject {
     @Published var id_fiche_technique: Int
     @Published var libelle_fiche_technique: String
     @Published var nombre_couverts: Int
+    @Published var id_responsable: Int
+    @Published var intitule_responsable: String
+    @Published var id_categorie_fiche: Int
+    @Published var phases: [PhaseModel]
     
     init(model: FicheTechniqueModel) {
         self.model = model
         self.id_fiche_technique = model.id_fiche_technique
         self.libelle_fiche_technique = model.libelle_fiche_technique
         self.nombre_couverts = model.nombre_couverts
+        self.id_responsable = model.id_responsable
+        self.intitule_responsable = model.intitule_responsable
+        self.id_categorie_fiche = model.id_categorie_fiche
+        self.phases = model.phases
     }
 }

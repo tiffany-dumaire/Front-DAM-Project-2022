@@ -34,7 +34,7 @@ struct Front_DAM_Project_2022App: App {
                             }
                         }
                         self.mercurial.ingredients = await IngredientDAO.loadMercurialDatas()
-                        self.fiches.fiches = await FicheTechniqueDAO.loadFTsDatas().fiches
+                        self.fiches.fiches = await FicheTechniqueDAO.loadFTsDatas()
                         self.categoriesFT.categories = await CategoriesDAO.loadCategorieFTDatas().categories
                         self.categoriesIngredient.categories = await CategoriesDAO.loadCategorieIngredientDatas().categories
                         self.categoriesAllergenes.categories = await CategoriesDAO.loadCategorieAllergeneDatas().categories

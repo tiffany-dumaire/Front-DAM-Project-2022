@@ -31,3 +31,23 @@ struct IngredientModel {
         self.id_categorie_allergene = id_categorie_allergene
     }
 }
+
+struct IngredientInStepModel {
+    var id_phase_ingredient: Int
+    var code: Int
+    var libelle: String
+    var unite: String
+    var prix_unitaire: Double
+    var allergene: Bool
+    var quantite: Double
+    
+    init(id_phase_ingredient: Int, code: Int, libelle: String, unite: String, prix_unitaire: Double, allergene: Bool, quantite: Double) {
+        self.id_phase_ingredient = id_phase_ingredient
+        self.code = code
+        self.libelle = libelle
+        self.unite = unite
+        self.prix_unitaire = prix_unitaire
+        self.allergene = allergene
+        self.quantite = quantite
+    }
+}
