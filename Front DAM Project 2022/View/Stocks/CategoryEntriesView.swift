@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CategoryEntriesView: View {
+    @StateObject var stocks: ListIngredientViewModel = ListIngredientViewModel([])
     @State var categorieChoice: Int = 0
     @State var index = 0
     var body: some View {
@@ -37,8 +38,8 @@ struct CategoryEntriesView: View {
                 .padding(.top, 10)
             
             TabView(selection: $index) {
-                CategoryChoiceView(categorie: $categorieChoice, index: $index).tag(0)
-                Text("Hello world").tag(1)
+                CategoryChoiceView(stocks: stocks, categorie: $categorieChoice, index: $index).tag(0)
+                ModifyStocksView(stocks: stocks).tag(1)
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             
             Spacer(minLength: 0)

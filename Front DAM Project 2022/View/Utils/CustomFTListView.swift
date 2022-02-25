@@ -24,7 +24,7 @@ struct CustomFTListView: View {
     var body: some View {
         ScrollView {
             ForEach(fiches.fiches.filter(filterSearch), id: \.id_fiche_technique) { fiche in
-                NavigationLink(destination: FTDetailView()) {
+                NavigationLink(destination: FTDetailView(vm: FicheTechniqueViewModel(model: fiche))) {
                     HStack {
                         Image(systemName: "circle.hexagongrid.fill")
                             .symbolRenderingMode(.multicolor)

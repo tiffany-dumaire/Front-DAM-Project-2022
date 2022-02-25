@@ -13,6 +13,7 @@ struct IngredientAddView: View {
     @EnvironmentObject var mercurial: ListIngredientViewModel
     @Environment(\.dismiss) var dismiss
     @ObservedObject var vm: IngredientViewModel = IngredientViewModel(model: IngredientModel(code: 0, libelle: "", unite: "", prix_unitaire: 0, stock: 0, allergene: false, id_categorie: 0, id_categorie_allergene: nil))
+    @State var categorieA: Int = 0
     @State private var showingAlert = false
     @State var code: Int = 0
     @State var prix_unitaire: Double = 0
@@ -90,7 +91,7 @@ struct IngredientAddView: View {
                     .padding(.trailing, 130)
                 if vm.allergene {
                     Text("Cat.d'allergènes :").frame(height: 30)
-                    Picker("Catégorie d'allergènes", selection: $vm.id_categorie_allergene) {
+                    Picker("Catégorie d'allergènes", selection: $categorieA) {
                         Text("Aucune").tag(0)
                         ForEach(categoriesAllergenes.categories, id: \.id_categorie_allergene) { categorie in
                             Text(categorie.categorie_allergene).tag(categorie.id_categorie_allergene)
@@ -111,7 +112,7 @@ struct IngredientAddView: View {
                             vm.reset()
                             showingAlert.toggle()
                         } else {
-                            vm.state.intentToChange(ingredientAdd: IngredientModel(code: vm.code, libelle: vm.libelle, unite: vm.unite, prix_unitaire: vm.prix_unitaire, stock: vm.stock, allergene: vm.allergene, id_categorie: vm.id_categorie, id_categorie_allergene: vm.allergene ? vm.id_categorie_allergene : nil))
+                            vm.state.intentToChange(ingredientAdd: IngredientModel(code: vm.code, libelle: vm.libelle, unite: vm.unite, prix_unitaire: vm.prix_unitaire, stock: vm.stock, allergene: vm.allergene, id_categorie: vm.id_categorie, id_categorie_allergene: vm.allergene ? categorieA == 0 ? nil : categorieA : nil))
                             dismiss()
                         }
                     }).alert("Vous ne pouvez pas créer un ingrédient sans remplir tous les champs obligatoires.", isPresented: $showingAlert) {

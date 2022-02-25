@@ -127,4 +127,46 @@ struct IngredientDAO {
             }
         }
     }
+    
+    static func modifyStock(ingredient: IngredientModel) async {
+        if let encoded = try? JSONEncoder().encode(IngredientStockDTO(code: ingredient.code, libelle: ingredient.libelle, stock: ingredient.stock)) {
+            if let url = URL(string: "https://back-awi-projet-2021.herokuapp.com/ingredients/stocks/modify/\(ingredient.code)"){
+                do {
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "PUT"
+                    request.httpBody = encoded
+                    request.setValue("application/json", forHTTPHeaderField: "content-type")
+                    if let (_, response) = try? await URLSession.shared.data(for: request){
+                        let httpresponse = response as! HTTPURLResponse
+                        if httpresponse.statusCode == 200 {
+                            print("Le stock de l'ingrédient \(ingredient.libelle) a été modifié avec succès.")
+                        }
+                        else{
+                            print("Modification d'un ingrédient \(ingredient.libelle) - error \(httpresponse.statusCode): \(HTTPURLResponse.localizedString(forStatusCode: httpresponse.statusCode))")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    /**DELETE**/
+    
+    static func deleteIngredient(code: Int) async {
+        if let url = URL(string: "https://back-awi-projet-2021.herokuapp.com/ingredients/delete/\(code)"){
+            do {
+                var request = URLRequest(url: url)
+                request.httpMethod = "DELETE"
+                if let (_, response) = try? await URLSession.shared.data(for: request){
+                    let httpresponse = response as! HTTPURLResponse
+                    if httpresponse.statusCode == 200 {
+                        print("L'ingrédient a été supprimé avec succès.")
+                    }
+                    else{
+                        print("Suppression d'un ingrédient - error \(httpresponse.statusCode): \(HTTPURLResponse.localizedString(forStatusCode: httpresponse.statusCode))")
+                    }
+                }
+            }
+        }
+    }
 }

@@ -42,6 +42,19 @@ class IngredientViewModel: ObservableObject {
                         self.state = .ingredientChanged
                         print("IngredientIntent: .ingredientChanging to .ingredientChanged")
                     }
+                case .ingredientStockModifying(let ingredient):
+                    self.stock = ingredient.stock
+                    Task {
+                        await IngredientDAO.modifyStock(ingredient: ingredient)
+                        self.state = .ingredientStockModified
+                        print("IngredientIntent: .ingredientStockModifying to .ingredientStockModified")
+                    }
+                case .ingredientDeleting(let code):
+                    Task {
+                        await IngredientDAO.deleteIngredient(code: code)
+                        self.state = .ingredientDeleted
+                        print("IngredientIntent: .ingredientDeleting to .ingredientDeleted")
+                    }
                 default:
                     return
             }

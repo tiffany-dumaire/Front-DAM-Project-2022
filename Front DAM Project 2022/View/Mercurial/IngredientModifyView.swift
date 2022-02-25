@@ -14,12 +14,9 @@ struct IngredientModifyView: View {
     @Environment(\.dismiss) var dismiss
     @ObservedObject var vm: IngredientViewModel
     @State private var showingAlert = false
+    @State var categorieA: Int
     var cols = [GridItem(.fixed(140)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)
-    
-    init(vm: IngredientViewModel) {
-        self.vm = vm
-    }
     
     private func stateChanged(_ newValue: IngredientIntent) {
         switch self.vm.state {
@@ -81,11 +78,11 @@ struct IngredientModifyView: View {
                     .padding(.trailing, 130)
                 if vm.allergene {
                     Text("Cat.d'allergènes :").frame(height: 30)
-                    Picker("Catégorie d'allergènes", selection: $vm.id_categorie_allergene) {
-                        Text("Aucune").tag(0)
+                    Picker("Catégorie d'allergènes", selection: $categorieA) {
                         ForEach(categoriesAllergenes.categories, id: \.id_categorie_allergene) { categorie in
                             Text(categorie.categorie_allergene).tag(categorie.id_categorie_allergene)
                         }
+                        Text("Aucune").tag(0)
                     }.frame(maxWidth: .infinity, alignment: .leading)
                         .padding(5)
                         .background(Color.myGray.opacity(0.25))
@@ -98,18 +95,9 @@ struct IngredientModifyView: View {
                 Spacer().frame(height: 20)
                 LazyVGrid(columns: cols2, alignment: .center, spacing: 20) {
                     Button("Sauvegarder", action: {
-                        if vm.allergene && (vm.id_categorie_allergene == 0 || vm.id_categorie_allergene == nil) {
-                            vm.reset()
-                            showingAlert.toggle()
-                        } else {
-                            vm.state.intentToChange(ingredientModify: IngredientModel(code: vm.code, libelle: vm.libelle, unite: vm.unite, prix_unitaire: vm.prix_unitaire, stock: vm.stock, allergene: vm.allergene, id_categorie: vm.id_categorie, id_categorie_allergene: vm.allergene ? vm.id_categorie_allergene : nil))
-                            dismiss()
-                        }
-                    }).alert("Vous ne pouvez pas créer un ingrédient sans remplir tous les champs obligatoires.", isPresented: $showingAlert) {
-                        Button("J'ai compris", role: .cancel) {
-                            return
-                        }
-                    }
+                        vm.state.intentToChange(ingredientModify: IngredientModel(code: vm.code, libelle: vm.libelle, unite: vm.unite, prix_unitaire: vm.prix_unitaire, stock: vm.stock, allergene: vm.allergene, id_categorie: vm.id_categorie, id_categorie_allergene: vm.allergene ? categorieA == 0 ? nil : categorieA : nil))
+                        dismiss()
+                    })
                         .padding(10)
                         .frame(width: 138)
                         .background(Color.green.opacity(0.25))

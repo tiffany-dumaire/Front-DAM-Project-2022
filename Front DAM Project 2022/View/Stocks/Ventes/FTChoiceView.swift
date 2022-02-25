@@ -23,7 +23,9 @@ struct FTChoiceView: View {
                     ForEach(fiches.fiches, id: \.id_fiche_technique) { fiche in
                         VStack(alignment: .leading) {
                             HStack {
-                                Image(systemName: "cross.circle.fill").font(.system(size: 14))
+                                Image(systemName: "plus.circle.fill")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.green)
                                 Text("\(fiche.libelle_fiche_technique)").font(.system(size: 14))
                             }
                             HStack {
@@ -32,16 +34,28 @@ struct FTChoiceView: View {
                             }.padding(.horizontal, 25)
                         }
                     }
-                }
+                }.listStyle(PlainListStyle())
                 
             }
             Divider()
             VStack(alignment: .leading) {
                 Text("Fiches sélectionnées")
                 List {
-                    Text("Il n'y a pas encore de fiches ici")
-                    Text("Les quantités pour chaque fiche seront affichées à leur droite et le nombre de couverts en dessous du nom")
-                }
+                    ForEach(fiches.fiches, id: \.id_fiche_technique) { fiche in
+                        VStack(alignment: .leading) {
+                            HStack {
+                                Image(systemName: "minus.circle.fill")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.red)
+                                Text("\(fiche.libelle_fiche_technique)").font(.system(size: 14))
+                            }
+                            HStack {
+                                Image(systemName: "person.3.sequence.fill").font(.system(size: 12))
+                                Text("\(fiche.nombre_couverts)").font(.system(size: 12))
+                            }.padding(.horizontal, 25)
+                        }
+                    }
+                }.listStyle(PlainListStyle())
             }
         }.padding()
     }

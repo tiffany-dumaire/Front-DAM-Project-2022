@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct IngredientModel {    
+struct IngredientModel: Equatable {
     var code: Int
     var libelle: String
     var unite: String

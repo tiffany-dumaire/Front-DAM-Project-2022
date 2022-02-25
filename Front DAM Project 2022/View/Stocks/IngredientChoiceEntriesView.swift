@@ -8,8 +8,44 @@
 import SwiftUI
 
 struct IngredientChoiceEntriesView: View {
+    @EnvironmentObject var mercurial: ListIngredientViewModel
+    @StateObject var stocks: ListIngredientViewModel = ListIngredientViewModel([])
+    @State var index = 0
     var body: some View {
-        Text("Réaliser les entrées de stock pour une liste d'ingrédients choisis")
+        VStack {
+            HStack(spacing: 0) {
+                Text("Choix catégorie")
+                    .font(.system(size: 14))
+                    .foregroundColor(self.index == 0 ? .white : Color.black.opacity(0.7))
+                    .fontWeight(.bold)
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 20)
+                    .background(Color.purple.opacity(self.index == 0 ? 1 : 0))
+                    .clipShape(Capsule())
+                Spacer(minLength: 0)
+                Text("Gérer stocks")
+                    .font(.system(size: 14))
+                    .foregroundColor(self.index == 1 ? .white : Color.black.opacity(0.7))
+                    .fontWeight(.bold)
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 20)
+                    .background(Color.purple.opacity(self.index == 1 ? 1 : 0))
+                    .clipShape(Capsule())
+            }
+                .background(Color.black.opacity(0.06))
+                .clipShape(Capsule())
+                .padding(.horizontal)
+                .padding(.top, 10)
+            
+            TabView(selection: $index) {
+                IngredientStockChoiceView(stocks: stocks, index: $index).tag(0)
+                ModifyStocksView(stocks: stocks).tag(1)
+            }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+            
+            Spacer(minLength: 0)
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationTitle("Entrée de stock par ingrédients")
+        }
     }
 }
 

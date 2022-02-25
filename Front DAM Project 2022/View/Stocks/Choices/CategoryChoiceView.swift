@@ -9,9 +9,15 @@ import SwiftUI
 
 struct CategoryChoiceView: View {
     @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
+    @EnvironmentObject var mercurial: ListIngredientViewModel
+    @ObservedObject var stocks: ListIngredientViewModel
     @Binding var categorie: Int
     @State private var showingAlert = false
     @Binding var index: Int
+    
+    private func filterSearch(ingredient: IngredientModel) -> Bool{
+        return categorie == ingredient.id_categorie
+    }
     
     var body: some View {
         VStack {
@@ -32,6 +38,11 @@ struct CategoryChoiceView: View {
                     if categorie == 0 {
                         showingAlert.toggle()
                     } else {
+                        for ingredient in mercurial.ingredients {
+                            if filterSearch(ingredient: ingredient) {
+                                stocks.ingredients.append(ingredient)
+                            }
+                        }
                         index = 1
                     }
                 }).alert("Vous devez impérativement sélectionner une catégorie avant de continuer", isPresented: $showingAlert) {
@@ -56,6 +67,6 @@ struct CategoryChoiceView: View {
 
 struct CategoryChoiceView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoryChoiceView(categorie: .constant(0), index: .constant(0))
+        CategoryChoiceView(stocks: ListIngredientViewModel([]), categorie: .constant(0), index: .constant(0))
     }
 }

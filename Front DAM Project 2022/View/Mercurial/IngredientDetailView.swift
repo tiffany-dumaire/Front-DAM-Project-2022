@@ -8,15 +8,35 @@
 import SwiftUI
 
 struct IngredientDetailView: View {
+    @EnvironmentObject var mercurial: ListIngredientViewModel
     @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
     @EnvironmentObject var categoriesAllergenes: ListCategorieAllergeneViewModel
     @ObservedObject var vm: IngredientViewModel
-    
+    @Environment(\.dismiss) var dismiss
     var cols = [GridItem(.fixed(140)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)
     
     init(_ vm: IngredientViewModel) {
         self.vm = vm
+    }
+    
+    private func filterSearch(categorie: CategorieIngredientModel) -> Bool{
+        return categorie.id_categorie == vm.id_categorie
+    }
+    
+    private func filterSearchAllergene(categorie: CategorieAllergeneModel) -> Bool{
+        return categorie.id_categorie_allergene == vm.id_categorie_allergene
+    }
+    
+    private func stateChanged(_ newValue: IngredientIntent) {
+        switch self.vm.state {
+            case .ingredientDeleted:
+                self.vm.state = .ready
+                print("IngredientIntent: .ingredientDeleted to .ready")
+                self.mercurial.state = .changingListIngredient
+            default:
+                return
+        }
     }
     
     var body: some View {
@@ -32,31 +52,28 @@ struct IngredientDetailView: View {
                 Text(String(format: "%.2f", vm.prix_unitaire) + " €")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
-                    .background(Color.myGray.opacity(0.25))
+                    .background(Color.blue.opacity(0.25))
                     .cornerRadius(10)
                 Text("Stock :").frame(height: 30)
-                Text(String(format: "%.3f", vm.stock) + " " + vm.unite).frame(maxWidth: .infinity, alignment: .leading)
+                Text(String(format: "%.3f", vm.stock) + " " + vm.unite)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
-                    .background(Color.myGray.opacity(0.25))
+                    .background(Color.blue.opacity(0.25))
                     .cornerRadius(10)
                 Text("Valeur du stock :").frame(height: 30)
-                Text(String(format: "%.2f", vm.prix_unitaire * vm.stock) + " €").frame(maxWidth: .infinity, alignment: .leading)
+                Text(String(format: "%.2f", vm.prix_unitaire * vm.stock) + " €")
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
-                    .background(Color.myGray.opacity(0.25))
+                    .background(Color.blue.opacity(0.25))
                     .cornerRadius(10)
                 Text("Catégorie :").frame(height: 30)
-                Picker("Catégorie", selection: $vm.id_categorie) {
-                    Text("Aucune").tag(0)
-                        .foregroundColor(.black)
-                    ForEach(categoriesIngredient.categories, id: \.id_categorie) { categorie in
-                        Text(categorie.categorie).tag(categorie.id_categorie)
-                            .foregroundColor(.black)
-                    }
-                }.frame(maxWidth: .infinity, alignment: .leading)
-                    .disabled(true)
-                    .padding(5)
-                    .background(Color.myGray.opacity(0.25))
-                    .cornerRadius(10)
+                ForEach(categoriesIngredient.categories.filter(filterSearch), id: \.id_categorie) { categorie in
+                    Text(categorie.categorie)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(5)
+                        .background(Color.blue.opacity(0.25))
+                        .cornerRadius(10)
+                }
             }
             VStack {
                 Spacer().frame(height: 20)
@@ -82,18 +99,13 @@ struct IngredientDetailView: View {
                 }
                 if vm.allergene {
                     Text("Cat. d'allergènes :").frame(height: 30)
-                    Picker("Cat. d'allergènes", selection: $vm.id_categorie_allergene) {
-                        Text("Aucune").tag(0)
-                            .foregroundColor(.black)
-                        ForEach(categoriesAllergenes.categories, id: \.id_categorie_allergene) { categorie in
-                            Text(categorie.categorie_allergene).tag(categorie.id_categorie_allergene)
-                                .foregroundColor(.black)
-                        }
-                    }.frame(maxWidth: .infinity, alignment: .leading)
-                        .disabled(true)
-                        .padding(5)
-                        .background(Color.myGray.opacity(0.25))
-                        .cornerRadius(10)
+                    ForEach(categoriesAllergenes.categories.filter(filterSearchAllergene), id: \.id_categorie_allergene) { categorie in
+                        Text(categorie.categorie_allergene)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(5)
+                            .background(Color.blue.opacity(0.25))
+                            .cornerRadius(10)
+                    }
                 }
             }
             VStack {
@@ -101,7 +113,7 @@ struct IngredientDetailView: View {
                 Divider()
                 Spacer().frame(height: 20)
                 LazyVGrid(columns: cols2, alignment: .center, spacing: 20) {
-                    NavigationLink(destination: IngredientModifyView(vm: vm)) {
+                    NavigationLink(destination: IngredientModifyView(vm: vm, categorieA: (vm.id_categorie_allergene == nil ? 0 : vm.id_categorie_allergene)!)) {
                         Text("Modifier")
                     }
                         .padding(10)
@@ -110,7 +122,10 @@ struct IngredientDetailView: View {
                         .foregroundColor(Color.modifyButton)
                         .cornerRadius(10)
                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.modifyButton, lineWidth: 2))
-                    Button("Supprimer", action: {})
+                    Button("Supprimer", action: {
+                        vm.state.intentToChange(ingredientDeleting: vm.code)
+                        dismiss()
+                    })
                         .padding(10)
                         .frame(width: 138)
                         .background(Color.red.opacity(0.25))
@@ -128,6 +143,10 @@ struct IngredientDetailView: View {
             }
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)
+            
+                .onChange(of: self.vm.state, perform: {
+                    newValue in stateChanged(newValue)
+                })
         }.padding(.horizontal, 10)
     }
 }
