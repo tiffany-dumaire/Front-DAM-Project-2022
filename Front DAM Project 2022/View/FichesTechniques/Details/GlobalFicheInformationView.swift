@@ -11,6 +11,10 @@ struct GlobalFicheInformationView: View {
     @EnvironmentObject var categoriesFT: ListCategorieFTViewModel
     @ObservedObject var vm: FicheTechniqueViewModel
     
+    private func filterSearch(categorie: CategorieFTModel) -> Bool{
+        return categorie.id_categorie_fiche == vm.id_categorie_fiche
+    }
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading){
@@ -19,33 +23,31 @@ struct GlobalFicheInformationView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.vertical, 5)
                     .padding(.horizontal, 10)
-                    .background(Color.myGray.opacity(0.25))
+                    .background(Color.blue.opacity(0.25))
                     .cornerRadius(10)
                 Text("Responsable :").frame(height: 30)
                 Text(vm.intitule_responsable)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(5)
-                    .background(Color.myGray.opacity(0.25))
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 10)
+                    .background(Color.blue.opacity(0.25))
                     .cornerRadius(10)
                 Text("Nombre de couverts :").frame(height: 30)
                 Text("\(vm.nombre_couverts)")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(5)
-                    .background(Color.myGray.opacity(0.25))
+                    .padding(.vertical, 5)
+                    .padding(.horizontal, 10)
+                    .background(Color.blue.opacity(0.25))
                     .cornerRadius(10)
                 Text("Catégorie :").frame(height: 30)
-                Picker("Catégorie", selection: $vm.id_categorie_fiche) {
-                    Text("Aucune").tag(0)
-                        .foregroundColor(.black)
-                    ForEach(categoriesFT.categories, id: \.id_categorie_fiche) { categorie in
-                        Text(categorie.categorie_fiche).tag(categorie.id_categorie_fiche)
-                            .foregroundColor(.black)
-                    }
-                }.frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(5)
-                    .background(Color.myGray.opacity(0.25))
-                    .cornerRadius(10)
-                    .disabled(true)
+                ForEach(categoriesFT.categories.filter(filterSearch), id: \.id_categorie_fiche) { categorie in
+                    Text(categorie.categorie_fiche)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 10)
+                        .background(Color.blue.opacity(0.25))
+                        .cornerRadius(10)
+                }
             }
             .padding(20)
         }

@@ -9,37 +9,40 @@ import SwiftUI
 
 struct EntriesView: View {
     @EnvironmentObject var mercurial: ListIngredientViewModel
-    var cols = [GridItem(.flexible()),GridItem(.fixed(80))]
+    @StateObject var stocks: ListOfIngredientViewModel
     @Environment(\.dismiss) var dismiss
-    @State var loading: Bool = false
+    @State var loading: Int = 0
+    
+    private func modifyStocks() async {
+        loading = 1
+        Task {
+            for ingredient in stocks.ingredients {
+                await ingredient.state.intentToChange(ingredientStockModify: IngredientModel(code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, stock: ingredient.stock, allergene: ingredient.allergene, id_categorie: ingredient.id_categorie, id_categorie_allergene: ingredient.id_categorie_allergene))
+                ingredient.state = .ready
+                print("IngredientIntent: .ingredientStockModified to .ready")
+                    
+            }
+            self.mercurial.state = .changingListIngredient
+        }
+    }
+    
     var body: some View {
         ScrollView {
-            if loading {
+            if loading == 1 {
                 VStack {
                     Text("Stocks en cours d'enregistrement")
                     ProgressView()
                 }
-            } else {
-                ForEach(mercurial.ingredients, id: \.code) { ingredient in
-                    LazyVGrid(columns: cols, alignment: .leading, spacing: 15) {
-                        Text(ingredient.libelle)
-                        Text(String(format: "%.3f", ingredient.stock))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(5)
-                            .background(Color.myGray.opacity(0.25))
-                            .cornerRadius(10)
-                    }
-                    .padding(15)
-                    .background(Color.blue.opacity(0.1))
-                    .cornerRadius(20)
-                    .padding(.horizontal, 15)
+            }
+            if loading == 0 {
+                ForEach(stocks.ingredients, id: \.code) { ingredient in
+                    IngredientStockView(ingredient: ingredient)
                 }
                 Button("Modifier les stocks", action: {
-                    loading = true
-                    /*for ingredient in mercurial.ingredients {
-                        print(ingredient.libelle)
-                    }*/
-                    dismiss()
+                    Task {
+                        await modifyStocks()
+                        loading = 2
+                    }
                 })
                     .padding(10)
                     .frame(width: 200)
@@ -51,12 +54,18 @@ struct EntriesView: View {
                 .navigationTitle("Entrée de stock complète")
                 .navigationBarTitleDisplayMode(.inline)
             }
+            if loading == 2 {
+                VStack {
+                    Text("Les stocks d'ingrédients ont bien été modifiés.")
+                    Button("Retour au menu", action: { dismiss() })
+                }
+            }
         }
     }
 }
 
 struct EntriesView_Previews: PreviewProvider {
     static var previews: some View {
-        EntriesView()
+        EntriesView(stocks: ListOfIngredientViewModel(ListIngredientViewModel([])))
     }
 }

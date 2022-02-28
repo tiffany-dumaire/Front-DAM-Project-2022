@@ -39,7 +39,7 @@ struct IngredientChoiceEntriesView: View {
             
             TabView(selection: $index) {
                 IngredientStockChoiceView(stocks: stocks, index: $index).tag(0)
-                ModifyStocksView(stocks: stocks).tag(1)
+                ModifyStocksView(stocks: ListOfIngredientViewModel(stocks)).tag(1)
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             
             Spacer(minLength: 0)

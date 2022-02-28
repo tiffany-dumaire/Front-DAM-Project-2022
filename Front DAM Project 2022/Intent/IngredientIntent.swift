@@ -43,7 +43,7 @@ enum IngredientIntent: CustomStringConvertible, Equatable {
         print("IngredientIntent: .ready to .ingredientChanging")
     }
     
-    mutating func intentToChange(ingredientStockModify: IngredientModel){
+    mutating func intentToChange(ingredientStockModify: IngredientModel) async {
         self = .ingredientStockModifying(ingredientStockModify)
         print("IngredientIntent: .ready to .ingredientStockModifying")
     }

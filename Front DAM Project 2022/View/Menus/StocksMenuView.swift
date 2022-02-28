@@ -13,10 +13,11 @@ func pdf() {
 }
 
 struct StocksMenuView: View {
+    @EnvironmentObject var mercurial: ListIngredientViewModel
     var rows = [GridItem(.adaptive(minimum: 80, maximum: 90))]
     var body: some View {
         LazyHGrid(rows: rows, alignment: .center, spacing: 25) {
-            NavigationLink(destination: EntriesView()) {
+            NavigationLink(destination: EntriesView(stocks: ListOfIngredientViewModel(mercurial))) {
                 ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
                     VStack(alignment: .leading, spacing: 15) {
                         Text("Entrée de stock \n(complète)").font(.system(size: 16))

@@ -2,7 +2,7 @@
 //  IngredientStockChoiceView.swift
 //  Front DAM Project 2022
 //
-//  Created by m1 on 25/02/2022.
+//  Created by Tiffany Dumaire on 25/02/2022.
 //
 
 import SwiftUI
@@ -75,6 +75,23 @@ struct IngredientStockChoiceView: View {
                     }
                 }.listStyle(PlainListStyle())
             }
+            Button("Choisir ces ingrédients", action: {
+                if stocks.ingredients.count == 0 {
+                    showingAlert.toggle()
+                } else {
+                    index = 1
+                }
+            }).alert("Vous devez impérativement sélectionner au moins un ingrédient avant de continuer", isPresented: $showingAlert) {
+                Button("J'ai compris", role: .cancel) {
+                    return
+                }
+            }
+                .padding(10)
+                .frame(width: 200)
+                .background(Color.blue.opacity(0.25))
+                .foregroundColor(Color.blue)
+                .cornerRadius(10)
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2))
         }.padding()
     }
 }
