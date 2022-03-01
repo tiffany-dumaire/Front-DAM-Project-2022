@@ -8,15 +8,20 @@
 import SwiftUI
 
 struct ListPhasesView: View {
+    @State var phases: [PhaseModel]
     var body: some View {
         ScrollView {
-            
+            ForEach(phases, id: \.id_phase) { phase in
+                PhasesDetailView(phase: phase)
+                    .padding(.vertical, 15)
+                Divider()
+            }
         }
     }
 }
 
 struct ListPhasesView_Previews: PreviewProvider {
     static var previews: some View {
-        ListPhasesView()
+        ListPhasesView(phases: [])
     }
 }

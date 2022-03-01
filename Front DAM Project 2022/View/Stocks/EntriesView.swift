@@ -22,7 +22,6 @@ struct EntriesView: View {
                 print("IngredientIntent: .ingredientStockModified to .ready")
                     
             }
-            self.mercurial.state = .changingListIngredient
         }
     }
     
@@ -41,7 +40,10 @@ struct EntriesView: View {
                 Button("Modifier les stocks", action: {
                     Task {
                         await modifyStocks()
-                        loading = 2
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                            self.mercurial.state = .changingListIngredient
+                            loading = 2
+                        }
                     }
                 })
                     .padding(10)

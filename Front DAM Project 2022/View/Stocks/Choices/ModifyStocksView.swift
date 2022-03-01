@@ -22,8 +22,12 @@ struct ModifyStocksView: View {
                 print("IngredientIntent: .ingredientStockModified to .ready")
                     
             }
-            self.mercurial.state = .changingListIngredient
         }
+    }
+    
+    private func stateChanged() {
+        self.mercurial.state = .changingListIngredient
+        loading = 2
     }
     
     var body: some View {
@@ -41,7 +45,8 @@ struct ModifyStocksView: View {
                 Button("Modifier les stocks", action: {
                     Task {
                         await modifyStocks()
-                        loading = 2
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {                     stateChanged()
+                        }
                     }
                 })
                     .padding(10)

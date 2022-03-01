@@ -1,16 +1,15 @@
 //
-//  FTDetailView.swift
+//  FTCreationView.swift
 //  Front DAM Project 2022
 //
-//  Created by Tiffany Dumaire on 16/02/2022.
+//  Created by Tiffany Dumaire on 28/02/2022.
 //
 
 import SwiftUI
 
-struct FTDetailView: View {
+struct FTCreationView: View {
     @State var index: Int = 0
-    @ObservedObject var vm: FicheTechniqueViewModel
-    
+    @StateObject var vm: FicheTechniqueViewModel = FicheTechniqueViewModel(model: FicheTechniqueModel(id_fiche_technique: 0, libelle_fiche_technique: "", nombre_couverts: 1, id_responsable: 0, intitule_responsable: "", id_categorie_fiche: 0, phases: []))
     var body: some View {
         VStack(alignment: .leading) {
             HStack(spacing: 0) {
@@ -18,7 +17,7 @@ struct FTDetailView: View {
                     .foregroundColor(self.index == 0 ? .white : Color.black.opacity(0.7))
                     .fontWeight(.bold)
                     .padding(.vertical, 10)
-                    .padding(.horizontal, 15)
+                    .padding(.horizontal, 20)
                     .background(Color.orange.opacity(self.index == 0 ? 1 : 0))
                     .clipShape(Capsule())
                     .onTapGesture {
@@ -27,11 +26,11 @@ struct FTDetailView: View {
                         }
                     }
                 Spacer(minLength: 0)
-                Text("Progression")
+                Text("Phases")
                     .foregroundColor(self.index == 1 ? .white : Color.black.opacity(0.7))
                     .fontWeight(.bold)
                     .padding(.vertical, 10)
-                    .padding(.horizontal, 15)
+                    .padding(.horizontal, 20)
                     .background(Color.orange.opacity(self.index == 1 ? 1 : 0))
                     .clipShape(Capsule())
                     .onTapGesture {
@@ -40,11 +39,11 @@ struct FTDetailView: View {
                         }
                     }
                 Spacer(minLength: 0)
-                Text("Coûts")
+                Text("Ordre")
                     .foregroundColor(self.index == 2 ? .white : Color.black.opacity(0.7))
                     .fontWeight(.bold)
                     .padding(.vertical, 10)
-                    .padding(.horizontal, 15)
+                    .padding(.horizontal, 20)
                     .background(Color.orange.opacity(self.index == 2 ? 1 : 0))
                     .clipShape(Capsule())
                     .onTapGesture {
@@ -52,25 +51,25 @@ struct FTDetailView: View {
                             self.index = 2
                         }
                     }
-            
-            }.background(Color.blue.opacity(0.06))
+            }
+                .background(Color.blue.opacity(0.06))
                 .clipShape(Capsule())
                 .padding(.horizontal)
                 .padding(.top, 10)
             VStack {
                 TabView(selection: $index) {
-                    GlobalFicheInformationView(vm: vm).tag(0)
+                    AddGlobalFicheInformationView().tag(0)
                     ListPhasesView(phases: vm.phases).tag(1)
                 }
             }
-            .navigationTitle(vm.libelle_fiche_technique)
+            .navigationTitle("Créer une fiche technique")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
-struct FTDetailView_Previews: PreviewProvider {
+struct FTCreationView_Previews: PreviewProvider {
     static var previews: some View {
-        FTDetailView(vm: FicheTechniqueViewModel(model: FicheTechniqueModel(id_fiche_technique: 101, libelle_fiche_technique: "Test", nombre_couverts: 10, id_responsable: 1, intitule_responsable: "Responsable", id_categorie_fiche: 2, phases: [])))
+        FTCreationView()
     }
 }
