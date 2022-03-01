@@ -59,6 +59,9 @@
 		6F87805A27CD850300690706 /* FTCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87805927CD850300690706 /* FTCreationView.swift */; };
 		6F87805C27CD8C6300690706 /* FicheTechniqueIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87805B27CD8C6300690706 /* FicheTechniqueIntent.swift */; };
 		6F87805E27CD8F6600690706 /* ListFicheTechniqueIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87805D27CD8F6600690706 /* ListFicheTechniqueIntent.swift */; };
+		6F87806027CE14CA00690706 /* ListPhasesAddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87805F27CE14CA00690706 /* ListPhasesAddingView.swift */; };
+		6F87806227CE595C00690706 /* PhaseAddingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87806127CE595C00690706 /* PhaseAddingView.swift */; };
+		6F87806427CE5BBB00690706 /* AddPhaseGlobalInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87806327CE5BBB00690706 /* AddPhaseGlobalInformationView.swift */; };
 		6F94B3BE27C5116E00AF909A /* CategoryChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F94B3BD27C5116E00AF909A /* CategoryChoiceView.swift */; };
 		6F9EA34727BD770F0024DAB1 /* FTChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9EA34627BD770F0024DAB1 /* FTChoiceView.swift */; };
 		6F9EA34927BD7D2B0024DAB1 /* ListIngredientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9EA34827BD7D2B0024DAB1 /* ListIngredientViewModel.swift */; };
@@ -152,6 +155,9 @@
 		6F87805927CD850300690706 /* FTCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTCreationView.swift; sourceTree = "<group>"; };
 		6F87805B27CD8C6300690706 /* FicheTechniqueIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FicheTechniqueIntent.swift; sourceTree = "<group>"; };
 		6F87805D27CD8F6600690706 /* ListFicheTechniqueIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFicheTechniqueIntent.swift; sourceTree = "<group>"; };
+		6F87805F27CE14CA00690706 /* ListPhasesAddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPhasesAddingView.swift; sourceTree = "<group>"; };
+		6F87806127CE595C00690706 /* PhaseAddingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseAddingView.swift; sourceTree = "<group>"; };
+		6F87806327CE5BBB00690706 /* AddPhaseGlobalInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhaseGlobalInformationView.swift; sourceTree = "<group>"; };
 		6F94B3BD27C5116E00AF909A /* CategoryChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryChoiceView.swift; sourceTree = "<group>"; };
 		6F9EA34627BD770F0024DAB1 /* FTChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTChoiceView.swift; sourceTree = "<group>"; };
 		6F9EA34827BD7D2B0024DAB1 /* ListIngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIngredientViewModel.swift; sourceTree = "<group>"; };
@@ -425,6 +431,9 @@
 			isa = PBXGroup;
 			children = (
 				6F87805727CD84D300690706 /* AddGlobalFicheInformationView.swift */,
+				6F87805F27CE14CA00690706 /* ListPhasesAddingView.swift */,
+				6F87806127CE595C00690706 /* PhaseAddingView.swift */,
+				6F87806327CE5BBB00690706 /* AddPhaseGlobalInformationView.swift */,
 			);
 			path = Creation;
 			sourceTree = "<group>";
@@ -631,6 +640,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F43CBAE27C4362B001A39C5 /* CustomIntStepperView.swift in Sources */,
+				6F87806027CE14CA00690706 /* ListPhasesAddingView.swift in Sources */,
 				6FABF0FB27C7740D00EA9AAA /* PhaseModel.swift in Sources */,
 				6FE2A6C527BFEF9B00EEF94D /* FicheTechniqueDTO.swift in Sources */,
 				6F2FF77427B57AB600ED2EE0 /* FTMenuView.swift in Sources */,
@@ -650,6 +660,7 @@
 				6F43CB9B27C2D52D001A39C5 /* CustomIngredientListView.swift in Sources */,
 				6F2FF76827B54E4300ED2EE0 /* HomeView.swift in Sources */,
 				6F87804F27CCE3A000690706 /* IngredientStockView.swift in Sources */,
+				6F87806227CE595C00690706 /* PhaseAddingView.swift in Sources */,
 				6F1BD41027B9B2CF001E50AA /* EntriesView.swift in Sources */,
 				6F43CBAA27C3A095001A39C5 /* CategoriesDAO.swift in Sources */,
 				6F11388727B69A070048F029 /* IngredientModifyView.swift in Sources */,
@@ -694,6 +705,7 @@
 				6FED6DE627B5AF97000649E8 /* IngredientDetailView.swift in Sources */,
 				6F54E93227B1E8CA009DF2F6 /* Front_DAM_Project_2022App.swift in Sources */,
 				6F0443EF27BE3CA500F565F3 /* URLSession.swift in Sources */,
+				6F87806427CE5BBB00690706 /* AddPhaseGlobalInformationView.swift in Sources */,
 				6F1BD40C27B9AFBC001E50AA /* IngredientChoiceEntriesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

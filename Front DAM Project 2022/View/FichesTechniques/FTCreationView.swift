@@ -58,8 +58,8 @@ struct FTCreationView: View {
                 .padding(.top, 10)
             VStack {
                 TabView(selection: $index) {
-                    AddGlobalFicheInformationView().tag(0)
-                    ListPhasesView(phases: vm.phases).tag(1)
+                    AddGlobalFicheInformationView(vm: vm).tag(0)
+                    ListPhasesAddingView(vm: vm).tag(1)
                 }
             }
             .navigationTitle("Créer une fiche technique")

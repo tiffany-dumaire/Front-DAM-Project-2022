@@ -26,3 +26,13 @@ struct FicheTechniqueModel {
         self.phases = phases
     }
 }
+
+struct ResponsableModel {
+    var id_responsable: Int
+    var intitule_responsable: String
+    
+    init(id_responsable: Int, intitule_responsable: String) {
+        self.id_responsable = id_responsable
+        self.intitule_responsable = intitule_responsable
+    }
+}

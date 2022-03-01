@@ -16,9 +16,9 @@ class ListFicheTechniqueViewModel: ObservableObject {
             switch state {
                 case .changingListFT:
                     Task {
-                        self.model = await FicheTechniqueDAO.loadFTsDatas()
+                        self.fiches = await FicheTechniqueDAO.loadFTsDatas()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            self.fiches = self.model
+                            self.model = self.fiches
                         }
                     }
                     self.state = .changedListFT
@@ -32,5 +32,15 @@ class ListFicheTechniqueViewModel: ObservableObject {
     init(_ fiches: [FicheTechniqueModel]) {
         self.fiches = fiches
         self.model = fiches
+    }
+}
+
+class ListResponsableViewModel: ObservableObject {
+    private var model: [ResponsableModel]
+    @Published var responsables: [ResponsableModel]
+    
+    init(_ respo: [ResponsableModel]) {
+        self.responsables = respo
+        self.model = respo
     }
 }

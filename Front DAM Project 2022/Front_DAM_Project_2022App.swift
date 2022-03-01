@@ -15,6 +15,7 @@ struct Front_DAM_Project_2022App: App {
     @StateObject var categoriesFT: ListCategorieFTViewModel = ListCategorieFTViewModel([])
     @StateObject var categoriesIngredient: ListCategorieIngredientViewModel = ListCategorieIngredientViewModel([])
     @StateObject var categoriesAllergenes: ListCategorieAllergeneViewModel = ListCategorieAllergeneViewModel([])
+    @StateObject var responsables: ListResponsableViewModel = ListResponsableViewModel([])
     
     var body: some Scene {
         WindowGroup {
@@ -25,6 +26,7 @@ struct Front_DAM_Project_2022App: App {
                 .environmentObject(categoriesFT)
                 .environmentObject(categoriesIngredient)
                 .environmentObject(categoriesAllergenes)
+                .environmentObject(responsables)
                 .onAppear(perform: {
                     Task {
                         let parameters: [String] = ["COUT_ASSAISONNEMENT", "COEFF_VENTE", "COUT_HORAIRE_MOYEN"]
@@ -38,6 +40,7 @@ struct Front_DAM_Project_2022App: App {
                         self.categoriesFT.categories = await CategoriesDAO.loadCategorieFTDatas().categories
                         self.categoriesIngredient.categories = await CategoriesDAO.loadCategorieIngredientDatas().categories
                         self.categoriesAllergenes.categories = await CategoriesDAO.loadCategorieAllergeneDatas().categories
+                        self.responsables.responsables = await FicheTechniqueDAO.loadResponsables()
                     }
                 })
         }

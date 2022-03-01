@@ -33,6 +33,31 @@ struct FicheTechniqueDAO {
         return []
     }
     
+    static func loadResponsables() async -> [ResponsableModel] {
+        if let url: URL = URL(string: "https://back-awi-projet-2021.herokuapp.com/responsables/all") {
+            do {
+                let (data, _) = try await URLSession.shared.data(from: url)
+                if let respo: [ResponsableDTO] = JSONHelper.decode(data: data) {
+                    let list: [ResponsableDTO] = respo.sorted {
+                        $0.intitule_responsable < $1.intitule_responsable
+                    }
+                    var responsables: [ResponsableModel] = []
+                    for ft in list {
+                        responsables.append(ResponsableModel(id_responsable: ft.id_responsable, intitule_responsable: ft.intitule_responsable))
+                    }
+                    return responsables
+                } else {
+                    print("Récupération des responsables -> nil | Aucune donnée trouvée.")
+                    return []
+                }
+            } catch {
+                print("Récupération des responsables -> Error | Erreur durant l'exécution")
+            }
+        }
+        print("Récupération des responsables -> Error | L'url donnée n'existe pas.")
+        return []
+    }
+    
     static func ficheDTOToModel(fiche: FicheTechniqueDTO) -> FicheTechniqueModel{
         var phases : [PhaseModel] = []
         for s in fiche.phases{

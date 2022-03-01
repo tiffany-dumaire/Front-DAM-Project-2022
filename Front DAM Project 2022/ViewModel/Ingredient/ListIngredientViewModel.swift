@@ -16,9 +16,9 @@ class ListIngredientViewModel: ObservableObject {
             switch state {
                 case .changingListIngredient:
                     Task {
-                        self.model.ingredients = await IngredientDAO.loadMercurialDatas()
+                        self.ingredients = await IngredientDAO.loadMercurialDatas()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            self.ingredients = self.model.ingredients
+                            self.model.ingredients = self.ingredients
                         }
                     }
                     self.state = .changedListIngredient
