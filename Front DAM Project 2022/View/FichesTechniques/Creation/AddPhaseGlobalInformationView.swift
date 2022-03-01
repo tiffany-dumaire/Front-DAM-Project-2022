@@ -49,7 +49,7 @@ struct AddPhaseGlobalInformationView: View {
                 Text("Ordre :")
                     .frame(height: 30)
                     .foregroundColor(.blue)
-                Text("\(vm.phases.count)")
+                Text("\(vm.phases.count + 1)")
                     .frame(maxWidth: .infinity, maxHeight: 30, alignment: .leading)
                     .padding(.vertical, 5)
                     .padding(.horizontal, 10)
@@ -64,10 +64,10 @@ struct AddPhaseGlobalInformationView: View {
                 })
                 .padding(10)
                 .frame(width: 138)
-                .foregroundColor(Color.green)
-                .background(Color.green.opacity(0.25))
+                .foregroundColor(Color.blue)
+                .background(Color.blue.opacity(0.25))
                 .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: 2))
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2))
                 Button("Annuler", role:.none){
                     self.showingCover = false
                 }
