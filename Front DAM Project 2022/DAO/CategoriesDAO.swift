@@ -8,6 +8,9 @@
 import Foundation
 
 struct CategoriesDAO {
+    
+    /**GET**/
+    
     static func loadCategorieFTDatas() async -> ListCategorieFTViewModel {
         if let url: URL = URL(string: "https://back-awi-projet-2021.herokuapp.com/categories_fiches/all") {
             do {

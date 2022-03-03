@@ -23,23 +23,41 @@ class FicheTechniqueViewModel: ObservableObject {
             switch state {
                 case .ftAdding(let fiche):
                     Task {
-                        /*await IngredientDAO.addIngredient(ingredient: ingredient)*/
+                        self.id_fiche_technique = await FicheTechniqueDAO.addFiche(fiche: fiche)
+                        self.model.id_fiche_technique = self.id_fiche_technique
+                        modifyModel()
                         self.state = .ftAdded
                         print("FicheTechniqueIntent: .ftAdding to .ftAdded")
                     }
+                    
                 case .ftChanging(let fiche):
-                   /* self.code = ingredient.code
-                    self.libelle = ingredient.libelle
-                    self.unite = ingredient.unite
-                    self.prix_unitaire = ingredient.prix_unitaire
-                    self.stock = ingredient.stock
-                    self.allergene = ingredient.allergene
-                    self.id_categorie = ingredient.id_categorie
-                    self.id_categorie_allergene = id_categorie_allergene*/
                     Task {
-                        /*await IngredientDAO.modifyIngredient(ingredient: ingredient)*/
+                        await FicheTechniqueDAO.modifyFiche(fiche: fiche)
+                        modifyModel()
                         self.state = .ftChanged
                         print("FicheTechniqueIntent: .ftChanging to .ftChanged")
+                    }
+                case .phaseAdding(let phase):
+                    Task {
+                        let idP = await PhaseDAO.addPhase(phase: phase)
+                        let idPFT = await PhaseDAO.addOrdrePhase(id_phase: idP, id_fiche_technique: self.id_fiche_technique, phase: phase)
+                        let newPhase: PhaseModel = PhaseModel(id_phase: idP, id_phase_ft: idPFT, libelle_phase: phase.libelle_phase, libelle_denrees: phase.libelle_denrees, description_phase: phase.description_phase, duree_phase: phase.duree_phase, ordre: phase.ordre, ingredients: [])
+                        addPhase(phase: newPhase)
+                        self.state = .phaseAdded
+                        print("FicheTechniqueIntent: .phaseAdding to .phaseAdded")
+                    }
+                case .phaseModifying(let phase):
+                    Task {
+                        //A FINIR
+                        print(phase.libelle_phase)
+                        self.state = .phaseModified
+                        print("FicheTechniqueIntent: .phaseModifying to .phaseModified")
+                    }
+                case .phaseDeleting(let idpft):
+                    Task {
+                        await PhaseDAO.deletePhase(id_phase_ft: idpft)
+                        self.state = .phaseDeleted
+                        print("FicheTechniqueIntent: .phaseDeleting to .phaseDeleted")
                     }
                 case .ftDeleting(let id):
                     Task {
@@ -62,5 +80,22 @@ class FicheTechniqueViewModel: ObservableObject {
         self.intitule_responsable = model.intitule_responsable
         self.id_categorie_fiche = model.id_categorie_fiche
         self.phases = model.phases
+    }
+    
+    private func modifyModel() {
+        self.model.libelle_fiche_technique = self.libelle_fiche_technique
+        self.model.nombre_couverts = self.nombre_couverts
+        self.model.id_responsable = self.id_responsable
+        self.model.id_categorie_fiche = self.id_categorie_fiche
+        self.model.phases = self.phases
+    }
+    
+    private func addPhase(phase: PhaseModel) {
+        self.model.phases.append(phase)
+        self.phases.append(phase)
+    }
+    
+    private func modifyPhase(phase: PhaseModel) {
+        
     }
 }

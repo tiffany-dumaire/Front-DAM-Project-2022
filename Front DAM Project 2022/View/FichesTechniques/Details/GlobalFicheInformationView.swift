@@ -67,11 +67,11 @@ struct GlobalFicheInformationView: View {
                     Divider()
                     Spacer().frame(height: 15)
                     LazyVGrid(columns: cols, alignment: .center, spacing: 20) {
-                        Button("Modifier", action: {
-                            
-                        })
+                        NavigationLink(destination: FTModificationView(vm: vm)) {
+                            Text("Modifier")
+                        }
                             .padding(10)
-                            .frame(width: 130)
+                            .frame(width: 138)
                             .background(Color.modifyButton.opacity(0.25))
                             .foregroundColor(Color.modifyButton)
                             .cornerRadius(10)

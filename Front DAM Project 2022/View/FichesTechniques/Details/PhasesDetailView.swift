@@ -17,16 +17,18 @@ struct PhasesDetailView: View {
                     .font(.system(size: 18))
                     .bold()
                     .foregroundColor(.blue)
-                Text(phase.libelle_denrees + " :")
-                    .font(.system(size: 16))
-                    .bold()
-                    .foregroundColor(.blue.opacity(0.7))
-                ForEach(phase.ingredients, id: \.code) { ingredient in
-                    LazyVGrid(columns: cols, alignment: .leading) {
-                        Text(ingredient.libelle)
-                            .font(.system(size: 15))
-                        Text(String(format: "%.3f", ingredient.quantite) + " \(ingredient.unite)")
-                            .font(.system(size: 15))
+                if phase.ingredients.count != 0 {
+                    Text(phase.libelle_denrees + " :")
+                        .font(.system(size: 16))
+                        .bold()
+                        .foregroundColor(.blue.opacity(0.7))
+                    ForEach(phase.ingredients, id: \.code) { ingredient in
+                        LazyVGrid(columns: cols, alignment: .leading) {
+                            Text(ingredient.libelle)
+                                .font(.system(size: 15))
+                            Text(String(format: "%.3f", ingredient.quantite) + " \(ingredient.unite)")
+                                .font(.system(size: 15))
+                        }
                     }
                 }
             }

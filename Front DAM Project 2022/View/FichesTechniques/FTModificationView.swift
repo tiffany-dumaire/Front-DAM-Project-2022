@@ -1,15 +1,15 @@
 //
-//  FTCreationView.swift
+//  FTModificationView.swift
 //  Front DAM Project 2022
 //
-//  Created by Tiffany Dumaire on 28/02/2022.
+//  Created by Tiffany Dumaire on 02/03/2022.
 //
 
 import SwiftUI
 
-struct FTCreationView: View {
+struct FTModificationView: View {
     @State var index: Int = 0
-    @StateObject var vm: FicheTechniqueViewModel = FicheTechniqueViewModel(model: FicheTechniqueModel(id_fiche_technique: 0, libelle_fiche_technique: "", nombre_couverts: 1, id_responsable: 0, intitule_responsable: "", id_categorie_fiche: 0, phases: []))
+    @ObservedObject var vm: FicheTechniqueViewModel
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -48,14 +48,14 @@ struct FTCreationView: View {
                     ListPhasesAddingView(vm: vm).tag(1)
                 }
             }
-            .navigationTitle("Créer une fiche technique")
+            .navigationTitle("Modifier une fiche technique")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
 
-struct FTCreationView_Previews: PreviewProvider {
+struct FTModificationView_Previews: PreviewProvider {
     static var previews: some View {
-        FTCreationView()
+        FTModificationView(vm: FicheTechniqueViewModel(model: FicheTechniqueModel(id_fiche_technique: 0, libelle_fiche_technique: "", nombre_couverts: 1, id_responsable: 0, intitule_responsable: "", id_categorie_fiche: 0, phases: [])))
     }
 }

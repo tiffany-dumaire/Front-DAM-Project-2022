@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct PhaseDTO: Codable {
     var id_phase: Int
@@ -26,5 +27,31 @@ struct PhaseDTO: Codable {
         self.duree_phase = duree_phase
         self.ordre = ordre
         self.ingredients = ingredients
+    }
+}
+
+struct PhaseInfosDTO: Codable {
+    var libelle_phase: String
+    var libelle_denrees: String
+    var description_phase: String
+    var duree_phase: Int
+    
+    init(libelle_phase: String, libelle_denrees: String, description_phase: String, duree_phase: Int) {
+        self.libelle_phase = libelle_phase
+        self.libelle_denrees = libelle_denrees
+        self.description_phase = description_phase
+        self.duree_phase = duree_phase
+    }
+}
+
+struct PhaseOrdreDTO: Codable {
+    var id_phase: Int
+    var id_fiche_technique: Int
+    var ordre: Int
+    
+    init(id_phase: Int, id_fiche_technique: Int, ordre: Int) {
+        self.id_phase = id_phase
+        self.id_fiche_technique = id_fiche_technique
+        self.ordre = ordre
     }
 }

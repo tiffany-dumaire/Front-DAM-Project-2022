@@ -11,24 +11,6 @@ struct IngredientDAO {
     
     /**GET**/
     
-    static func loadStockDatas() async -> IngredientStocksDTO {
-        if let url: URL = URL(string: "https://back-awi-projet-2021.herokuapp.com/ingredients/stocks") {
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                if let s: [IngredientStockDTO] = JSONHelper.decode(data: data) {
-                    return IngredientStocksDTO(stocks: s)
-                } else {
-                    print("Récupération des stocks d'ingrédients -> nil | Aucune donnée trouvée.")
-                    return IngredientStocksDTO(stocks: [])
-                }
-            } catch {
-                print("Récupération des stocks d'ingrédients -> Error | Erreur durant l'exécution")
-            }
-        }
-        print("Récupération des stocks d'ingrédients -> Error | L'url donnée n'existe pas.")
-        return IngredientStocksDTO(stocks: [])
-     }
-    
     static func loadMercurialDatas() async -> [IngredientModel] {
         if let url: URL = URL(string: "https://back-awi-projet-2021.herokuapp.com/ingredients/all") {
             do {
@@ -53,31 +35,6 @@ struct IngredientDAO {
         print("Récupération des ingrédients -> Error | L'url donnée n'existe pas.")
         return []
      }
-    
-    /*static func loadAllergenesDatas() async -> [IngredientModel] {
-        if let url: URL = URL(string: "https://back-awi-projet-2021.herokuapp.com/ingredients/allergenes") {
-            do {
-                let (data, _) = try await URLSession.shared.data(from: url)
-                if let s: [IngredientDTO] = JSONHelper.decode(data: data) {
-                    let list: [IngredientDTO] = s.sorted {
-                        $0.libelle < $1.libelle
-                    }
-                    var ingredients: [IngredientModel] = []
-                    for ingredient in list {
-                        ingredients.append(IngredientModel(code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, stock: ingredient.stock, allergene: ingredient.allergene == 1 ? true : false, id_categorie: ingredient.id_categorie, id_categorie_allergene: ingredient.id_categorie_allergene))
-                    }
-                    return ingredients
-                } else {
-                    print("Récupération des allergènes -> nil | Aucune donnée trouvée.")
-                    return []
-                }
-            } catch {
-                print("Récupération des allergènes -> Error | Erreur durant l'exécution")
-            }
-        }
-        print("Récupération des allergènes -> Error | L'url donnée n'existe pas.")
-        return []
-    }*/
     
     /**POST**/
     

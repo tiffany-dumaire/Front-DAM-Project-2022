@@ -8,6 +8,9 @@
 import Foundation
 
 struct FicheTechniqueDAO {
+    
+    /**GET**/
+    
     static func loadFTsDatas() async -> [FicheTechniqueModel] {
         if let url: URL = URL(string: "https://back-awi-projet-2021.herokuapp.com/fiches_techniques/allDetails") {
             do {
@@ -58,18 +61,56 @@ struct FicheTechniqueDAO {
         return []
     }
     
-    static func ficheDTOToModel(fiche: FicheTechniqueDTO) -> FicheTechniqueModel{
-        var phases : [PhaseModel] = []
-        for s in fiche.phases{
-            var ingredients : [IngredientInStepModel] = []
-            for i in s.ingredients {
-                let ingredient = IngredientInStepModel(id_phase_ingredient: i.id_phase_ingredient, code: i.code, libelle: i.libelle, unite: i.unite, prix_unitaire: i.prix_unitaire, allergene: i.allergene == 1 ? true : false, quantite: i.quantite)
-                ingredients.append(ingredient)
+    /**POST**/
+    
+    static func addFiche(fiche: FicheTechniqueModel) async -> Int {
+        if let encoded = try? JSONEncoder().encode(FicheTechniqueInfosDTO(libelle_fiche_technique: fiche.libelle_fiche_technique, nombre_couverts: fiche.nombre_couverts, id_responsable: fiche.id_responsable, id_categorie_fiche: fiche.id_categorie_fiche)) {
+            if let url = URL(string: "https://back-awi-projet-2021.herokuapp.com/fiches_techniques/create"){
+                do {
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "POST"
+                    request.httpBody = encoded
+                    request.addValue("application/json", forHTTPHeaderField: "content-type")
+                    if let (data, response) = try? await URLSession.shared.upload(for: request, from:encoded){
+                        if let datas: UtilDTO = JSONHelper.decode(data: data) {
+                            let httpresponse = response as! HTTPURLResponse
+                            if httpresponse.statusCode == 200 || httpresponse.statusCode == 201 {
+                                print("La fiche technique a été ajouté avec succès.")
+                                return datas.insertId
+                            }
+                            else{
+                                print("Ajout d'une fiche technique - error \(httpresponse.statusCode): \(HTTPURLResponse.localizedString(forStatusCode: httpresponse.statusCode))")
+                            }
+                        }
+                    }
+                }
             }
-            let phase = PhaseModel(id_phase: s.id_phase, id_phase_ft: s.id_phase_ft, libelle_phase: s.libelle_phase, libelle_denrees: s.libelle_denrees, description_phase: s.description_phase, duree_phase: s.duree_phase, ordre: s.ordre, ingredients: ingredients)
-            phases.append(phase)
         }
-        return FicheTechniqueModel(id_fiche_technique: fiche.id_fiche_technique, libelle_fiche_technique: fiche.libelle_fiche_technique, nombre_couverts: fiche.nombre_couverts, id_responsable: fiche.id_responsable, intitule_responsable: fiche.intitule_responsable, id_categorie_fiche: fiche.id_categorie_fiche, phases: phases)
+        return fiche.id_fiche_technique
+    }
+    
+    /**PUT**/
+    
+    static func modifyFiche(fiche: FicheTechniqueModel) async {
+        if let encoded = try? JSONEncoder().encode(FicheTechniqueInfosDTO(libelle_fiche_technique: fiche.libelle_fiche_technique, nombre_couverts: fiche.nombre_couverts, id_responsable: fiche.id_responsable, id_categorie_fiche: fiche.id_categorie_fiche)){
+            if let url = URL(string: "https://back-awi-projet-2021.herokuapp.com/fiches_techniques/modify/\(fiche.id_fiche_technique)"){
+                do {
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "PUT"
+                    request.httpBody = encoded
+                    request.setValue("application/json", forHTTPHeaderField: "content-type")
+                    if let (_, response) = try? await URLSession.shared.data(for: request){
+                        let httpresponse = response as! HTTPURLResponse
+                        if httpresponse.statusCode == 200 {
+                            print("La fiche technique '\(fiche.libelle_fiche_technique)' a été modifiée avec succès.")
+                        }
+                        else{
+                            print("Modification d'une fiche technique - error \(httpresponse.statusCode): \(HTTPURLResponse.localizedString(forStatusCode: httpresponse.statusCode))")
+                        }
+                    }
+                }
+            }
+        }
     }
     
     /**DELETE**/
@@ -90,5 +131,21 @@ struct FicheTechniqueDAO {
                 }
             }
         }
+    }
+    
+    /**Fonctions utiles**/
+    
+    static func ficheDTOToModel(fiche: FicheTechniqueDTO) -> FicheTechniqueModel{
+        var phases : [PhaseModel] = []
+        for s in fiche.phases{
+            var ingredients : [IngredientInStepModel] = []
+            for i in s.ingredients {
+                let ingredient = IngredientInStepModel(id_phase_ingredient: i.id_phase_ingredient, code: i.code, libelle: i.libelle, unite: i.unite, prix_unitaire: i.prix_unitaire, allergene: i.allergene == 1 ? true : false, quantite: i.quantite)
+                ingredients.append(ingredient)
+            }
+            let phase = PhaseModel(id_phase: s.id_phase, id_phase_ft: s.id_phase_ft, libelle_phase: s.libelle_phase, libelle_denrees: s.libelle_denrees, description_phase: s.description_phase, duree_phase: s.duree_phase, ordre: s.ordre, ingredients: ingredients)
+            phases.append(phase)
+        }
+        return FicheTechniqueModel(id_fiche_technique: fiche.id_fiche_technique, libelle_fiche_technique: fiche.libelle_fiche_technique, nombre_couverts: fiche.nombre_couverts, id_responsable: fiche.id_responsable, intitule_responsable: fiche.intitule_responsable, id_categorie_fiche: fiche.id_categorie_fiche, phases: phases)
     }
 }

@@ -36,3 +36,17 @@ struct ResponsableDTO: Codable {
         self.intitule_responsable = intitule_responsable
     }
 }
+
+struct FicheTechniqueInfosDTO: Codable {
+    var libelle_fiche_technique: String
+    var nombre_couverts: Int
+    var id_responsable: Int
+    var id_categorie_fiche: Int
+    
+    init(libelle_fiche_technique: String, nombre_couverts: Int, id_responsable: Int, id_categorie_fiche: Int) {
+        self.libelle_fiche_technique = libelle_fiche_technique
+        self.nombre_couverts = nombre_couverts
+        self.id_responsable = id_responsable
+        self.id_categorie_fiche = id_categorie_fiche
+    }
+}
