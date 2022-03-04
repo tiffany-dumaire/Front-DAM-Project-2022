@@ -26,10 +26,10 @@ enum FicheTechniqueIntent: CustomStringConvertible, Equatable {
     case phaseDeleting(Int)
     case phaseDeleted
     case ingredientAdding(Int, IngredientInStepModel)
-    case ingredientAdded
+    case ingredientAdded(Int, Int)
     case ingredientDeleting(Int, Int)
     case ingredientDeleted
-    case quantityModifying(IngredientInStepModel)
+    case quantityModifying(Int, IngredientInStepModel)
     case quantityModified
     case ftDeleting(Int)
     case ftDeleted
@@ -45,7 +45,7 @@ enum FicheTechniqueIntent: CustomStringConvertible, Equatable {
             case .phaseDeleting(let id_fiche_FT): return "state: .phaseDeleting(\(id_fiche_FT)"
             case .ingredientAdding(let phase, let ingredient): return "state: .ingredientAdding(\(ingredient.libelle)) to \(phase)"
             case .ingredientDeleting(let id_phase, let id_phase_ingredient): return "state: .ingredientDeleting(\(id_phase_ingredient) to \(id_phase)"
-            case .quantityModifying(let ingredient): return "state: .quantityModifying(\(ingredient.libelle))"
+            case .quantityModifying(let id_phase, let ingredient): return "state: .quantityModifying(\(ingredient.libelle) to \(id_phase)"
             case .ftDeleting(let id_fiche_technique): return "state: .ftDeleting(\(id_fiche_technique))"
             default: return "state: done"
         }
@@ -91,8 +91,8 @@ enum FicheTechniqueIntent: CustomStringConvertible, Equatable {
         print("FicheTechniqueIntent: .ready to .ingredientDeleting")
     }
     
-    mutating func intentToChange(quantityModify: IngredientInStepModel){
-        self = .quantityModifying(quantityModify)
+    mutating func intentToChange(id_phase: Int, quantityModify: IngredientInStepModel){
+        self = .quantityModifying(id_phase, quantityModify)
         print("FicheTechniqueIntent: .ready to .quantityModifying")
     }
     

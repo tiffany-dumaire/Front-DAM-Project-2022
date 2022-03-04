@@ -135,6 +135,28 @@ struct PhaseDAO {
         }
     }
     
+    static func modifyQuantityIngredientInPhase(id_fiche_technique: Int, ingredient: IngredientInStepModel) async {
+        if let encoded = try? JSONEncoder().encode(IngredientQuantityAddDTO(id_phase_ingredient: ingredient.id_phase_ingredient, id_fiche_technique: id_fiche_technique, quantite: ingredient.quantite)){
+            if let url = URL(string: "https://back-awi-projet-2021.herokuapp.com/phases/phase_ingredient_quantity/modify/\(ingredient.id_phase_ingredient)"){
+                do {
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "PUT"
+                    request.httpBody = encoded
+                    request.setValue("application/json", forHTTPHeaderField: "content-type")
+                    if let (_, response) = try? await URLSession.shared.data(for: request){
+                        let httpresponse = response as! HTTPURLResponse
+                        if httpresponse.statusCode == 200 {
+                            print("La quantité d'un ingrédient a été modifiée avec succès.")
+                        }
+                        else{
+                            print("Modification d'une quantité d'ingrédient - error \(httpresponse.statusCode): \(HTTPURLResponse.localizedString(forStatusCode: httpresponse.statusCode))")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     /**DELETE**/
     
     static func deletePhase(id_phase_ft: Int) async {

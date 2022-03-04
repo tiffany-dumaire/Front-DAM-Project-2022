@@ -103,12 +103,10 @@ struct AddPhaseGlobalInformationView: View {
                 Spacer().frame(height: 15)
                 LazyVGrid(columns: cols, alignment: .center) {
                     Button("Continuer", action: {
-                        Task {
-                            if (phase.id_phase == 0) {
-                                vm.state.intentToChange(phaseAdd: PhaseModel(id_phase: phase.id_phase, id_phase_ft: phase.id_phase_ft, libelle_phase: phase.libelle_phase, libelle_denrees: phase.libelle_denrees, description_phase: phase.description_phase, duree_phase: phase.duree_phase, ordre: vm.phases.count + 1, ingredients: []))
-                            } else {
-                                vm.state.intentToChange(phaseModify: phase)
-                            }
+                        if (phase.id_phase == 0) {
+                            vm.state.intentToChange(phaseAdd: PhaseModel(id_phase: phase.id_phase, id_phase_ft: phase.id_phase_ft, libelle_phase: phase.libelle_phase, libelle_denrees: phase.libelle_denrees, description_phase: phase.description_phase, duree_phase: phase.duree_phase, ordre: vm.phases.count + 1, ingredients: []))
+                        } else {
+                            vm.state.intentToChange(phaseModify: phase)
                         }
                     })
                     .padding(10)

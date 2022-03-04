@@ -50,6 +50,7 @@ struct PhaseModificationView: View {
             TabView(selection: $index) {
                 AddPhaseGlobalInformationView(vm: vm, phase: $phase, index: $index).tag(0)
                 PhaseIngredientChoiceView(vm: vm, phase: $phase, index: $index).tag(1)
+                PhaseQuantityModificationView(vm: vm, phase: $phase, index: $index).tag(2)
             }
             Spacer(minLength: 0)
         }

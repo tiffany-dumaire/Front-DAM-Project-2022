@@ -143,6 +143,9 @@ struct FicheTechniqueDAO {
                 let ingredient = IngredientInStepModel(id_phase_ingredient: i.id_phase_ingredient, code: i.code, libelle: i.libelle, unite: i.unite, prix_unitaire: i.prix_unitaire, allergene: i.allergene == 1 ? true : false, quantite: i.quantite)
                 ingredients.append(ingredient)
             }
+            ingredients = ingredients.sorted{
+                $0.libelle < $1.libelle
+            }
             let phase = PhaseModel(id_phase: s.id_phase, id_phase_ft: s.id_phase_ft, libelle_phase: s.libelle_phase, libelle_denrees: s.libelle_denrees, description_phase: s.description_phase, duree_phase: s.duree_phase, ordre: s.ordre, ingredients: ingredients)
             phases.append(phase)
         }

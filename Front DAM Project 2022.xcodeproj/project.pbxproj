@@ -67,6 +67,7 @@
 		6F87806A27CF9E8800690706 /* FTModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87806927CF9E8800690706 /* FTModificationView.swift */; };
 		6F87806D27D1002C00690706 /* PhaseModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87806C27D1002C00690706 /* PhaseModificationView.swift */; };
 		6F87806F27D1289E00690706 /* PhaseIngredientChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87806E27D1289E00690706 /* PhaseIngredientChoiceView.swift */; };
+		6F87807127D25A9500690706 /* PhaseQuantityModificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F87807027D25A9500690706 /* PhaseQuantityModificationView.swift */; };
 		6F94B3BE27C5116E00AF909A /* CategoryChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F94B3BD27C5116E00AF909A /* CategoryChoiceView.swift */; };
 		6F9EA34727BD770F0024DAB1 /* FTChoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9EA34627BD770F0024DAB1 /* FTChoiceView.swift */; };
 		6F9EA34927BD7D2B0024DAB1 /* ListIngredientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F9EA34827BD7D2B0024DAB1 /* ListIngredientViewModel.swift */; };
@@ -168,6 +169,7 @@
 		6F87806927CF9E8800690706 /* FTModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTModificationView.swift; sourceTree = "<group>"; };
 		6F87806C27D1002C00690706 /* PhaseModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseModificationView.swift; sourceTree = "<group>"; };
 		6F87806E27D1289E00690706 /* PhaseIngredientChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseIngredientChoiceView.swift; sourceTree = "<group>"; };
+		6F87807027D25A9500690706 /* PhaseQuantityModificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseQuantityModificationView.swift; sourceTree = "<group>"; };
 		6F94B3BD27C5116E00AF909A /* CategoryChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryChoiceView.swift; sourceTree = "<group>"; };
 		6F9EA34627BD770F0024DAB1 /* FTChoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FTChoiceView.swift; sourceTree = "<group>"; };
 		6F9EA34827BD7D2B0024DAB1 /* ListIngredientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListIngredientViewModel.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 			isa = PBXGroup;
 			children = (
 				6F87806C27D1002C00690706 /* PhaseModificationView.swift */,
+				6F87807027D25A9500690706 /* PhaseQuantityModificationView.swift */,
 			);
 			path = Modification;
 			sourceTree = "<group>";
@@ -721,6 +724,7 @@
 				6F9EA34F27BDA29B0024DAB1 /* FicheTechniqueViewModel.swift in Sources */,
 				6F835C2027BEEAFA009DCA40 /* CustomDoubleStepperView.swift in Sources */,
 				6FCAC3BC27BCFF0D006ADDDC /* FTDetailView.swift in Sources */,
+				6F87807127D25A9500690706 /* PhaseQuantityModificationView.swift in Sources */,
 				6FABF0FE27C7E56A00EA9AAA /* GlobalFicheInformationView.swift in Sources */,
 				6F2FF77227B57A3000ED2EE0 /* MercurialMenuView.swift in Sources */,
 				6F87806A27CF9E8800690706 /* FTModificationView.swift in Sources */,

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IngredientStockView: View {
     @ObservedObject var ingredient: IngredientViewModel
-    var cols = [GridItem(.flexible()),GridItem(.fixed(150)), GridItem(.fixed(10))]
+    var cols = [GridItem(.flexible()),GridItem(.fixed(150))]
     var body: some View {
         LazyVGrid(columns: cols, alignment: .leading, spacing: 15) {
             Text(ingredient.libelle)

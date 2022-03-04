@@ -22,8 +22,13 @@ struct PhaseIngredientChoiceView: View {
     
     private func stateChanged(_ newValue: FicheTechniqueIntent) {
         switch self.vm.state {
-            case .ingredientAdded:
+            case .ingredientAdded(let code, let idPhaseIngredient):
                 self.vm.state = .ready
+                if let i = phase.ingredients.firstIndex(where: {
+                    $0.code == code
+                }) {
+                    phase.ingredients[i].id_phase_ingredient = idPhaseIngredient
+                }
                 print("FicheTechniqueIntent: .ingredientAdded to .ready")
                 self.fiches.state = .changingListFT
             case .ingredientDeleted:
@@ -44,12 +49,12 @@ struct PhaseIngredientChoiceView: View {
                     ForEach(mercurial.ingredients.filter(filterSearch), id: \.code) { ingredient in
                         VStack(alignment: .leading, spacing: 10) {
                             Button(action: {
-                                Task {
+                                if !phase.ingredients.contains(where: { $0.code == ingredient.code }) {
                                     vm.state.intentToChange(phase: phase.id_phase, ingredient: IngredientInStepModel(id_phase_ingredient: 0, code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, allergene: ingredient.allergene, quantite: 0))
-                                }
-                                phase.ingredients.append(IngredientInStepModel(id_phase_ingredient: 0, code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, allergene: ingredient.allergene, quantite: 0))
-                                phase.ingredients = phase.ingredients.sorted {
-                                    $0.libelle < $1.libelle
+                                    phase.ingredients.append(IngredientInStepModel(id_phase_ingredient: 0, code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, allergene: ingredient.allergene, quantite: 0))
+                                    phase.ingredients = phase.ingredients.sorted {
+                                        $0.libelle < $1.libelle
+                                    }
                                 }
                             }) {
                                 VStack(alignment: .leading) {
@@ -91,16 +96,8 @@ struct PhaseIngredientChoiceView: View {
                 }.listStyle(PlainListStyle())
             }
             Button("Choisir ces ingrédients", action: {
-                if phase.ingredients.count == 0 {
-                    showingAlert.toggle()
-                } else {
-                    index = 1
-                }
-            }).alert("Vous devez impérativement sélectionner au moins un ingrédient avant de continuer", isPresented: $showingAlert) {
-                Button("J'ai compris", role: .cancel) {
-                    return
-                }
-            }
+                self.index = 2
+            })
                 .padding(10)
                 .frame(width: 200)
                 .background(Color.blue.opacity(0.25))

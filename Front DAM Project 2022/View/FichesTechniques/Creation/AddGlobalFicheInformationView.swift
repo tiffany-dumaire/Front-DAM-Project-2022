@@ -80,10 +80,8 @@ struct AddGlobalFicheInformationView: View {
                 if vm.id_fiche_technique == 0 {
                     LazyVGrid(columns: cols, alignment: .center) {
                         Button("Continuer", action: {
-                            Task {
-                                vm.state.intentToChange(ficheAdd: FicheTechniqueModel(id_fiche_technique: vm.id_fiche_technique, libelle_fiche_technique: vm.libelle_fiche_technique, nombre_couverts: vm.nombre_couverts, id_responsable: vm.id_responsable, intitule_responsable: vm.intitule_responsable, id_categorie_fiche: vm.id_categorie_fiche, phases: []))
-                                self.index = 1
-                            }
+                            vm.state.intentToChange(ficheAdd: FicheTechniqueModel(id_fiche_technique: vm.id_fiche_technique, libelle_fiche_technique: vm.libelle_fiche_technique, nombre_couverts: vm.nombre_couverts, id_responsable: vm.id_responsable, intitule_responsable: vm.intitule_responsable, id_categorie_fiche: vm.id_categorie_fiche, phases: []))
+                            self.index = 1
                         })
                             .padding(10)
                             .frame(width: 138)
@@ -104,10 +102,8 @@ struct AddGlobalFicheInformationView: View {
                 } else {
                     LazyVGrid(columns: cols, alignment: .center) {
                         Button("Modifier", action: {
-                            Task {
-                                vm.state.intentToChange(ficheModify: FicheTechniqueModel(id_fiche_technique: vm.id_fiche_technique, libelle_fiche_technique: vm.libelle_fiche_technique, nombre_couverts: vm.nombre_couverts, id_responsable: vm.id_responsable, intitule_responsable: vm.intitule_responsable, id_categorie_fiche: vm.id_categorie_fiche, phases: []))
-                                self.index = 1
-                            }
+                            vm.state.intentToChange(ficheModify: FicheTechniqueModel(id_fiche_technique: vm.id_fiche_technique, libelle_fiche_technique: vm.libelle_fiche_technique, nombre_couverts: vm.nombre_couverts, id_responsable: vm.id_responsable, intitule_responsable: vm.intitule_responsable, id_categorie_fiche: vm.id_categorie_fiche, phases: []))
+                            self.index = 1
                         })
                             .padding(10)
                             .frame(width: 138)

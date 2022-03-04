@@ -10,7 +10,6 @@ import SwiftUI
 
 class FicheTechniqueViewModel: ObservableObject {
     private var model: FicheTechniqueModel
-    
     @Published var id_fiche_technique: Int
     @Published var libelle_fiche_technique: String
     @Published var nombre_couverts: Int
@@ -65,7 +64,7 @@ class FicheTechniqueViewModel: ObservableObject {
                             self.phases[i].ingredients.append(IngredientInStepModel(id_phase_ingredient: idPhaseIngredient, code: c.code, libelle: c.libelle, unite: c.unite, prix_unitaire: c.prix_unitaire, allergene: c.allergene, quantite: c.quantite))
                             self.model.phases[i].ingredients.append(IngredientInStepModel(id_phase_ingredient: idPhaseIngredient, code: c.code, libelle: c.libelle, unite: c.unite, prix_unitaire: c.prix_unitaire, allergene: c.allergene, quantite: c.quantite))
                         }
-                        self.state = .ingredientAdded
+                        self.state = .ingredientAdded(c.code, idPhaseIngredient)
                         print("FicheTechniqueIntent: .ingredientAdding to .ingredientAdded")
                     }
                 case .ingredientDeleting(let idP, let idPhaseIngredient):
@@ -85,6 +84,18 @@ class FicheTechniqueViewModel: ObservableObject {
                         await PhaseDAO.deletePhase(id_phase_ft: idpft)
                         self.state = .phaseDeleted
                         print("FicheTechniqueIntent: .phaseDeleting to .phaseDeleted")
+                    }
+                case .quantityModifying(let idP, let ingredient):
+                    Task {
+                        if let p: Int = self.phases.firstIndex(where: { $0.id_phase == idP }) {
+                            if let i = self.phases[p].ingredients.firstIndex(where: { $0.id_phase_ingredient == ingredient.id_phase_ingredient }) {
+                                self.phases[p].ingredients[i].quantite = ingredient.quantite
+                                self.model.phases[p].ingredients[i].quantite = ingredient.quantite
+                            }
+                        }
+                        await PhaseDAO.modifyQuantityIngredientInPhase(id_fiche_technique: self.id_fiche_technique, ingredient: ingredient)
+                        self.state = .quantityModified
+                        print("FicheTechniqueIntent: .quantityModifying to .quantityModified")
                     }
                 case .ftDeleting(let id):
                     Task {
