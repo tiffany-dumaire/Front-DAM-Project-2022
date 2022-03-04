@@ -32,7 +32,7 @@ struct IngredientModel: Equatable {
     }
 }
 
-struct IngredientInStepModel {
+struct IngredientInStepModel: Equatable {
     var id_phase_ingredient: Int
     var code: Int
     var libelle: String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PhaseModel {
+struct PhaseModel: Equatable {
     var id_phase: Int
     var id_phase_ft: Int
     var libelle_phase: String

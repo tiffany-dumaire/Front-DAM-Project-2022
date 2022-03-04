@@ -79,6 +79,28 @@ struct IngredientInStepDTO: Codable {
     }
 }
 
+struct IngredientAddDTO: Codable {
+    var id_phase: Int
+    var code: Int
+    
+    init(id_phase: Int, code: Int) {
+        self.id_phase = id_phase
+        self.code = code
+    }
+}
+
+struct IngredientQuantityAddDTO: Codable {
+    var id_phase_ingredient: Int
+    var id_fiche_technique: Int
+    var quantite: Double
+    
+    init(id_phase_ingredient: Int, id_fiche_technique: Int, quantite: Double) {
+        self.id_phase_ingredient = id_phase_ingredient
+        self.id_fiche_technique = id_fiche_technique
+        self.quantite = quantite
+    }
+}
+
 struct IngredientStocksDTO: Codable {
     var stocks: [IngredientStockDTO]
     

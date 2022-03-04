@@ -12,7 +12,6 @@ struct PhaseModificationView: View {
     @State var phase: PhaseModel
     var cols = [GridItem](repeating: .init(.flexible()), count: 2)
     @State var index: Int = 0
-    @Binding var showingCover: Bool
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -49,7 +48,8 @@ struct PhaseModificationView: View {
                 .padding(.top, 10)
             Spacer().frame(height: 15)
             TabView(selection: $index) {
-                AddPhaseGlobalInformationView(vm: vm, phase: phase, index: $index, showingCover: $showingCover).tag(0)
+                AddPhaseGlobalInformationView(vm: vm, phase: $phase, index: $index).tag(0)
+                PhaseIngredientChoiceView(vm: vm, phase: $phase, index: $index).tag(1)
             }
             Spacer(minLength: 0)
         }
@@ -58,6 +58,6 @@ struct PhaseModificationView: View {
 
 struct PhaseModificationView_Previews: PreviewProvider {
     static var previews: some View {
-        PhaseModificationView(vm: FicheTechniqueViewModel(model: FicheTechniqueModel(id_fiche_technique: 101, libelle_fiche_technique: "Abricots", nombre_couverts: 2, id_responsable: 1, intitule_responsable: "Patissier", id_categorie_fiche: 1, phases: [])), phase: PhaseModel(id_phase: 3, id_phase_ft: 2, libelle_phase: "Phase 1", libelle_denrees: "Ingrédient phase 1", description_phase: "Ma super description des enfers !!!", duree_phase: 30, ordre: 2, ingredients: []), showingCover: .constant(true))
+        PhaseModificationView(vm: FicheTechniqueViewModel(model: FicheTechniqueModel(id_fiche_technique: 101, libelle_fiche_technique: "Abricots", nombre_couverts: 2, id_responsable: 1, intitule_responsable: "Patissier", id_categorie_fiche: 1, phases: [])), phase: PhaseModel(id_phase: 3, id_phase_ft: 2, libelle_phase: "Phase 1", libelle_denrees: "Ingrédient phase 1", description_phase: "Ma super description des enfers !!!", duree_phase: 30, ordre: 2, ingredients: []))
     }
 }

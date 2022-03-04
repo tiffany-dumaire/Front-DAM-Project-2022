@@ -11,8 +11,6 @@ struct ListPhasesAddingView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var fiches: ListFicheTechniqueViewModel
     @ObservedObject var vm: FicheTechniqueViewModel
-    @State private var showingCover = false
-    @State private var showingCover2 = false
     var cols = [GridItem](repeating: .init(.flexible()), count: 2)
     
     private func stateChanged(_ newValue: FicheTechniqueIntent) {
@@ -33,19 +31,20 @@ struct ListPhasesAddingView: View {
                     .padding(.vertical, 15)
                 Spacer().frame(height: 15)
                 LazyVGrid(columns: cols, alignment: .center) {
-                    Button("Modifier", action: {
-                        showingCover2.toggle()
-                    }).fullScreenCover(isPresented: $showingCover2) {
-                        PhaseModificationView(vm: vm, phase: phase, showingCover: $showingCover2)
+                    NavigationLink(destination: PhaseModificationView(vm: vm, phase: phase)) {
+                        Text("Modifier")
+                            .padding(10)
+                            .frame(width: 138)
+                            .foregroundColor(Color.modifyButton)
+                            .background(Color.modifyButton.opacity(0.25))
+                            .cornerRadius(10)
+                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.modifyButton, lineWidth: 2))
                     }
-                    .padding(10)
-                    .frame(width: 138)
-                    .foregroundColor(Color.modifyButton)
-                    .background(Color.modifyButton.opacity(0.25))
-                    .cornerRadius(10)
-                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.modifyButton, lineWidth: 2))
                     Button("Supprimer", action: {
                         vm.state.intentToChange(phaseDelete: phase.id_phase_ft)
+                        if let i = vm.phases.firstIndex(of: phase) {
+                            vm.phases.remove(at: i)
+                        }
                     })
                     .padding(10)
                     .frame(width: 138)
@@ -56,18 +55,15 @@ struct ListPhasesAddingView: View {
                 }
                 Divider()
             }
-            Button("Ajouter une phase", action: {
-                showingCover.toggle()
-            }).fullScreenCover(isPresented: $showingCover) {
-                PhaseAddingView(vm: vm, showingCover: $showingCover)
+            NavigationLink(destination: PhaseAddingView(vm: vm)) {
+                Text("Ajouter une phase")
+                    .padding(10)
+                    .frame(width: 200)
+                    .foregroundColor(Color.green)
+                    .background(Color.green.opacity(0.25))
+                    .cornerRadius(10)
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: 2))
             }
-                .padding(10)
-                .frame(width: 200)
-                .foregroundColor(Color.green)
-                .background(Color.green.opacity(0.25))
-                .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.green, lineWidth: 2))
-            
                 .onChange(of: self.vm.state, perform: {
                     newValue in stateChanged(newValue)
                 })

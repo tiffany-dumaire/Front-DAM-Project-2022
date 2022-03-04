@@ -8,23 +8,26 @@
 import SwiftUI
 
 struct AddPhaseGlobalInformationView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var fiches: ListFicheTechniqueViewModel
     @ObservedObject var vm: FicheTechniqueViewModel
-    @State var phase: PhaseModel
+    @Binding var phase: PhaseModel
     @Binding var index: Int
-    @Binding var showingCover: Bool
     var cols = [GridItem](repeating: .init(.flexible()), count: 2)
     
     private func stateChanged(_ newValue: FicheTechniqueIntent) {
         switch self.vm.state {
-            case .phaseAdded:
+            case .phaseAdded(let id_phase):
+                phase.id_phase = id_phase
                 self.vm.state = .ready
                 print("FicheTechniqueIntent: .phaseAdded to .ready")
                 self.fiches.state = .changingListFT
+                self.index = 1
             case .phaseModified:
                 self.vm.state = .ready
                 print("FicheTechniqueIntent: .phaseModified to .ready")
                 self.fiches.state = .changingListFT
+                self.index = 1
             default:
                 return
         }
@@ -106,7 +109,6 @@ struct AddPhaseGlobalInformationView: View {
                             } else {
                                 vm.state.intentToChange(phaseModify: phase)
                             }
-                            self.showingCover = false
                         }
                     })
                     .padding(10)
@@ -116,7 +118,7 @@ struct AddPhaseGlobalInformationView: View {
                     .cornerRadius(10)
                     .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.blue, lineWidth: 2))
                     Button("Annuler", role:.none){
-                        self.showingCover = false
+                        dismiss()
                     }
                     .padding(10)
                     .frame(width: 138)
@@ -136,6 +138,6 @@ struct AddPhaseGlobalInformationView: View {
 
 struct AddPhaseGlobalInformationView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPhaseGlobalInformationView(vm: FicheTechniqueViewModel(model: FicheTechniqueModel(id_fiche_technique: 101, libelle_fiche_technique: "Abricots", nombre_couverts: 2, id_responsable: 1, intitule_responsable: "Patissier", id_categorie_fiche: 1, phases: [])), phase: PhaseModel(id_phase: 0, id_phase_ft: 0, libelle_phase: "", libelle_denrees: "", description_phase: "", duree_phase: 0, ordre: 0, ingredients: []), index: .constant(0), showingCover: .constant(true))
+        AddPhaseGlobalInformationView(vm: FicheTechniqueViewModel(model: FicheTechniqueModel(id_fiche_technique: 101, libelle_fiche_technique: "Abricots", nombre_couverts: 2, id_responsable: 1, intitule_responsable: "Patissier", id_categorie_fiche: 1, phases: [])), phase: .constant(PhaseModel(id_phase: 0, id_phase_ft: 0, libelle_phase: "", libelle_denrees: "", description_phase: "", duree_phase: 0, ordre: 0, ingredients: [])), index: .constant(0))
     }
 }
