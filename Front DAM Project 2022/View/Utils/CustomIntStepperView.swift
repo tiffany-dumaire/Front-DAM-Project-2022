@@ -10,6 +10,7 @@ import SwiftUI
 struct CustomIntStepperView: View {
     @Binding var value: Int
     var step: Int
+    var max: Int?
     
     var body: some View {
         HStack {
@@ -32,8 +33,14 @@ struct CustomIntStepperView: View {
             Divider()
             Spacer()
             Button(action: {
-                if self.value >= 0 {
-                    self.value += self.step
+                if max == nil {
+                    if self.value >= 0 {
+                        self.value += self.step
+                    }
+                } else {
+                    if self.value < max! && self.value >= 0 {
+                        self.value += self.step
+                    }
                 }
             }, label: {
                 Image(systemName: "cross.circle.fill")

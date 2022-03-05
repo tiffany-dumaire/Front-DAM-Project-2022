@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct GlobalFicheInformationView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var fiches: ListFicheTechniqueViewModel
     @EnvironmentObject var categoriesFT: ListCategorieFTViewModel
     @ObservedObject var vm: FicheTechniqueViewModel
-    @Environment(\.dismiss) var dismiss
+    @State private var showingAlert = false
     var cols = [GridItem](repeating: .init(.flexible()), count: 2)
     
     private func filterSearch(categorie: CategorieFTModel) -> Bool{
@@ -77,9 +78,14 @@ struct GlobalFicheInformationView: View {
                             .cornerRadius(10)
                             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.modifyButton, lineWidth: 2))
                         Button("Supprimer", action: {
-                            vm.state.intentToChange(ficheDelete: vm.id_fiche_technique)
-                            dismiss()
-                        })
+                            showingAlert.toggle()
+                        }).alert("Souhaitez-vous réellement supprimer cette fiche technique ?", isPresented: $showingAlert) {
+                            Button("Non", role: .cancel) {}
+                            Button("Oui", role: .none) {
+                                vm.state.intentToChange(ficheDelete: vm.id_fiche_technique)
+                                dismiss()
+                            }
+                        }
                             .padding(10)
                             .frame(width: 130)
                             .background(Color.red.opacity(0.25))

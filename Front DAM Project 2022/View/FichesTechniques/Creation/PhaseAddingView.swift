@@ -51,7 +51,7 @@ struct PhaseAddingView: View {
                 AddPhaseGlobalInformationView(vm: vm, phase: $newPhase, index: $index).tag(0)
                 PhaseIngredientChoiceView(vm: vm, phase: $newPhase, index: $index).tag(1)
                 PhaseQuantityModificationView(vm: vm, phase: $newPhase, index: $index).tag(2)
-            }
+            }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             Spacer(minLength: 0)
         }
     }

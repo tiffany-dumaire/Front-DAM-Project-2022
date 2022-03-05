@@ -12,6 +12,8 @@ struct AddGlobalFicheInformationView: View {
     @EnvironmentObject var categoriesFT: ListCategorieFTViewModel
     @EnvironmentObject var responsables: ListResponsableViewModel
     @Environment(\.dismiss) var dismiss
+    @State var showingAlert: Bool = false
+    @State var showingAlert2: Bool = false
     @ObservedObject var vm: FicheTechniqueViewModel
     @Binding var index: Int
     
@@ -79,10 +81,18 @@ struct AddGlobalFicheInformationView: View {
                     .cornerRadius(10)
                 if vm.id_fiche_technique == 0 {
                     LazyVGrid(columns: cols, alignment: .center) {
-                        Button("Continuer", action: {
-                            vm.state.intentToChange(ficheAdd: FicheTechniqueModel(id_fiche_technique: vm.id_fiche_technique, libelle_fiche_technique: vm.libelle_fiche_technique, nombre_couverts: vm.nombre_couverts, id_responsable: vm.id_responsable, intitule_responsable: vm.intitule_responsable, id_categorie_fiche: vm.id_categorie_fiche, phases: []))
-                            self.index = 1
-                        })
+                        Button("Créer", action: {
+                            if vm.libelle_fiche_technique == "" || vm.id_responsable == 0 || vm.id_categorie_fiche == 0 || vm.nombre_couverts == 0 {
+                                showingAlert.toggle()
+                            } else {
+                                vm.state.intentToChange(ficheAdd: FicheTechniqueModel(id_fiche_technique: vm.id_fiche_technique, libelle_fiche_technique: vm.libelle_fiche_technique, nombre_couverts: vm.nombre_couverts, id_responsable: vm.id_responsable, intitule_responsable: vm.intitule_responsable, id_categorie_fiche: vm.id_categorie_fiche, phases: []))
+                                self.index = 1
+                            }
+                        }).alert("Vous ne pouvez pas créer de fiche technique sans renseigner tous les champs.", isPresented: $showingAlert) {
+                            Button("J'ai compris", role: .cancel) {
+                                return
+                            }
+                        }
                             .padding(10)
                             .frame(width: 138)
                             .foregroundColor(Color.green)
@@ -102,9 +112,17 @@ struct AddGlobalFicheInformationView: View {
                 } else {
                     LazyVGrid(columns: cols, alignment: .center) {
                         Button("Modifier", action: {
-                            vm.state.intentToChange(ficheModify: FicheTechniqueModel(id_fiche_technique: vm.id_fiche_technique, libelle_fiche_technique: vm.libelle_fiche_technique, nombre_couverts: vm.nombre_couverts, id_responsable: vm.id_responsable, intitule_responsable: vm.intitule_responsable, id_categorie_fiche: vm.id_categorie_fiche, phases: []))
-                            self.index = 1
-                        })
+                            if vm.libelle_fiche_technique == "" || vm.id_responsable == 0 || vm.id_categorie_fiche == 0 || vm.nombre_couverts == 0 {
+                                showingAlert.toggle()
+                            } else {
+                                vm.state.intentToChange(ficheModify: FicheTechniqueModel(id_fiche_technique: vm.id_fiche_technique, libelle_fiche_technique: vm.libelle_fiche_technique, nombre_couverts: vm.nombre_couverts, id_responsable: vm.id_responsable, intitule_responsable: vm.intitule_responsable, id_categorie_fiche: vm.id_categorie_fiche, phases: []))
+                                self.index = 1
+                            }
+                        }).alert("Vous ne pouvez pas modifier de fiche technique sans renseigner tous les champs.", isPresented: $showingAlert2) {
+                            Button("J'ai compris", role: .cancel) {
+                                return
+                            }
+                        }
                             .padding(10)
                             .frame(width: 138)
                             .foregroundColor(Color.modifyButton)

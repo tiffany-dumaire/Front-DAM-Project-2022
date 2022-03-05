@@ -61,7 +61,8 @@ struct FTDetailView: View {
                 TabView(selection: $index) {
                     GlobalFicheInformationView(vm: vm).tag(0)
                     ListPhasesView(phases: vm.phases).tag(1)
-                }
+                    CoutsView(vm: vm).tag(2)
+                }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }
             .navigationTitle(vm.libelle_fiche_technique)
             .navigationBarTitleDisplayMode(.inline)

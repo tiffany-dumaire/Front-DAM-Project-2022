@@ -19,10 +19,10 @@ struct FichesQuantites {
 
 struct RealizeSalesView: View {
     @EnvironmentObject var fiches: ListFicheTechniqueViewModel
+    @State var tickets: [TicketModel] = []
     
     @State var index = 0
     var body: some View {
-        //TabView avec 2 vue --> 1. choix des fiches techniques et quantité | 2.  Config vente/test, emporté/sur place  + aperçu et impression
         VStack {
             HStack(spacing: 0) {
                 Text("Commander")
@@ -57,10 +57,10 @@ struct RealizeSalesView: View {
                 .padding(.top, 10)
             
             TabView(selection: $index) {
-                FTChoiceView(fiches: fiches).tag(0)
-                FTMenuView().tag(1)
+                FTChoiceView(fiches: fiches, tickets: $tickets).tag(0)
+                TicketView(tickets: $tickets).tag(1)
             }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .navigationTitle("Réaliser une vente")
+                .navigationTitle("Simuler une vente")
                 .navigationBarTitleDisplayMode(.inline)
         }
     }

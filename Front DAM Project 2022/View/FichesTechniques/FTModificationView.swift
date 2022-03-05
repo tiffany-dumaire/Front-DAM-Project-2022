@@ -45,8 +45,9 @@ struct FTModificationView: View {
             VStack {
                 TabView(selection: $index) {
                     AddGlobalFicheInformationView(vm: vm, index: $index).tag(0)
-                    ListPhasesAddingView(vm: vm).tag(1)
-                }
+                    ListPhasesAddingView(vm: vm, index: $index).tag(1)
+                    ModificationOrdrePhasesView(vm : vm).tag(2)
+                }.tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
             }
             .navigationTitle("Modifier une fiche technique")
             .navigationBarTitleDisplayMode(.inline)

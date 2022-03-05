@@ -157,6 +157,28 @@ struct PhaseDAO {
         }
     }
     
+    static func modifyOrdrePhase(id_fiche_technique: Int, phase: PhaseModel) async {
+        if let encoded = try? JSONEncoder().encode(PhaseOrdreDTO(id_phase: phase.id_phase, id_fiche_technique: id_fiche_technique, ordre: phase.ordre)){
+            if let url = URL(string: "https://back-awi-projet-2021.herokuapp.com/phases/phase_FT/modify/\(phase.id_phase_ft)"){
+                do {
+                    var request = URLRequest(url: url)
+                    request.httpMethod = "PUT"
+                    request.httpBody = encoded
+                    request.setValue("application/json", forHTTPHeaderField: "content-type")
+                    if let (_, response) = try? await URLSession.shared.data(for: request){
+                        let httpresponse = response as! HTTPURLResponse
+                        if httpresponse.statusCode == 200 {
+                            print("L'ordre d'une phase a été modifié avec succès.")
+                        }
+                        else{
+                            print("Modification ordre d'une phase - error \(httpresponse.statusCode): \(HTTPURLResponse.localizedString(forStatusCode: httpresponse.statusCode))")
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     /**DELETE**/
     
     static func deletePhase(id_phase_ft: Int) async {

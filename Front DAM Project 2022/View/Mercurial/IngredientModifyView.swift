@@ -95,9 +95,17 @@ struct IngredientModifyView: View {
                 Spacer().frame(height: 20)
                 LazyVGrid(columns: cols2, alignment: .center, spacing: 20) {
                     Button("Sauvegarder", action: {
-                        vm.state.intentToChange(ingredientModify: IngredientModel(code: vm.code, libelle: vm.libelle, unite: vm.unite, prix_unitaire: vm.prix_unitaire, stock: vm.stock, allergene: vm.allergene, id_categorie: vm.id_categorie, id_categorie_allergene: vm.allergene ? categorieA == 0 ? nil : categorieA : nil))
-                        dismiss()
-                    })
+                        if vm.libelle == "" || vm.unite == "" || vm.id_categorie == 0 || (vm.allergene && categorieA == 0) {
+                            showingAlert.toggle()
+                        } else {
+                            vm.state.intentToChange(ingredientModify: IngredientModel(code: vm.code, libelle: vm.libelle, unite: vm.unite, prix_unitaire: vm.prix_unitaire, stock: vm.stock, allergene: vm.allergene, id_categorie: vm.id_categorie, id_categorie_allergene: vm.allergene ? categorieA == 0 ? nil : categorieA : nil))
+                            dismiss()
+                        }
+                    }).alert("Vous ne pouvez pas créer un ingrédient sans remplir tous les champs obligatoires.", isPresented: $showingAlert) {
+                        Button("J'ai compris", role: .cancel) {
+                            return
+                        }
+                    }
                         .padding(10)
                         .frame(width: 138)
                         .background(Color.green.opacity(0.25))

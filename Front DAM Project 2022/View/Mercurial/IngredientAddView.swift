@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct IngredientAddView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
     @EnvironmentObject var categoriesAllergenes: ListCategorieAllergeneViewModel
     @EnvironmentObject var mercurial: ListIngredientViewModel
-    @Environment(\.dismiss) var dismiss
     @ObservedObject var vm: IngredientViewModel = IngredientViewModel(model: IngredientModel(code: 0, libelle: "", unite: "", prix_unitaire: 0, stock: 0, allergene: false, id_categorie: 0, id_categorie_allergene: nil))
     @State var categorieA: Int = 0
     @State private var showingAlert = false
@@ -108,7 +108,7 @@ struct IngredientAddView: View {
                 Spacer().frame(height: 20)
                 LazyVGrid(columns: cols2, alignment: .center, spacing: 20) {
                     Button("Ajouter", action: {
-                        if vm.allergene && vm.id_categorie_allergene == 0 {
+                        if vm.libelle == "" || vm.unite == "" || vm.id_categorie == 0 || (vm.allergene && vm.id_categorie_allergene == 0) {
                             vm.reset()
                             showingAlert.toggle()
                         } else {

@@ -59,7 +59,7 @@ struct StocksMenuView: View {
             NavigationLink(destination: RealizeSalesView()) {
                 ZStack(alignment: Alignment(horizontal: .trailing, vertical: .top)) {
                     VStack(alignment: .leading, spacing: 15) {
-                        Text("Réaliser une vente")
+                        Text("Simuler une vente")
                     }
                     .frame(width: 200, height: 40, alignment: .center)
                     .padding()

@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct IngredientDetailView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var mercurial: ListIngredientViewModel
     @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
     @EnvironmentObject var categoriesAllergenes: ListCategorieAllergeneViewModel
     @ObservedObject var vm: IngredientViewModel
-    @Environment(\.dismiss) var dismiss
+    @State private var showingAlert = false
     var cols = [GridItem(.fixed(140)),GridItem(.flexible())]
     var cols2 = [GridItem](repeating: .init(.flexible()), count: 2)
     
@@ -123,9 +124,14 @@ struct IngredientDetailView: View {
                         .cornerRadius(10)
                         .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.modifyButton, lineWidth: 2))
                     Button("Supprimer", action: {
-                        vm.state.intentToChange(ingredientDeleting: vm.code)
-                        dismiss()
-                    })
+                        showingAlert.toggle()
+                    }).alert("Souhaitez-vous réellement supprimer cet ingrédient ? \nAttention celui-ci sera également supprimé du contenu des fiches techniques.", isPresented: $showingAlert) {
+                        Button("Non", role: .cancel) {}
+                        Button("Oui", role: .none) {
+                            vm.state.intentToChange(ingredientDeleting: vm.code)
+                            dismiss()
+                        }
+                    }
                         .padding(10)
                         .frame(width: 138)
                         .background(Color.red.opacity(0.25))

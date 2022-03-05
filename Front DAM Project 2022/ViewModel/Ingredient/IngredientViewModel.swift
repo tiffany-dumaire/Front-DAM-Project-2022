@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-class IngredientViewModel: ObservableObject {
+class IngredientViewModel: ObservableObject, IngredientObserver {
+    
     private var model: IngredientModel
     
     @Published var code: Int
@@ -19,6 +20,7 @@ class IngredientViewModel: ObservableObject {
     @Published var allergene: Bool
     @Published var id_categorie: Int
     @Published var id_categorie_allergene: Int?
+    
     @Published var state: IngredientIntent = .ready{
         didSet{
             switch state {
@@ -83,4 +85,34 @@ class IngredientViewModel: ObservableObject {
         self.id_categorie = self.model.id_categorie
         self.id_categorie_allergene = self.model.id_categorie_allergene
     }
+    
+    func changed(libelle: String) {
+        self.libelle = libelle
+    }
+    
+    func changed(unite: String) {
+        self.unite = unite
+    }
+    
+    func changed(prix_unitaire: Double) {
+        self.prix_unitaire = prix_unitaire
+    }
+    
+    func changed(stock: Double) {
+        self.stock = stock
+    }
+    
+    func changed(allergene: Bool) {
+        self.allergene = allergene
+    }
+    
+    func changed(id_categorie: Int) {
+        self.id_categorie = id_categorie
+    }
+    
+    func changed(id_categorie_allergene: Int?) {
+        self.id_categorie_allergene = id_categorie_allergene
+    }
+    
+    func changed(valeurStock: Double) {}
 }

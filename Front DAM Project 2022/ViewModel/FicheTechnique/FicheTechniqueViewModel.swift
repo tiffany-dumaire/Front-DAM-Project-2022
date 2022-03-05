@@ -51,7 +51,6 @@ class FicheTechniqueViewModel: ObservableObject {
                         if let i: Int = self.phases.firstIndex(where: { $0.id_phase == phase.id_phase }) {
                             self.phases[i] = phase
                         }
-                        print(phase.libelle_phase)
                         self.state = .phaseModified
                         print("FicheTechniqueIntent: .phaseModifying to .phaseModified")
                     }
@@ -78,6 +77,15 @@ class FicheTechniqueViewModel: ObservableObject {
                         }
                         self.state = .ingredientDeleted
                         print("FicheTechniqueIntent: .ingredientDeleting to .ingredientDeleted")
+                    }
+                case .ordreModifying(let phase):
+                    Task {
+                        await PhaseDAO.modifyOrdrePhase(id_fiche_technique: self.id_fiche_technique, phase: phase)
+                        if let p: Int = self.phases.firstIndex(where: { $0.id_phase == phase.id_phase }) {
+                            self.phases[p].ordre = phase.ordre
+                        }
+                        self.state = .ordreModified
+                        print("FicheTechniqueIntent: .ordreModifying to .ordreModified")
                     }
                 case .phaseDeleting(let idpft):
                     Task {
@@ -132,8 +140,22 @@ class FicheTechniqueViewModel: ObservableObject {
         self.model.phases.append(phase)
         self.phases.append(phase)
     }
+
+    public func coutMatiere() -> Double {
+        var coutM: Double = 0
+        for phase in self.phases {
+            for ingredient in phase.ingredients {
+                coutM = coutM + (ingredient.prix_unitaire * ingredient.quantite)
+            }
+        }
+        return coutM
+    }
     
-    private func modifyPhase(phase: PhaseModel) {
-        
+    public func tempsTotalHeure() -> Double {
+        var timeMinute: Int = 0
+        for phase in self.phases {
+            timeMinute = timeMinute + phase.duree_phase
+        }
+        return Double(timeMinute) / 60
     }
 }

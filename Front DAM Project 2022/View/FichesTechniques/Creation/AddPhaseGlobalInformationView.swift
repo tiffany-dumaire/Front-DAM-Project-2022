@@ -11,6 +11,7 @@ struct AddPhaseGlobalInformationView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var fiches: ListFicheTechniqueViewModel
     @ObservedObject var vm: FicheTechniqueViewModel
+    @State var showingAlert: Bool = false
     @Binding var phase: PhaseModel
     @Binding var index: Int
     var cols = [GridItem](repeating: .init(.flexible()), count: 2)
@@ -37,7 +38,7 @@ struct AddPhaseGlobalInformationView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
                 Group {
-                    Text("Libellé de la phase :")
+                    Text("Libellé de la phase * :")
                         .frame(height: 30)
                         .foregroundColor(.blue)
                     TextField("libellé phase..", text: $phase.libelle_phase)
@@ -47,7 +48,7 @@ struct AddPhaseGlobalInformationView: View {
                         .foregroundColor(.black)
                         .background(Color.myGray.opacity(0.25))
                         .cornerRadius(10)
-                    Text("Titre des denrées de la phase :")
+                    Text("Titre des denrées de la phase * :")
                         .frame(height: 30)
                         .foregroundColor(.blue)
                     TextField("libellé denrées..", text: $phase.libelle_denrees)
@@ -57,7 +58,7 @@ struct AddPhaseGlobalInformationView: View {
                         .foregroundColor(.black)
                         .background(Color.myGray.opacity(0.25))
                         .cornerRadius(10)
-                    Text("Description de la phase :")
+                    Text("Description de la phase * :")
                         .frame(height: 30)
                         .foregroundColor(.blue)
                     TextEditor(text: $phase.description_phase)
@@ -69,7 +70,7 @@ struct AddPhaseGlobalInformationView: View {
                         .foregroundColor(.black)
                         .background(Color.myGray.opacity(0.25))
                         .cornerRadius(10)
-                    Text("Durée en minutes :")
+                    Text("Durée en minutes * :")
                         .frame(height: 30)
                         .foregroundColor(.blue)
                     CustomIntStepperView(value: $phase.duree_phase, step: 1)
@@ -103,12 +104,20 @@ struct AddPhaseGlobalInformationView: View {
                 Spacer().frame(height: 15)
                 LazyVGrid(columns: cols, alignment: .center) {
                     Button("Continuer", action: {
-                        if (phase.id_phase == 0) {
-                            vm.state.intentToChange(phaseAdd: PhaseModel(id_phase: phase.id_phase, id_phase_ft: phase.id_phase_ft, libelle_phase: phase.libelle_phase, libelle_denrees: phase.libelle_denrees, description_phase: phase.description_phase, duree_phase: phase.duree_phase, ordre: vm.phases.count + 1, ingredients: []))
+                        if phase.libelle_phase == "" || phase.libelle_denrees == "" || phase.description_phase == "" || phase.duree_phase == 0 {
+                            showingAlert.toggle()
                         } else {
-                            vm.state.intentToChange(phaseModify: phase)
+                            if (phase.id_phase == 0) {
+                                vm.state.intentToChange(phaseAdd: PhaseModel(id_phase: phase.id_phase, id_phase_ft: phase.id_phase_ft, libelle_phase: phase.libelle_phase, libelle_denrees: phase.libelle_denrees, description_phase: phase.description_phase, duree_phase: phase.duree_phase, ordre: vm.phases.count + 1, ingredients: []))
+                            } else {
+                                vm.state.intentToChange(phaseModify: phase)
+                            }
                         }
-                    })
+                    }).alert("Vous ne pouvez pas créer ou modifier de phase sans remplir tous les champs obligatoires.", isPresented: $showingAlert) {
+                        Button("J'ai compris", role: .cancel) {
+                            return
+                        }
+                    }
                     .padding(10)
                     .frame(width: 138)
                     .foregroundColor(Color.blue)

@@ -1,29 +1,27 @@
 //
-//  PhaseQuantityModificationView.swift
+//  ModificationOrdrePhasesView.swift
 //  Front DAM Project 2022
 //
-//  Created by Tiffany Dumaire on 04/03/2022.
+//  Created by Tiffany dumaire on 05/03/2022.
 //
 
 import SwiftUI
 import SimpleToast
 
-struct PhaseQuantityModificationView: View {
+struct ModificationOrdrePhasesView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var fiches: ListFicheTechniqueViewModel
     @ObservedObject var vm: FicheTechniqueViewModel
     @State var showToast: Bool = false
-    @Binding var phase: PhaseModel
-    @Binding var index: Int
     var cols = [GridItem(.flexible()),GridItem(.fixed(120))]
     
     private let toastOptions = SimpleToastOptions(hideAfter: 5)
     
     private func stateChanged(_ newValue: FicheTechniqueIntent) {
         switch self.vm.state {
-            case .quantityModified:
+            case .ordreModified:
                 self.vm.state = .ready
-                print("FicheTechniqueIntent: .quantityModified to .ready")
+                print("FicheTechniqueIntent: .ordreModified to .ready")
                 self.fiches.state = .changingListFT
             default:
                 return
@@ -33,23 +31,19 @@ struct PhaseQuantityModificationView: View {
     var body: some View {
         ScrollView {
             VStack {
-                ForEach($phase.ingredients, id: \.id_phase_ingredient) { $ingredient in
+                ForEach($vm.phases, id: \.id_phase_ft) { $phase in
                     VStack(alignment: .leading) {
-                        HStack {
-                            Text(ingredient.libelle)
-                            Text("(en \(ingredient.unite))")
-                                .font(.system(size: 14))
-                        }
+                        Text(phase.libelle_phase)
                         LazyVGrid(columns: cols, alignment: .leading) {
-                            CustomDoubleStepperView(value: $ingredient.quantite, step: 0.001, decimal: 3)
+                            CustomIntStepperView(value: $phase.ordre, step: 1, max: vm.phases.count)
                             Button(action: {
-                                vm.state.intentToChange(id_phase: phase.id_phase, quantityModify: IngredientInStepModel(id_phase_ingredient: ingredient.id_phase_ingredient, code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, allergene: ingredient.allergene, quantite: ingredient.quantite))
-                                if let i: Int = phase.ingredients.firstIndex(where: { ingredient.id_phase_ingredient == $0.id_phase_ingredient }) {
-                                    phase.ingredients[i].quantite = ingredient.quantite
+                                vm.state.intentToChange(ordreModify: phase)
+                                if let i: Int = vm.phases.firstIndex(where: { phase.id_phase == $0.id_phase }) {
+                                    vm.phases[i].ordre = phase.ordre
                                     withAnimation {
                                         self.showToast.toggle()
                                     }
-                                }
+                               }
                             }) {
                                 HStack {
                                     Image(systemName: "checkmark.circle.fill")
@@ -80,7 +74,7 @@ struct PhaseQuantityModificationView: View {
                 .simpleToast(isPresented: $showToast, options: toastOptions) {
                     HStack {
                         Image(systemName: "checkmark.circle.fill")
-                        Text("La quantité d'un ingrédient a été modifiée.")
+                        Text("L'ordre d'une phase a été modifié.")
                     }
                     .padding()
                     .background(Color.green)
@@ -94,8 +88,8 @@ struct PhaseQuantityModificationView: View {
     }
 }
 
-struct PhaseQuantityModificationView_Previews: PreviewProvider {
+struct ModificationOrdrePhasesView_Previews: PreviewProvider {
     static var previews: some View {
-        PhaseQuantityModificationView(vm: FicheTechniqueViewModel(model: FicheTechniqueModel(id_fiche_technique: 101, libelle_fiche_technique: "Abricots", nombre_couverts: 2, id_responsable: 1, intitule_responsable: "Patissier", id_categorie_fiche: 1, phases: [])), phase: .constant(PhaseModel(id_phase: 0, id_phase_ft: 0, libelle_phase: "", libelle_denrees: "", description_phase: "", duree_phase: 0, ordre: 0, ingredients: [IngredientInStepModel(id_phase_ingredient: 1, code: 1, libelle: "Test", unite: "kg", prix_unitaire: 1.23, allergene: true, quantite: 2.356)])), index: .constant(2))
+        ModificationOrdrePhasesView(vm: FicheTechniqueViewModel(model: FicheTechniqueModel(id_fiche_technique: 101, libelle_fiche_technique: "Abricots", nombre_couverts: 2, id_responsable: 1, intitule_responsable: "Patissier", id_categorie_fiche: 1, phases: [])))
     }
 }
