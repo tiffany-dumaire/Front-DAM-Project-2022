@@ -49,7 +49,7 @@ struct CoutsView: View {
                             Text("Coût total charges :")
                                 .frame(height: 30)
                                 .font(.system(size: 15))
-                            Text(String(format: "%.2f", (parameters.parameters[2].value + parameters.parameters[2].value2) * vm.tempsTotalHeure()) + " €")
+                            Text(String(format: "%.2f", chargesFixes()) + " €")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 10)
@@ -77,7 +77,7 @@ struct CoutsView: View {
                             Text("Coût assaisonnement :")
                                 .frame(height: 30)
                                 .font(.system(size: 15))
-                            Text(parameters.parameters[0].utile ? String(format: "%.2f", parameters.parameters[0].value * vm.coutMatiere() / 100) + " €" : "\(parameters.parameters[0].value2)")
+                            Text(String(format: "%.2f", assaisonnement()) + " €")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 10)
@@ -92,29 +92,16 @@ struct CoutsView: View {
                             .bold()
                             .foregroundColor(.blue)
                         LazyVGrid(columns: cols, alignment: .leading) {
-                            if parameters.parameters[1].utile {
-                                Text("charges fixes incluses :")
-                                    .frame(height: 30)
-                                    .font(.system(size: 15))
-                                Text(parameters.parameters[0].utile ? String(format: "%.2f", parameters.parameters[0].value * vm.coutMatiere() / 100 + vm.coutMatiere() + parameters.parameters[2].value * vm.tempsTotalHeure() + parameters.parameters[2].value2 * vm.tempsTotalHeure()) + " €" : "\(parameters.parameters[0].value2 + vm.coutMatiere() + parameters.parameters[2].value * vm.tempsTotalHeure() + parameters.parameters[2].value2 * vm.tempsTotalHeure()) €")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.vertical, 5)
-                                    .padding(.horizontal, 10)
-                                    .font(.system(size: 15))
-                                    .background(Color.blue.opacity(0.25))
-                                    .cornerRadius(10)
-                            } else {
-                                Text("charges fixes exclues :")
-                                    .frame(height: 30)
-                                    .font(.system(size: 15))
-                                Text(parameters.parameters[0].utile ? String(format: "%.2f", parameters.parameters[0].value * vm.coutMatiere() / 100 + vm.coutMatiere()) + " €" : "\(parameters.parameters[0].value2 + vm.coutMatiere()) €")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.vertical, 5)
-                                    .padding(.horizontal, 10)
-                                    .font(.system(size: 15))
-                                    .background(Color.blue.opacity(0.25))
-                                    .cornerRadius(10)
-                            }
+                            Text("charges fixes \(parameters.parameters[1].utile ? "incluses" : "exclues") :")
+                                .frame(height: 30)
+                                .font(.system(size: 15))
+                            Text(String(format: "%.2f", coutProduction()) + " €")
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.vertical, 5)
+                                .padding(.horizontal, 10)
+                                .font(.system(size: 15))
+                                .background(Color.blue.opacity(0.25))
+                                .cornerRadius(10)
                         }
                     }
                     Group {
@@ -123,20 +110,20 @@ struct CoutsView: View {
                             .bold()
                             .foregroundColor(.blue)
                         LazyVGrid(columns: cols, alignment: .leading) {
-                            Text("Prix de vente :")
+                            Text("Prix de vente/portion :")
                                 .frame(height: 30)
                                 .font(.system(size: 15))
-                            Text(String(format: "%.2f", parameters.parameters[2].value * vm.tempsTotalHeure()) + " €")
+                            Text(String(format: "%.2f", prixVente() / Double(vm.nombre_couverts)) + " €")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 10)
                                 .font(.system(size: 15))
                                 .background(Color.blue.opacity(0.25))
                                 .cornerRadius(10)
-                            Text("Prix de vente/portion :")
+                            Text("Prix de vente :")
                                 .frame(height: 30)
                                 .font(.system(size: 15))
-                            Text(String(format: "%.2f", parameters.parameters[2].value * vm.tempsTotalHeure()) + " €")
+                            Text(String(format: "%.2f", prixVente()) + " €")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 10)
@@ -160,7 +147,7 @@ struct CoutsView: View {
                             Text("Durée totale en heure :")
                                 .frame(height: 30)
                                 .font(.system(size: 15))
-                            Text(String(format: "%.2f", vm.tempsTotalHeure()))
+                            Text(String(format: "%.2f", vm.tempsTotalHeure()) + "h")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 10)
@@ -170,7 +157,7 @@ struct CoutsView: View {
                             Text("Durée totale en minutes :")
                                 .frame(height: 30)
                                 .font(.system(size: 15))
-                            Text("\(Int(vm.tempsTotalHeure() * 60))")
+                            Text("\(Int(vm.tempsTotalHeure() * 60))min")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 10)
@@ -188,7 +175,7 @@ struct CoutsView: View {
                             Text("Bénéfice net par portion :")
                                 .frame(height: 30)
                                 .font(.system(size: 15))
-                            Text(String(format: "%.2f", vm.tempsTotalHeure()))
+                            Text(String(format: "%.2f", benefice() / Double(vm.nombre_couverts)) + " €")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 10)
@@ -198,7 +185,7 @@ struct CoutsView: View {
                             Text("Bénéfice net :")
                                 .frame(height: 30)
                                 .font(.system(size: 15))
-                            Text("\(Int(vm.tempsTotalHeure() * 60))")
+                            Text(String(format: "%.2f", benefice()) + " €")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 10)
@@ -216,7 +203,7 @@ struct CoutsView: View {
                             Text("Seuil de rentabilité :")
                                 .frame(height: 30)
                                 .font(.system(size: 15))
-                            Text(" portions")
+                            Text("\(seuilRentabilite()) portions")
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.vertical, 5)
                                 .padding(.horizontal, 10)
@@ -230,6 +217,45 @@ struct CoutsView: View {
             .padding(.horizontal, 15)
             .padding(.bottom, 15)
         }
+    }
+    
+    private func chargesFixes() -> Double {
+        return (parameters.parameters[2].value + parameters.parameters[2].value2) * vm.tempsTotalHeure()
+    }
+    
+    private func assaisonnement() -> Double {
+        if parameters.parameters[0].utile {
+           return parameters.parameters[0].value * vm.coutMatiere() / 100
+        }
+        return parameters.parameters[0].value2
+    }
+    
+    private func coutProduction() -> Double {
+        if parameters.parameters[1].utile {
+            return assaisonnement() + vm.coutMatiere() + chargesFixes()
+        } else {
+            return assaisonnement() + vm.coutMatiere()
+        }
+    }
+    
+    private func prixVente() -> Double {
+        if parameters.parameters[1].utile {
+            return coutProduction() + coutProduction() * (parameters.parameters[1].value / 100)
+        } else {
+            return coutProduction() + coutProduction() * (parameters.parameters[1].value2 / 100)
+        }
+    }
+    
+    private func benefice() -> Double {
+        return prixVente() / 1.1 - coutProduction()
+    }
+    
+    private func tauxMargeCoutV() -> Double {
+        return ((prixVente() / 1.1) / Double(vm.nombre_couverts) - (vm.coutMatiere() + assaisonnement()) / Double(vm.nombre_couverts)) / ((prixVente() / 1.1) / Double(vm.nombre_couverts))
+    }
+    
+    private func seuilRentabilite() -> Int {
+        return Int(ceil(chargesFixes() / tauxMargeCoutV()))
     }
 }
 
