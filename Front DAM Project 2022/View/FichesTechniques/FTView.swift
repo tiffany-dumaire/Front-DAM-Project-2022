@@ -41,7 +41,7 @@ struct FTView: View {
                 }.padding(10)
             }.padding(.bottom, 5)
                 .background(Color.salmon.opacity(0.2))
-            CustomFTListView(texte: intitule, categorie: selectedCategorie)
+            CustomFTListView(texte: intitule, ingredient: libelle, categorie: selectedCategorie)
             Spacer(minLength: 0)
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationTitle("Fiches techniques")

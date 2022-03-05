@@ -9,15 +9,17 @@ import SwiftUI
 
 struct CustomFTListView: View {
     private var texte: String
+    private var ingredient: String
     private var categorie: Int
     @EnvironmentObject var fiches: ListFicheTechniqueViewModel
     
     private func filterSearch(fiche: FicheTechniqueModel) -> Bool{
-        return (categorie != 0 ? fiche.id_categorie_fiche == categorie : true) && (!texte.isEmpty ? fiche.libelle_fiche_technique.lowercased().contains(texte.lowercased()) : true)
+        return (categorie != 0 ? fiche.id_categorie_fiche == categorie : true) && (!texte.isEmpty ? fiche.libelle_fiche_technique.lowercased().contains(texte.lowercased()) : true) && (!ingredient.isEmpty ? fiche.phases.contains(where: { $0.ingredients.contains(where: { $0.libelle == ingredient })}) : true)
     }
     
-    init(texte: String, categorie: Int) {
+    init(texte: String, ingredient: String, categorie: Int) {
         self.texte = texte
+        self.ingredient = ingredient
         self.categorie = categorie
     }
     
@@ -67,6 +69,6 @@ struct CustomFTListView: View {
 
 struct CustomFTListView_Previews: PreviewProvider {
     static var previews: some View {
-        CustomFTListView(texte: "", categorie: 1)
+        CustomFTListView(texte: "", ingredient: "", categorie: 1)
     }
 }
