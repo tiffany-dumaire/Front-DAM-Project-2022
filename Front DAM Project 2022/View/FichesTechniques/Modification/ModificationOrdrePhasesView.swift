@@ -63,6 +63,7 @@ struct ModificationOrdrePhasesView: View {
                 }
                 Button("Terminer", action: {
                     dismiss()
+                    dismiss()
                 })
                     .padding(10)
                     .frame(width: 138)

@@ -12,7 +12,7 @@ struct IngredientAddView: View {
     @EnvironmentObject var categoriesIngredient: ListCategorieIngredientViewModel
     @EnvironmentObject var categoriesAllergenes: ListCategorieAllergeneViewModel
     @EnvironmentObject var mercurial: ListIngredientViewModel
-    @ObservedObject var vm: IngredientViewModel = IngredientViewModel(model: IngredientModel(code: 0, libelle: "", unite: "", prix_unitaire: 0, stock: 0, allergene: false, id_categorie: 0, id_categorie_allergene: nil))
+    @StateObject var vm: IngredientViewModel = IngredientViewModel(model: IngredientModel(code: 0, libelle: "", unite: "", prix_unitaire: 0, stock: 0, allergene: false, id_categorie: 0, id_categorie_allergene: nil))
     @State var categorieA: Int = 0
     @State private var showingAlert = false
     @State var code: Int = 0

@@ -74,7 +74,6 @@ struct CustomIngredientListView: View {
                         .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.salmon, lineWidth: 2))
                 }
                 .padding(5)
-                
             }
         }
         .onChange(of: mercurial.state, perform: {
