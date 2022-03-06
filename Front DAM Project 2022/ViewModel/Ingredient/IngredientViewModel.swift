@@ -26,8 +26,8 @@ class IngredientViewModel: ObservableObject, IngredientObserver {
             switch state {
                 case .ingredientAdding(let ingredient):
                     Task {
-                        await IngredientDAO.addIngredient(ingredient: ingredient)
-                        self.state = .ingredientAdded
+                        let newId = await IngredientDAO.addIngredient(ingredient: ingredient)
+                        self.state = .ingredientAdded(newId)
                         print("IngredientIntent: .ingredientAdding to .ingredientAdded")
                     }
                 case .ingredientChanging(let ingredient):

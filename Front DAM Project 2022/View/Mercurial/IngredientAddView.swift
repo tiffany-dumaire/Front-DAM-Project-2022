@@ -35,14 +35,14 @@ struct IngredientAddView: View {
     var body: some View {
         VStack {
             Spacer().frame(height: 20)
-            LazyVGrid(columns: cols, alignment: .leading) {
+            /*LazyVGrid(columns: cols, alignment: .leading) {
                 Text("Code :").frame(height: 30)
                 CustomIntStepperView(value: $vm.code, step: 1)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(5)
                     .background(Color.myGray.opacity(0.25))
                     .cornerRadius(10)
-            }
+            }*/
             LazyVGrid(columns: cols, alignment: .leading) {
                 Text("Libellé :").frame(height: 30)
                 TextField("libellé...", text: $vm.libelle)

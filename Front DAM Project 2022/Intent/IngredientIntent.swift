@@ -14,7 +14,7 @@ enum IngredientIntent: CustomStringConvertible, Equatable {
     
     case ready
     case ingredientAdding(IngredientModel)
-    case ingredientAdded
+    case ingredientAdded(Int)
     case ingredientChanging(IngredientModel)
     case ingredientChanged
     case ingredientStockModifying(IngredientModel)

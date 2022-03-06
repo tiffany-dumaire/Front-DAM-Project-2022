@@ -38,26 +38,30 @@ struct IngredientDAO {
     
     /**POST**/
     
-    static func addIngredient(ingredient: IngredientModel) async {
-        if let encoded = try? JSONEncoder().encode(IngredientDTO(code: ingredient.code, libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, stock: ingredient.stock, allergene: ingredient.allergene ? 1 : 0, id_categorie: ingredient.id_categorie, id_categorie_allergene: ingredient.allergene ? ingredient.id_categorie_allergene : nil)) {
+    static func addIngredient(ingredient: IngredientModel) async -> Int {
+        if let encoded = try? JSONEncoder().encode(IngredientToAddDTO(libelle: ingredient.libelle, unite: ingredient.unite, prix_unitaire: ingredient.prix_unitaire, stock: ingredient.stock, allergene: ingredient.allergene ? 1 : 0, id_categorie: ingredient.id_categorie, id_categorie_allergene: ingredient.allergene ? ingredient.id_categorie_allergene : nil)) {
             if let url = URL(string: "https://back-awi-projet-2021.herokuapp.com/ingredients/create"){
                 do {
                     var request = URLRequest(url: url)
                     request.httpMethod = "POST"
                     request.httpBody = encoded
                     request.addValue("application/json", forHTTPHeaderField: "content-type")
-                    if let (_, response) = try? await URLSession.shared.upload(for: request, from:encoded){
-                        let httpresponse = response as! HTTPURLResponse
-                        if httpresponse.statusCode == 200 || httpresponse.statusCode == 201 {
-                            print("L'ingrédient a été ajouté avec succès.")
-                        }
-                        else{
-                            print("Ajout d'un ingrédient - error \(httpresponse.statusCode): \(HTTPURLResponse.localizedString(forStatusCode: httpresponse.statusCode))")
+                    if let (data, response) = try? await URLSession.shared.upload(for: request, from:encoded){
+                        if let datas: UtilDTO = JSONHelper.decode(data: data) {
+                            let httpresponse = response as! HTTPURLResponse
+                            if httpresponse.statusCode == 200 || httpresponse.statusCode == 201 {
+                                print("L'ingrédient a été ajouté avec succès.")
+                                return datas.insertId
+                            }
+                            else{
+                                print("Ajout d'un ingrédient - error \(httpresponse.statusCode): \(HTTPURLResponse.localizedString(forStatusCode: httpresponse.statusCode))")
+                            }
                         }
                     }
                 }
             }
         }
+        return -1
     }
     
     /**PUT**/
